@@ -13,6 +13,9 @@
 		1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0D270D79280079B080 /* ContentView.swift */; };
 		1B06FA20270D792A0079B080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
 		1B06FA21270D792A0079B080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
+		1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */; };
+		1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
+		1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,8 @@
 		1B06FA13270D792A0079B080 /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B06FA19270D792A0079B080 /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B06FA1B270D792A0079B080 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
+		1B98CDF62710024400FC3E9E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +61,8 @@
 			children = (
 				1B06FA0C270D79280079B080 /* TestApp.swift */,
 				1B06FA0D270D79280079B080 /* ContentView.swift */,
+				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
+				1B98CDF62710024400FC3E9E /* Calculator.swift */,
 				1B06FA0E270D792A0079B080 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -176,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */,
 			);
@@ -185,6 +193,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */,
+				1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */,
 				1B06FA1D270D792A0079B080 /* TestApp.swift in Sources */,
 			);
@@ -385,9 +395,11 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.dailyattendancemanagement.Test;
 				PRODUCT_NAME = Test;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAC";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -416,6 +428,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.dailyattendancemanagement.Test;
 				PRODUCT_NAME = Test;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = MAC;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
