@@ -16,7 +16,39 @@
 		1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */; };
 		1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
 		1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
+		1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
+		1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
+		1BA96B0F27229E60002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
+		1BA96B1027229E61002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
+		1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC668622721612200006C20 /* calculator_clipApp.swift */; };
+		1BC668672721612300006C20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC668662721612300006C20 /* Assets.xcassets */; };
+		1BC6686A2721612300006C20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC668692721612300006C20 /* Preview Assets.xcassets */; };
+		1BC6686F2721612300006C20 /* calculator_clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 1BC668602721612200006C20 /* calculator_clip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1BC6686D2721612300006C20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B06FA07270D79280079B080 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BC6685F2721612200006C20;
+			remoteInfo = calculator_clip;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1BC668702721612300006C20 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				1BC6686F2721612300006C20 /* calculator_clip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B06FA0C270D79280079B080 /* TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
@@ -27,6 +59,13 @@
 		1B06FA1B270D792A0079B080 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
 		1B98CDF62710024400FC3E9E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		1BA96B0D27229E10002B2419 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		1BC668602721612200006C20 /* calculator_clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator_clip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC668622721612200006C20 /* calculator_clipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculator_clipApp.swift; sourceTree = "<group>"; };
+		1BC668662721612300006C20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1BC668692721612300006C20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1BC6686B2721612300006C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BC6686C2721612300006C20 /* calculator_clip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calculator_clip.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +83,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BC6685D2721612200006C20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,6 +98,7 @@
 			children = (
 				1B06FA0B270D79280079B080 /* Shared */,
 				1B06FA1A270D792A0079B080 /* macOS */,
+				1BC668612721612200006C20 /* calculator_clip */,
 				1B06FA14270D792A0079B080 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +108,7 @@
 			children = (
 				1B06FA0C270D79280079B080 /* TestApp.swift */,
 				1B06FA0D270D79280079B080 /* ContentView.swift */,
+				1BA96B0D27229E10002B2419 /* CalculatorView.swift */,
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
 				1B98CDF62710024400FC3E9E /* Calculator.swift */,
 				1B06FA0E270D792A0079B080 /* Assets.xcassets */,
@@ -73,6 +121,7 @@
 			children = (
 				1B06FA13270D792A0079B080 /* Test.app */,
 				1B06FA19270D792A0079B080 /* Test.app */,
+				1BC668602721612200006C20 /* calculator_clip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +134,26 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		1BC668612721612200006C20 /* calculator_clip */ = {
+			isa = PBXGroup;
+			children = (
+				1BC668622721612200006C20 /* calculator_clipApp.swift */,
+				1BC668662721612300006C20 /* Assets.xcassets */,
+				1BC6686B2721612300006C20 /* Info.plist */,
+				1BC6686C2721612300006C20 /* calculator_clip.entitlements */,
+				1BC668682721612300006C20 /* Preview Content */,
+			);
+			path = calculator_clip;
+			sourceTree = "<group>";
+		};
+		1BC668682721612300006C20 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1BC668692721612300006C20 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,10 +164,12 @@
 				1B06FA0F270D792A0079B080 /* Sources */,
 				1B06FA10270D792A0079B080 /* Frameworks */,
 				1B06FA11270D792A0079B080 /* Resources */,
+				1BC668702721612300006C20 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1BC6686E2721612300006C20 /* PBXTargetDependency */,
 			);
 			name = "Test (iOS)";
 			productName = "Test (iOS)";
@@ -122,6 +193,23 @@
 			productReference = 1B06FA19270D792A0079B080 /* Test.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1BC6685F2721612200006C20 /* calculator_clip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BC668732721612300006C20 /* Build configuration list for PBXNativeTarget "calculator_clip" */;
+			buildPhases = (
+				1BC6685C2721612200006C20 /* Sources */,
+				1BC6685D2721612200006C20 /* Frameworks */,
+				1BC6685E2721612200006C20 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = calculator_clip;
+			productName = calculator_clip;
+			productReference = 1BC668602721612200006C20 /* calculator_clip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -136,6 +224,9 @@
 						CreatedOnToolsVersion = 13.0;
 					};
 					1B06FA18270D792A0079B080 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					1BC6685F2721612200006C20 = {
 						CreatedOnToolsVersion = 13.0;
 					};
 				};
@@ -155,6 +246,7 @@
 			targets = (
 				1B06FA12270D792A0079B080 /* Test (iOS) */,
 				1B06FA18270D792A0079B080 /* Test (macOS) */,
+				1BC6685F2721612200006C20 /* calculator_clip */,
 			);
 		};
 /* End PBXProject section */
@@ -176,6 +268,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BC6685E2721612200006C20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BC6686A2721612300006C20 /* Preview Assets.xcassets in Resources */,
+				1BC668672721612300006C20 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -183,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */,
 				1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */,
@@ -194,13 +296,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */,
+				1BA96B1027229E61002B2419 /* CalculatorView.swift in Sources */,
 				1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */,
 				1B06FA1D270D792A0079B080 /* TestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BC6685C2721612200006C20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */,
+				1BA96B0F27229E60002B2419 /* CalculatorView.swift in Sources */,
+				1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1BC6686E2721612300006C20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BC6685F2721612200006C20 /* calculator_clip */;
+			targetProxy = 1BC6686D2721612300006C20 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1B06FA22270D792A0079B080 /* Debug */ = {
@@ -317,6 +438,7 @@
 		1B06FA25270D792A0079B080 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -347,6 +469,7 @@
 		1B06FA26270D792A0079B080 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -434,6 +557,75 @@
 			};
 			name = Release;
 		};
+		1BC668712721612300006C20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"calculator_clip/Preview Content\"";
+				DEVELOPMENT_TEAM = QU9EPTU238;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = calculator_clip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Test;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.dailyattendancemanagement.Test.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1BC668722721612300006C20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"calculator_clip/Preview Content\"";
+				DEVELOPMENT_TEAM = QU9EPTU238;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = calculator_clip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Test;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.dailyattendancemanagement.Test.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -460,6 +652,15 @@
 			buildConfigurations = (
 				1B06FA28270D792A0079B080 /* Debug */,
 				1B06FA29270D792A0079B080 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BC668732721612300006C20 /* Build configuration list for PBXNativeTarget "calculator_clip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BC668712721612300006C20 /* Debug */,
+				1BC668722721612300006C20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
