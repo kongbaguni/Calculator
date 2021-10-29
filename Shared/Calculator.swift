@@ -15,10 +15,17 @@ extension Notification.Name {
 
 class Calculator {
     static let shared = Calculator()
-    struct Number {
+    public struct Number {
         let strvalue:String
         var doubleVlaue:Double {
             NSString(string: strvalue).doubleValue
+        }
+        var formattedString:String {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = -1
+            let str = formatter.string(from: NSNumber(value: doubleVlaue))
+            return str ?? strvalue
         }
     }
     
@@ -41,17 +48,20 @@ class Calculator {
         }
     }
     
-    var displayString:String {
+    var displayString:AttributedString {
         var txt = ""
         for item in items {
             if let n = item as? Calculator.Number {
-                txt.append(n.strvalue)
+                txt.append(n.formattedString)
             } else if let str = item as? String {
-                txt.append(" \(str) ")
+                txt.append(" `\(str)` ")
             }
         }
-        return txt
+        AttributedString(
+        let attr = try! AttributedString(markdown: txt)
+        return attr
     }
+    
     
     var numbers:[Double] {
         var result:[Double] = []
@@ -65,8 +75,19 @@ class Calculator {
     var decimalLength:Double = 0.0
     
     func keyInput(key:String) {
+        
+        var isOver:Bool {
+            if let li = items.last as? Number {
+                return li.strvalue.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: ",", with: "").count >= 9
+            }
+            return false
+        }
+        
         switch key.uppercased() {
         case "0","1","2","3","4","5","6","7","8","9":
+            if isOver {
+                return
+            }
             if let li = items.last as? Number {
                 let new = "\(li.strvalue)\(key)"
                 items.removeLast()
@@ -76,8 +97,10 @@ class Calculator {
             }
             print("number input \(key)")
         case "C":
-            items.removeLast()
-            NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
+            if items.count > 0 {
+                items.removeLast()
+                NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
+            }
         case "AC":
             items.removeAll()
             NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
@@ -102,7 +125,7 @@ class Calculator {
                 items.removeLast()
                 items.append(Number(strvalue: "\(new)"))
             }
-        case "/","*","-","+":
+        case "/","*","-","+","✕","÷":
             if items.count == 0 {
                 return
             }
@@ -124,6 +147,10 @@ class Calculator {
             print(newArr)
             print("--------------")
         case ".":
+            if isOver {
+                return
+            }
+
             if let li = items.last as? Number {
                 if li.strvalue.components(separatedBy: ".").count == 1 {
                     let new = "\(li.strvalue)."
