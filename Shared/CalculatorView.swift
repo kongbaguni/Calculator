@@ -71,11 +71,11 @@ struct CalculatorView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10).fill( str == lastOp ? Color.gray : color)
                                 if str == "clear" {
-                                    Text(clearText)
+                                    Text(try! AttributedString(markdown: "`\(clearText)`"))
                                         .foregroundColor(Color.btnTextColor)
                                         .padding(0.5)
                                 } else {
-                                    Text(str)
+                                    Text(try! AttributedString(markdown: "`\(str)`"))
                                         .foregroundColor(Color.btnTextColor)
                                         .padding(0.5)
                                 }

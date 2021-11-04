@@ -57,7 +57,6 @@ class Calculator {
                 txt.append(" `\(str)` ")
             }
         }
-        AttributedString(
         let attr = try! AttributedString(markdown: txt)
         return attr
     }
@@ -129,10 +128,24 @@ class Calculator {
             if items.count == 0 {
                 return
             }
-            if items.last is String {
-                items.removeLast()
+            var inputStr:String {
+                switch key {
+                case "*" :
+                    return "✕"
+                default:
+                    return key
+                }
             }
-            items.append(key)
+            
+            if let last = items.last as? String {
+                items.removeLast()
+                if last != key {
+                    items.append(inputStr)
+                }
+            } else {
+                items.append(inputStr)
+            }
+            
         case "=":
             var newArr:[Any] = []
             var op:[String] = []
