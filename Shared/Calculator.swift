@@ -147,18 +147,7 @@ class Calculator {
             }
             
         case "=":
-            var newArr:[Any] = []
-            var op:[String] = []
-            for item in items {
-                if let str = item as? String {
-                    op.insert(str, at: 0)
-                }
-                newArr.append(item)
-                
-            }
-            print("--------------")
-            print(newArr)
-            print("--------------")
+            calculate()
         case ".":
             if isOver {
                 return
@@ -174,6 +163,23 @@ class Calculator {
         default:
             break
         }
-        print(items)
+    }
+    
+    func calculate() {
+        var newArr:[Any] = []
+        var ops:[String] = []
+        for item in items {
+            if let str = item as? String {
+                ops.insert(str, at: 0)
+            } else {
+                newArr.append(item)
+            }
+        }
+        for op in ops {
+            newArr.append(op)
+        }
+        print("--------------")
+        print(newArr)
+        print("--------------")
     }
 }
