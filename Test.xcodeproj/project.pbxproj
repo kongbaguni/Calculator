@@ -20,6 +20,9 @@
 		1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
 		1BA96B0F27229E60002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
 		1BA96B1027229E61002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
+		1BAE669E273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
+		1BAE669F273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
+		1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
 		1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC668622721612200006C20 /* calculator_clipApp.swift */; };
 		1BC668672721612300006C20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC668662721612300006C20 /* Assets.xcassets */; };
 		1BC6686A2721612300006C20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC668692721612300006C20 /* Preview Assets.xcassets */; };
@@ -64,6 +67,7 @@
 		1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
 		1B98CDF62710024400FC3E9E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		1BA96B0D27229E10002B2419 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		1BAE669D273A4A5300C82269 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		1BC668602721612200006C20 /* calculator_clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator_clip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC668622721612200006C20 /* calculator_clipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculator_clipApp.swift; sourceTree = "<group>"; };
 		1BC668662721612300006C20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 				1B98CDF62710024400FC3E9E /* Calculator.swift */,
 				1B06FA0E270D792A0079B080 /* Assets.xcassets */,
 				1BD60CF227294AB2002684D6 /* Color.swift */,
+				1BAE669D273A4A5300C82269 /* Stack.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1BD60CF327294AB2002684D6 /* Color.swift in Sources */,
+				1BAE669E273A4A5300C82269 /* Stack.swift in Sources */,
 				1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +311,7 @@
 			files = (
 				1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */,
 				1BA96B1027229E61002B2419 /* CalculatorView.swift in Sources */,
+				1BAE669F273A4A5300C82269 /* Stack.swift in Sources */,
 				1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */,
 				1B06FA1D270D792A0079B080 /* TestApp.swift in Sources */,
@@ -317,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */,
+				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
 				1BA96B0F27229E60002B2419 /* CalculatorView.swift in Sources */,
 				1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */,

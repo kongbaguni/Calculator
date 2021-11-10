@@ -15,6 +15,28 @@ extension Notification.Name {
 
 class Calculator {
     static let shared = Calculator()
+
+    public enum Operation : String {
+        case 더하기 = "+"
+        case 곱하기 = "✕"
+        case 나누기 = "÷"
+        case 빼기 = "-"
+        
+        func isPriorityIsHigherThen(_ operation:Operation)->Bool {
+            switch self {
+            case .더하기, .빼기:
+                return false
+            default:
+                switch operation {
+                case .더하기, .빼기:
+                    return true
+                case .곱하기,.나누기:
+                    return false
+                }
+            }
+        }
+    }
+    
     public struct Number {
         let strvalue:String
         var doubleVlaue:Double {
@@ -26,6 +48,17 @@ class Calculator {
             formatter.maximumFractionDigits = -1
             let str = formatter.string(from: NSNumber(value: doubleVlaue))
             return str ?? strvalue
+        }
+    }
+    
+    public struct Result {
+        let doubleValue:Double
+        var formattedString:String? {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = -1
+            let str = formatter.string(from: NSNumber(value: doubleValue))
+            return str
         }
     }
     
@@ -53,8 +86,13 @@ class Calculator {
         for item in items {
             if let n = item as? Calculator.Number {
                 txt.append(n.formattedString)
-            } else if let str = item as? String {
-                txt.append(" `\(str)` ")
+            }
+            else if let r = (item as? Result)?.formattedString {
+                txt.append(" `=` ")
+                txt.append(r)
+            }
+            else if let str = item as? Operation {
+                txt.append(" `\(str.rawValue)` ")
             }
         }
         let attr = try! AttributedString(markdown: txt)
@@ -74,7 +112,9 @@ class Calculator {
     var decimalLength:Double = 0.0
     
     func keyInput(key:String) {
-        
+        if key != "=" && items.last is Result {
+            items.removeAll()
+        }
         var isOver:Bool {
             if let li = items.last as? Number {
                 return li.strvalue.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: ",", with: "").count >= 9
@@ -137,17 +177,20 @@ class Calculator {
                 }
             }
             
-            if let last = items.last as? String {
+            if let last = items.last as? Operation {
                 items.removeLast()
-                if last != key {
-                    items.append(inputStr)
+                if last.rawValue != key {
+                    items.append(Operation(rawValue: key)!)
                 }
             } else {
-                items.append(inputStr)
+                items.append(Operation(rawValue: inputStr)!)
             }
             
         case "=":
-            calculate()
+            if items.last is Result == false {
+                calculateSimple()
+//                calculate()
+            }
         case ".":
             if isOver {
                 return
@@ -166,20 +209,62 @@ class Calculator {
     }
     
     func calculate() {
-        var newArr:[Any] = []
-        var ops:[String] = []
+        var arr:[Any] = []
+        var stack = Stack<Operation>()
+        
         for item in items {
-            if let str = item as? String {
-                ops.insert(str, at: 0)
-            } else {
-                newArr.append(item)
+            if let number = item as? Number {
+                arr.append(number)
+            }
+            else if let op = item as? Operation {
+                if let top = stack.top {
+                    if op.isPriorityIsHigherThen(top) {
+                        let t = stack.pop()!
+                        stack.push(op)
+                        stack.push(t)
+                    } else {
+                        stack.push(op)
+                    }
+                }
+                else {
+                    stack.push(op)
+                }
             }
         }
-        for op in ops {
-            newArr.append(op)
+        print(items)
+        print(stack)
+    }
+    
+    func calculateSimple() {
+        var result:Double = 0
+        var oper:Operation? = nil
+        print("---------------------")
+        print(items)
+        for item in items {
+            if let number = (item as? Number)?.doubleVlaue {
+                if let op = oper {
+                    switch op {
+                    case .더하기:
+                        result += number
+                    case .빼기:
+                        result -= number
+                    case .곱하기:
+                        result *= number
+                    case .나누기:
+                        result /= number
+                    }
+                    oper = nil
+                } else {
+                    result = number
+                }
+                
+            }
+            if let op = item as? Operation {
+                oper = op
+            }
         }
-        print("--------------")
-        print(newArr)
-        print("--------------")
+      
+        items.append(Result(doubleValue: result))
+        
     }
 }

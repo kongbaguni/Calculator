@@ -69,7 +69,8 @@ struct CalculatorView: View {
                             }
                         } label: {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 10).fill( str == lastOp ? Color.gray : color)
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill( str == lastOp ? Color.gray : color)
                                 if str == "clear" {
                                     Text(try! AttributedString(markdown: "`\(clearText)`"))
                                         .foregroundColor(Color.btnTextColor)
@@ -81,7 +82,10 @@ struct CalculatorView: View {
                                 }
                             }
                             .frame(width: width, height: 50, alignment: .center)
-
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.btnTextColor, lineWidth: 1)
+                            )
                         }
                         .buttonStyle(PlainButtonStyle())
 
@@ -97,7 +101,9 @@ struct CalculatorView: View {
             }
             NotificationCenter.default.addObserver(forName: .calculator_lastOperator, object: nil, queue: nil) { noti in
                 displayText = Calculator.shared.displayString
-                lastOp = noti.object as? String
+                if let op = noti.object as? Calculator.Operation {
+                    lastOp = op.rawValue
+                }
             }
         
         }.background(Color.bg1)
