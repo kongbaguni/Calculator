@@ -83,6 +83,8 @@ class Calculator {
     
     var displayString:AttributedString {
         var txt = ""
+        var operationCount = 0
+        
         for item in items {
             if let n = item as? Calculator.Number {
                 txt.append(n.formattedString)
@@ -92,7 +94,11 @@ class Calculator {
                 txt.append(r)
             }
             else if let str = item as? Operation {
+                if operationCount > 0 {
+                    txt = "(\(txt))"
+                }
                 txt.append(" `\(str.rawValue)` ")
+                operationCount += 1
             }
         }
         let attr = try! AttributedString(markdown: txt)
