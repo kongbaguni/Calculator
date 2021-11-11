@@ -65,6 +65,20 @@ struct CalculatorView: View {
                             }
                         }
                     }
+                    Button {
+                        let realm = try! Realm()
+                        try! realm.write {
+                            realm.deleteAll()
+                        }
+                        
+                    } label : {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.red)
+                            Text("Delete All")
+                                .foregroundColor(Color.btnTextColor)
+                        }
+                    }
                 }
                 .background(Color.bg2)
                 .listStyle(SidebarListStyle())
@@ -74,7 +88,9 @@ struct CalculatorView: View {
                 )
                 .padding(10)
             }
-            
+            else {
+                Spacer()
+            }
             
             Spacer().frame(width: 300, height: 20, alignment: .center)
             ForEach(0..<list.count) { i in
