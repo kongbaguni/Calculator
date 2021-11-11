@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Calculator
+
+  Created by Changyeol Seo on 2021/11/11.
+  
+*/
+
+"app_title" = "계산기";
+"history_delete_button_title" = "기록 삭제";
+"history" = "계산 기록";

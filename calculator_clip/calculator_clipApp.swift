@@ -11,10 +11,7 @@ import SwiftUI
 struct calculator_clipApp: App {
     var body: some Scene {
         WindowGroup {
-            VStack {
-                Text("App Clip 실행중")
-                CalculatorView()
-            }
+            CalculatorView()
         }
     }
 }

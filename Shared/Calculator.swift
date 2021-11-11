@@ -45,10 +45,18 @@ class Calculator {
         }
         var formattedString:String {
             let isLastDot = strvalue.last == "."
-            
+            let isLastZero = strvalue.last == "0"
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
             formatter.maximumFractionDigits = -1
+            let dotComponents = strvalue.components(separatedBy: ".")
+            if isLastZero && dotComponents.count > 1 {
+                let a = Number(strvalue: dotComponents.first!)
+                let b = dotComponents.last!
+                if let s1 = formatter.string(from: NSNumber(value: a.doubleVlaue)) {
+                    return "\(s1).\(b)"
+                }
+            }
             if let str = formatter.string(from: NSNumber(value: doubleVlaue)) {
                 if isLastDot {
                     return "\(str)`.`"
@@ -150,14 +158,16 @@ class Calculator {
                 return
             }
             if let li = items.last as? Number {
-                if li.doubleVlaue != 0 {
-                    let new = "\(li.strvalue)\(key)"
-                    items.removeLast()
+                let new = "\(li.strvalue)\(key)"
+                items.removeLast()
+                if li.doubleVlaue == 0 && key == "0" && li.strvalue.components(separatedBy: ".").count == 1 {
+                    items.append(Number(strvalue: key))
+                } else {
                     items.append(Number(strvalue: new))
-                    return
                 }
+            } else {
+                items.append(Number(strvalue: key))
             }
-            items.append(Number(strvalue: key))            
             print("number input \(key)")
         case "C":
             if items.count > 0 {

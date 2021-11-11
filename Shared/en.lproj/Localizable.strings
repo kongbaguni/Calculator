@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Calculator
+
+  Created by Changyeol Seo on 2021/11/11.
+  
+*/
+
+"app_title" = "Calculator";
+"history_delete_button_title" = "delete all";
+"history" = "history";

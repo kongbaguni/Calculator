@@ -65,20 +65,6 @@ struct CalculatorView: View {
                             }
                         }
                     }
-                    Button {
-                        let realm = try! Realm()
-                        try! realm.write {
-                            realm.deleteAll()
-                        }
-                        
-                    } label : {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.red)
-                            Text("Delete All")
-                                .foregroundColor(Color.btnTextColor)
-                        }
-                    }
                 }
                 .background(Color.bg2)
                 .listStyle(SidebarListStyle())
@@ -87,6 +73,24 @@ struct CalculatorView: View {
                         .stroke(Color.gray, lineWidth: 1)
                 )
                 .padding(10)
+                
+                Button {
+                    let realm = try! Realm()
+                    try! realm.write {
+                        realm.deleteAll()
+                    }
+                    
+                } label : {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.red)
+                        Text("history_delete_button_title")
+                            .foregroundColor(Color.btnTextColor)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .frame(width: 100, height: 50, alignment: .center)
+
             }
             else {
                 Spacer()
