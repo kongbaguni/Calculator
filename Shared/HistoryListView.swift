@@ -13,7 +13,7 @@ import RealmSwift
 struct HistoryListView: View {
     struct Data:Hashable {
         let date:String
-        let list:[HistoryModel]
+        let list:[String]
     }
     
     @State var data:[Data] = []
@@ -25,13 +25,14 @@ struct HistoryListView: View {
                 Text("empty history log...").multilineTextAlignment(.center)
             } else {
                 List {
+                    let list =
                     ForEach(data, id:\.self) { data in
                         Section(header: Text(data.date)) {
-                            ForEach(data.list, id:\.self) { model in
+                            ForEach(data.list, id:\.self) { str in
                                 let txt = HStack {
-                                    Text("\((data.list.firstIndex(of: model) ?? 0) + 1)")
+                                    Text("\((data.list.firstIndex(of: str) ?? 0) + 1)")
                                         .foregroundColor(Color.gray)
-                                    Text(try! AttributedString(markdown: model.value))
+                                    Text(try! AttributedString(markdown: str))
                                         .foregroundColor(Color.btnTextColor)
                                 }
                                 #if MAC
@@ -44,6 +45,12 @@ struct HistoryListView: View {
                         }
                         
                     }
+                    #if MAC
+                    list
+                    #else
+                    list.listStyle(GroupedListStyle())
+                    #endif
+                    
                     Button {
                         let realm = try! Realm()
                         try! realm.write {
@@ -61,14 +68,14 @@ struct HistoryListView: View {
                     switch event {
                     case .next(let dbList):
                         self.data = []
-                        var result:[String:[HistoryModel]] = [:]
+                        var result:[String:[String]] = [:]
                         
                         for item in dbList {
                             let date = item.date.formatedString(format: "yyyy.MM.dd hh:mm")!
                             if result[date] == nil {
-                                result[date] = [item]
+                                result[date] = [item.value]
                             } else {
-                                result[date]?.append(item)
+                                result[date]?.append(item.value)
                             }
                         }
                         print(result)
