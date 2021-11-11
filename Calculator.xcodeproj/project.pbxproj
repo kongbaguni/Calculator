@@ -31,7 +31,6 @@
 		1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
 		1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
 		1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
-		1BA96B0F27229E60002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
 		1BA96B1027229E61002B2419 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
 		1BAE669E273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
 		1BAE669F273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
@@ -149,17 +148,15 @@
 			isa = PBXGroup;
 			children = (
 				1B29F78A273D08E7007BC9B2 /* Extensions */,
+				1B29F78F273D115D007BC9B2 /* Model */,
+				1B29F790273D116D007BC9B2 /* View */,
 				1B06FA0C270D79280079B080 /* TestApp.swift */,
-				1B29F778273C921A007BC9B2 /* HistoryModel.swift */,
-				1B06FA0D270D79280079B080 /* ContentView.swift */,
-				1BA96B0D27229E10002B2419 /* CalculatorView.swift */,
-				1B29F786273CF0CA007BC9B2 /* HistoryListView.swift */,
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
 				1B98CDF62710024400FC3E9E /* Calculator.swift */,
+				1BAE669D273A4A5300C82269 /* Stack.swift */,
 				1B29F784273CC7CC007BC9B2 /* Localizable.strings */,
 				1B06FA0E270D792A0079B080 /* Assets.xcassets */,
 				1BD60CF227294AB2002684D6 /* Color.swift */,
-				1BAE669D273A4A5300C82269 /* Stack.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -188,6 +185,24 @@
 				1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1B29F78F273D115D007BC9B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B29F778273C921A007BC9B2 /* HistoryModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1B29F790273D116D007BC9B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B29F786273CF0CA007BC9B2 /* HistoryListView.swift */,
+				1BA96B0D27229E10002B2419 /* CalculatorView.swift */,
+				1B06FA0D270D79280079B080 /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1BC668612721612200006C20 /* calculator_clip */ = {
@@ -532,7 +547,6 @@
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
 				1B29F77B273C921A007BC9B2 /* HistoryModel.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
-				1BA96B0F27229E60002B2419 /* CalculatorView.swift in Sources */,
 				1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
