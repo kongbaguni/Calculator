@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import RealmSwift
+import RxRealm
+import RxSwift
+
 struct Item {
     let color:Color
     let value:AnyHashable
@@ -26,6 +30,9 @@ struct CalculatorView: View {
     @State var count = 0
     @State var displayText:AttributedString = "0"
     @State var lastOp:String? = nil
+    @State var history:[String] = []
+    let disposeBag = DisposeBag()
+    
     var clearText:String {
         if Calculator.shared.items.last is Calculator.Number {
             return "C"
@@ -35,22 +42,39 @@ struct CalculatorView: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                ScrollViewReader { value in
-                    HStack {
-                        Spacer()
-                        
-                        Text(displayText)
-                            .foregroundColor(Color.btnTextColor)
-                            .font(.title)
-                            .multilineTextAlignment(.trailing)
-                            .padding(20)
+            HStack {
+                Spacer()
+                Text(displayText)
+                    .foregroundColor(Color.btnTextColor)
+                    .font(.title)
+                    .multilineTextAlignment(.trailing)
+                    .padding(20)
 #if MAC
-                            .background(KeyEventHandling())
+                    .background(KeyEventHandling())
 #endif
-                    }.background(Color.bg2)
+            }
+            .background(Color.bg2)
+            
+            if history.count > 0 {
+                List {
+                    Section(header:Text("history")) {
+                        ForEach(history, id: \.self) { text in
+                            VStack {
+                                Text(try! AttributedString(markdown:text))
+                                    .foregroundColor(Color.gray)
+                            }
+                        }
+                    }
                 }
-            }.background(Color.bg2)
+                .background(Color.bg2)
+                .listStyle(SidebarListStyle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                .padding(10)
+            }
+            
             
             Spacer().frame(width: 300, height: 20, alignment: .center)
             ForEach(0..<list.count) { i in
@@ -96,15 +120,32 @@ struct CalculatorView: View {
             
         }.onAppear {
             NotificationCenter.default.addObserver(forName: .calculator_lastNumber, object: nil, queue: nil) {  noti in
-                displayText = Calculator.shared.displayString
+                displayText = Calculator.shared.displayAttributedString
                 lastOp = nil
             }
+            
             NotificationCenter.default.addObserver(forName: .calculator_lastOperator, object: nil, queue: nil) { noti in
-                displayText = Calculator.shared.displayString
+                displayText = Calculator.shared.displayAttributedString
                 if let op = noti.object as? Calculator.Operation {
                     lastOp = op.rawValue
                 }
             }
+            
+            Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
+                .subscribe { event in
+                    switch event {
+                    case .next(let list):
+                        var results:[String] = []
+                        for item in list {
+                            results.append(item.value)
+                        }
+                        history = results
+                        print(results)
+                    default:
+                        break
+                    }
+                    
+                }.disposed(by: self.disposeBag)
         
         }.background(Color.bg1)
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import RealmSwift
 
 extension Notification.Name {
     static let calculator_lastNumber = Notification.Name(rawValue: "calculator_lastNumber")
@@ -17,7 +18,7 @@ class Calculator {
     static let shared = Calculator()
 
     public enum Operation : String {
-        case 더하기 = "+"
+        case 더하기 = "+"  
         case 곱하기 = "✕"
         case 나누기 = "÷"
         case 빼기 = "-"
@@ -81,10 +82,9 @@ class Calculator {
         }
     }
     
-    var displayString:AttributedString {
+    var displayMarkDownString:String {
         var txt = ""
-        var operationCount = 0
-        
+        var lastOperation:Operation? = nil
         for item in items {
             if let n = item as? Calculator.Number {
                 txt.append(n.formattedString)
@@ -93,15 +93,24 @@ class Calculator {
                 txt.append(" `=` ")
                 txt.append(r)
             }
-            else if let str = item as? Operation {
-                if operationCount > 0 {
-                    txt = "(\(txt))"
+            else if let op = item as? Operation {
+                if let lop = lastOperation {
+                    if op.isPriorityIsHigherThen(lop) {
+                        txt = "(\(txt))"
+                    }
                 }
-                txt.append(" `\(str.rawValue)` ")
-                operationCount += 1
+                txt.append(" `\(op.rawValue)` ")
+                lastOperation = op
             }
         }
-        let attr = try! AttributedString(markdown: txt)
+        if txt.isEmpty {
+            return "0"
+        }
+        return txt
+    }
+    
+    var displayAttributedString:AttributedString {
+        let attr = try! AttributedString(markdown:displayMarkDownString)
         return attr
     }
     
@@ -193,9 +202,8 @@ class Calculator {
             }
             
         case "=":
-            if items.last is Result == false {
+            if items.last is Number {
                 calculateSimple()
-//                calculate()
             }
         case ".":
             if isOver {
@@ -214,32 +222,6 @@ class Calculator {
         }
     }
     
-    func calculate() {
-        var arr:[Any] = []
-        var stack = Stack<Operation>()
-        
-        for item in items {
-            if let number = item as? Number {
-                arr.append(number)
-            }
-            else if let op = item as? Operation {
-                if let top = stack.top {
-                    if op.isPriorityIsHigherThen(top) {
-                        let t = stack.pop()!
-                        stack.push(op)
-                        stack.push(t)
-                    } else {
-                        stack.push(op)
-                    }
-                }
-                else {
-                    stack.push(op)
-                }
-            }
-        }
-        print(items)
-        print(stack)
-    }
     
     func calculateSimple() {
         var result:Double = 0
@@ -269,8 +251,14 @@ class Calculator {
                 oper = op
             }
         }
-      
         items.append(Result(doubleValue: result))
-        
+        save()
+    }
+    
+    fileprivate func save() {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.create(HistoryModel.self, value: ["value":displayMarkDownString], update: .all)
+        }
     }
 }
