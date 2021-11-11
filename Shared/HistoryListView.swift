@@ -11,28 +11,38 @@ import RxRealm
 import RealmSwift
 
 struct HistoryListView: View {
-    @State var list:[String] = []
+    struct Data:Hashable {
+        let date:String
+        let list:[HistoryModel]
+    }
+    
+    @State var data:[Data] = []
     let disposeBag = DisposeBag()
     
     var body: some View {
         VStack {
-            if list.count == 0 {
+            if data.count == 0 {
                 Text("empty history log...").multilineTextAlignment(.center)
             } else {
                 List {
-                    ForEach(list, id:\.self) { str in
-                        
-                        let txt = HStack {
-                            Text("\((list.firstIndex(of: str) ?? 0) + 1)")
-                                .foregroundColor(Color.gray)
-                            Text(try! AttributedString(markdown: str))
-                                .foregroundColor(Color.btnTextColor)
+                    ForEach(data, id:\.self) { data in
+                        Section(header: Text(data.date)) {
+                            ForEach(data.list, id:\.self) { model in
+                                let txt = HStack {
+                                    Text("\((data.list.firstIndex(of: model) ?? 0) + 1)")
+                                        .foregroundColor(Color.gray)
+                                    Text(try! AttributedString(markdown: model.value))
+                                        .foregroundColor(Color.btnTextColor)
+                                }
+                                #if MAC
+                                txt
+                                #else
+                                txt.listRowSeparator(.hidden)
+                                #endif
+
+                            }
                         }
-                        #if MAC
-                        txt
-                        #else
-                        txt.listRowSeparator(.hidden)
-                        #endif
+                        
                     }
                     Button {
                         let realm = try! Realm()
@@ -50,10 +60,26 @@ struct HistoryListView: View {
                 .subscribe { event in
                     switch event {
                     case .next(let dbList):
-                        list = []
+                        self.data = []
+                        var result:[String:[HistoryModel]] = [:]
+                        
                         for item in dbList {
-                            list.append(item.value)
+                            let date = item.date.formatedString(format: "yyyy.MM.dd hh:mm")!
+                            if result[date] == nil {
+                                result[date] = [item]
+                            } else {
+                                result[date]?.append(item)
+                            }
                         }
+                        print(result)
+                        data = []
+                        for item in result {
+                            data.append(Data(date: item.key, list: item.value))
+                        }
+                        data = data.sorted { a, b in
+                            return a.date < b.date
+                        }
+                        
                     case .error(let error):
                         print(error.localizedDescription)
                         break

@@ -271,7 +271,10 @@ class Calculator {
             }
         }
         items.append(Result(doubleValue: result))
-        save()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {[weak self] in
+            self?.save()
+            self?.items.removeAll()
+        }
     }
     
     fileprivate func save() {

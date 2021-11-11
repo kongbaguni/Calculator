@@ -155,12 +155,6 @@ struct CalculatorView: View {
             
         }
         .background(Color.bg1)
-
-#if MAC
-#else
-//        .navigationBarTitleDisplayMode(SwiftUI.NavigationBarItem.TitleDisplayMode.inline)
-//        .navigationTitle("app_title")
-#endif
     }
 }
 
