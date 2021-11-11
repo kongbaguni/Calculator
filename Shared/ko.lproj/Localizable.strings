@@ -9,3 +9,5 @@
 "app_title" = "계산기";
 "history_delete_button_title" = "기록 삭제";
 "history" = "계산 기록";
+"more..." = "더보기";
+"empty history log..." = "계산 기록이 없습니다...";

@@ -9,3 +9,5 @@
 "app_title" = "Calculator";
 "history_delete_button_title" = "delete all";
 "history" = "history";
+"more..." = "more...";
+"empty history log..." = "empty history log...";

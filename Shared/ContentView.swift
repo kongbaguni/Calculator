@@ -8,14 +8,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            NavigationLink {
-                
-            } label: {
-                Text("test")
-            }
-
+        TabView {
             CalculatorView()
+                .tabItem {
+                    Image(systemName: "square.and.pencil")
+                    Text("app_title")
+                }
+            HistoryListView()
+                .tabItem {
+                    Image(systemName: "list.dash")
+                    Text("history")
+                }
         }
     }
 }

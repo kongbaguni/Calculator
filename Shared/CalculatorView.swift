@@ -31,6 +31,7 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String? = nil
     @State var history:[String] = []
+    @State var isNeedMoreHistory:Bool = false
     let disposeBag = DisposeBag()
     
     var clearText:String {
@@ -57,43 +58,23 @@ struct CalculatorView: View {
             
             if history.count > 0 {
                 List {
-                    Section(header:Text("history")) {
-                        ForEach(history, id: \.self) { text in
-                            VStack {
-                                Text(try! AttributedString(markdown:text))
-                                    .foregroundColor(Color.gray)
-                            }
+                    ForEach(history, id: \.self) { text in                        
+                        let vstack =  VStack {
+                            Text(try! AttributedString(markdown:text))
+                                .foregroundColor(Color.gray)
                         }
+#if MAC
+                        vstack
+#else
+                        vstack.listRowSeparator(.hidden)
+#endif
                     }
                 }
-                .background(Color.bg2)
+                .background(Color.bg3)
                 .listStyle(SidebarListStyle())
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-                .padding(10)
-                
-                Button {
-                    let realm = try! Realm()
-                    try! realm.write {
-                        realm.deleteAll()
-                    }
-                    
-                } label : {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.red)
-                        Text("history_delete_button_title")
-                            .foregroundColor(Color.btnTextColor)
-                    }
-                }
-                .buttonStyle(PlainButtonStyle())
-                .frame(width: 100, height: 50, alignment: .center)
-
             }
             else {
-                Spacer()
+                Spacer().background(Color.bg3)
             }
             
             Spacer().frame(width: 300, height: 20, alignment: .center)
@@ -132,13 +113,14 @@ struct CalculatorView: View {
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
-
+                        
                     }
                 }
             }
             Spacer().frame(width: 300, height: 20, alignment: .center)
             
-        }.onAppear {
+        }
+        .onAppear {
             NotificationCenter.default.addObserver(forName: .calculator_lastNumber, object: nil, queue: nil) {  noti in
                 displayText = Calculator.shared.displayAttributedString
                 lastOp = nil
@@ -155,8 +137,12 @@ struct CalculatorView: View {
                 .subscribe { event in
                     switch event {
                     case .next(let list):
+                        isNeedMoreHistory = list.count > 5
                         var results:[String] = []
                         for item in list {
+                            if results.count == 5 {
+                                continue
+                            }
                             results.append(item.value)
                         }
                         history = results
@@ -166,8 +152,15 @@ struct CalculatorView: View {
                     }
                     
                 }.disposed(by: self.disposeBag)
-        
-        }.background(Color.bg1)
+            
+        }
+        .background(Color.bg1)
+
+#if MAC
+#else
+//        .navigationBarTitleDisplayMode(SwiftUI.NavigationBarItem.TitleDisplayMode.inline)
+//        .navigationTitle("app_title")
+#endif
     }
 }
 

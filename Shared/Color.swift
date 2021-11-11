@@ -12,6 +12,7 @@ extension Color {
     #if MAC
     static let bg1 = Color(nsColor: NSColor(named: "bg1")!)
     static let bg2 = Color(nsColor: NSColor(named: "bg2")!)
+    static let bg3 = Color(nsColor: NSColor(named: "bg3")!)
     static let btn1 = Color(nsColor: NSColor(named: "btn1")!)
     static let btn2 = Color(nsColor: NSColor(named: "btn2")!)
     static let btn3 = Color(nsColor: NSColor(named: "btn3")!)
@@ -19,6 +20,7 @@ extension Color {
     #else
     static let bg1 = Color(UIColor(named: "bg1")!)
     static let bg2 = Color(UIColor(named: "bg2")!)
+    static let bg3 = Color(UIColor(named: "bg3")!)
     static let btn1 = Color(UIColor(named: "btn1")!)
     static let btn2 = Color(UIColor(named: "btn2")!)
     static let btn3 = Color(UIColor(named: "btn3")!)
