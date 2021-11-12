@@ -25,6 +25,9 @@
 		1B29F78D273D08FF007BC9B2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */; };
 		1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */; };
 		1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
+		1B39958D273E3BFE00EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
+		1B39958E273E3BFF00EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
+		1B39958F273E3C0000EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
 		1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */; };
 		1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
 		1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
@@ -85,6 +88,7 @@
 		1B29F786273CF0CA007BC9B2 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
 		1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1B29F792273DF8ED007BC9B2 /* calculator (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "calculator (iOS).entitlements"; sourceTree = "<group>"; };
+		1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
 		1B98CDF62710024400FC3E9E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		1BA96B0D27229E10002B2419 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 		1B06FA0B270D79280079B080 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */,
 				1B29F78A273D08E7007BC9B2 /* Extensions */,
 				1B29F78F273D115D007BC9B2 /* Model */,
 				1B29F790273D116D007BC9B2 /* View */,
@@ -358,6 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B39958D273E3BFE00EAADD8 /* Launch Screen.storyboard in Resources */,
 				1B06FA20270D792A0079B080 /* Assets.xcassets in Resources */,
 				1B29F780273CC7CC007BC9B2 /* Localizable.strings in Resources */,
 			);
@@ -367,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B39958E273E3BFF00EAADD8 /* Launch Screen.storyboard in Resources */,
 				1B06FA21270D792A0079B080 /* Assets.xcassets in Resources */,
 				1B29F781273CC7CC007BC9B2 /* Localizable.strings in Resources */,
 			);
@@ -379,6 +386,7 @@
 				1BC6686A2721612300006C20 /* Preview Assets.xcassets in Resources */,
 				C34428AB27314A2C003DCB1B /* Assets.xcassets in Resources */,
 				1BC668672721612300006C20 /* Assets.xcassets in Resources */,
+				1B39958F273E3C0000EAADD8 /* Launch Screen.storyboard in Resources */,
 				1B29F782273CC7CC007BC9B2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,13 +691,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "calculator (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -719,13 +728,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "calculator (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -757,7 +767,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -791,7 +801,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -823,7 +833,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator_clip/Preview Content\"";
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
@@ -860,7 +870,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator_clip/Preview Content\"";
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
