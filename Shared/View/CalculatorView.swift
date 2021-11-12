@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-#if FULL
+#if FULL || MAC
 import RealmSwift
 import RxRealm
 import RxSwift
@@ -34,7 +34,7 @@ struct CalculatorView: View {
     @State var lastOp:String? = nil
     @State var history:[String] = []
     @State var isNeedMoreHistory:Bool = false
-    #if FULL
+    #if FULL || MAC
     let disposeBag = DisposeBag()
     #endif
     
@@ -138,7 +138,7 @@ struct CalculatorView: View {
                     lastOp = op.rawValue
                 }
             }
-            #if FULL
+            #if FULL || MAC
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
                 .subscribe { event in
                     switch event {
