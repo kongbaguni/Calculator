@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+#if FULL
 import RealmSwift
 import RxRealm
 import RxSwift
+#endif
 
 struct Item {
     let color:Color
@@ -32,7 +34,9 @@ struct CalculatorView: View {
     @State var lastOp:String? = nil
     @State var history:[String] = []
     @State var isNeedMoreHistory:Bool = false
+    #if FULL
     let disposeBag = DisposeBag()
+    #endif
     
     var clearText:String {
         if Calculator.shared.items.last is Calculator.Number {
@@ -134,7 +138,7 @@ struct CalculatorView: View {
                     lastOp = op.rawValue
                 }
             }
-            
+            #if FULL
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
                 .subscribe { event in
                     switch event {
@@ -154,6 +158,7 @@ struct CalculatorView: View {
                     }
                     
                 }.disposed(by: self.disposeBag)
+            #endif
             
         }
         .background(Color.bg1)

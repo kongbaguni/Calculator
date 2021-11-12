@@ -7,8 +7,9 @@
 
 import Foundation
 import SwiftUI
+#if FULL
 import RealmSwift
-
+#endif
 extension Notification.Name {
     static let calculator_lastNumber = Notification.Name(rawValue: "calculator_lastNumber")
     static let calculator_lastOperator = Notification.Name(rawValue: "calculator_lastOperator")
@@ -271,16 +272,19 @@ class Calculator {
             }
         }
         items.append(Result(doubleValue: result))
+        #if FULL
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {[weak self] in
             self?.save()
             self?.items.removeAll()
         }
+        #endif
     }
-    
     fileprivate func save() {
+#if FULL
         let realm = try! Realm()
         try! realm.write {
             realm.create(HistoryModel.self, value: ["value":displayMarkDownString], update: .all)
         }
+#endif
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if FULL 
 import RealmSwift
 import SwiftUI
 
@@ -14,3 +15,4 @@ class HistoryModel : Object {
     @Persisted var value:String = ""
     @Persisted var date:Date = Date()
 }
+#endif

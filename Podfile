@@ -26,6 +26,5 @@ target 'calculator_clip' do
   use_frameworks!
 
   # Pods for calculator_clip
-  pod "RxRealm"
 
 end
