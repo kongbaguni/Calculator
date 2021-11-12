@@ -9,6 +9,7 @@ import SwiftUI
 import RxSwift
 import RxRealm
 import RealmSwift
+fileprivate let DATE_FORMAT = "yyyy.MM.dd hh:mm"
 
 struct HistoryListView: View {
     struct Data:Hashable {
@@ -71,7 +72,7 @@ struct HistoryListView: View {
                         var result:[String:[String]] = [:]
                         
                         for item in dbList {
-                            let date = item.date.formatedString(format: "yyyy.MM.dd hh:mm")!
+                            let date = item.date.formatedString(format: DATE_FORMAT)!
                             if result[date] == nil {
                                 result[date] = [item.value]
                             } else {
@@ -84,7 +85,11 @@ struct HistoryListView: View {
                             data.append(Data(date: item.key, list: item.value))
                         }
                         data = data.sorted { a, b in
-                            return a.date < b.date
+                            if let datea = a.date.dateValue(format: DATE_FORMAT),
+                               let dateb = b.date.dateValue(format: DATE_FORMAT) {
+                                return datea.timeIntervalSince1970 < dateb.timeIntervalSince1970
+                            }
+                            return false
                         }
                         
                     case .error(let error):

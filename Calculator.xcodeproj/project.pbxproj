@@ -28,6 +28,9 @@
 		1B39958D273E3BFE00EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
 		1B39958E273E3BFF00EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
 		1B39958F273E3C0000EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
+		1B399591273E3DC800EAADD8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B399590273E3DC800EAADD8 /* String+Extensions.swift */; };
+		1B399592273E3DC800EAADD8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B399590273E3DC800EAADD8 /* String+Extensions.swift */; };
+		1B399593273E3DC800EAADD8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B399590273E3DC800EAADD8 /* String+Extensions.swift */; };
 		1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */; };
 		1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
 		1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B98CDF62710024400FC3E9E /* Calculator.swift */; };
@@ -79,7 +82,7 @@
 		1B06FA0C270D79280079B080 /* TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 		1B06FA0D270D79280079B080 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1B06FA0E270D792A0079B080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1B06FA13270D792A0079B080 /* kongbaguni calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kongbaguni calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B06FA13270D792A0079B080 /* 콩 계산기.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "콩 계산기.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B06FA19270D792A0079B080 /* kongbaguni calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "kongbaguni calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B06FA1B270D792A0079B080 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		1B29F778273C921A007BC9B2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1B29F792273DF8ED007BC9B2 /* calculator (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "calculator (iOS).entitlements"; sourceTree = "<group>"; };
 		1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		1B399590273E3DC800EAADD8 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandling.swift; sourceTree = "<group>"; };
 		1B98CDF62710024400FC3E9E /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		1BA96B0D27229E10002B2419 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
@@ -171,7 +175,7 @@
 		1B06FA14270D792A0079B080 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1B06FA13270D792A0079B080 /* kongbaguni calculator.app */,
+				1B06FA13270D792A0079B080 /* 콩 계산기.app */,
 				1B06FA19270D792A0079B080 /* kongbaguni calculator.app */,
 				1BC668602721612200006C20 /* calculator_clip.app */,
 			);
@@ -190,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */,
+				1B399590273E3DC800EAADD8 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -276,7 +281,7 @@
 			);
 			name = "calculator (iOS)";
 			productName = "Test (iOS)";
-			productReference = 1B06FA13270D792A0079B080 /* kongbaguni calculator.app */;
+			productReference = 1B06FA13270D792A0079B080 /* 콩 계산기.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1B06FA18270D792A0079B080 /* calculator (macOS) */ = {
@@ -501,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B399591273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */,
 				1B29F787273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
 				1B29F78C273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
@@ -518,6 +524,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B29F788273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
+				1B399592273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				1B29F77A273C921A007BC9B2 /* HistoryModel.swift in Sources */,
 				1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */,
 				1B29F78D273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
@@ -535,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */,
+				1B399593273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */,
 				1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
@@ -710,7 +718,7 @@
 				MARKETING_VERSION = 1.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
-				PRODUCT_NAME = "kongbaguni calculator";
+				PRODUCT_NAME = "콩 계산기";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -747,7 +755,7 @@
 				MARKETING_VERSION = 1.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
-				PRODUCT_NAME = "kongbaguni calculator";
+				PRODUCT_NAME = "콩 계산기";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -839,7 +847,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = calculator_clip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "kongbaguni calculator";
+				INFOPLIST_KEY_CFBundleDisplayName = "콩 계산기";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -876,7 +884,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = calculator_clip/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "kongbaguni calculator";
+				INFOPLIST_KEY_CFBundleDisplayName = "콩 계산기";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
