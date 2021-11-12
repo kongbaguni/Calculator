@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Calculator
+
+  Created by Changyeol Seo on 2021/11/12.
+  
+*/
+"CFBundleDisplayName" = "콩 계산기";
+"CFBundleName" = "콩 계산기";
