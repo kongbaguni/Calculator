@@ -143,9 +143,6 @@ class Calculator {
     var decimalLength:Double = 0.0
     
     func keyInput(key:String) {
-        if key != "=" && items.last is Result {
-            items.removeAll()
-        }
         var isOver:Bool {
             if let li = items.last as? Number {
                 return li.strvalue.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: ",", with: "").count >= 9
@@ -158,6 +155,10 @@ class Calculator {
             if isOver {
                 return
             }
+            if items.last is Result {
+                items.removeAll()
+            }
+            
             if let li = items.last as? Number {
                 let new = "\(li.strvalue)\(key)"
                 items.removeLast()
@@ -200,6 +201,9 @@ class Calculator {
                 items.append(Number(strvalue: "\(new)"))
             }
         case "/","*","-","+","✕","÷":
+            if items.last is Result {
+                return
+            }
             if items.count == 0 {
                 return
             }
@@ -273,10 +277,7 @@ class Calculator {
         }
         items.append(Result(doubleValue: result))
         #if FULL
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {[weak self] in
-            self?.save()
-            self?.items.removeAll()
-        }
+        save()
         #endif
     }
     fileprivate func save() {

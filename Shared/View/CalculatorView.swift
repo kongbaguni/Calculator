@@ -63,7 +63,7 @@ struct CalculatorView: View {
                 }
                 .background(Color.bg3)
                 .listStyle(SidebarListStyle())
-                .frame(minWidth: 400, idealWidth: 400, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: 500, alignment: .center)
+                .frame(minWidth: 400, idealWidth: 400, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
             }
             else {
                 Spacer().background(Color.bg3)
