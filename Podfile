@@ -1,29 +1,31 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '15.0', osx, '12.0'
 
+target 'calculator (iOS)' do
+  platform :ios, '15.0'
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
 
-pod "RxRealm"
+  # Pods for calculator (iOS)
+  pod "RxRealm"
+
+end
+
+target 'calculator (macOS)' do
+  platform :osx, '12.0'
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for calculator (macOS)
+  pod "RxRealm"
+
+end
 
 target 'calculator_clip' do
+  platform :ios, '15.0'
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for calculator_clip
-
-end
-
-target 'Test (iOS)' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Test (iOS)
-
-end
-
-target 'Test (macOS)' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Test (macOS)
+  pod "RxRealm"
 
 end

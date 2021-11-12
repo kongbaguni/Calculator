@@ -43,22 +43,9 @@ struct CalculatorView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Text(displayText)
-                    .foregroundColor(Color.btnTextColor)
-                    .font(.title)
-                    .multilineTextAlignment(.trailing)
-                    .padding(20)
-#if MAC
-                    .background(KeyEventHandling())
-#endif
-            }
-            .background(Color.bg2)
-            
             if history.count > 0 {
                 List {
-                    ForEach(history, id: \.self) { text in                        
+                    ForEach(history, id: \.self) { text in
                         let vstack =  VStack {
                             Text(try! AttributedString(markdown:text))
                                 .foregroundColor(Color.gray)
@@ -72,10 +59,25 @@ struct CalculatorView: View {
                 }
                 .background(Color.bg3)
                 .listStyle(SidebarListStyle())
+                .frame(minWidth: 400, idealWidth: 400, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: 500, alignment: .center)
             }
             else {
                 Spacer().background(Color.bg3)
             }
+
+            HStack {
+                Spacer()
+                Text(displayText)
+                    .foregroundColor(Color.btnTextColor)
+                    .font(.title)
+                    .multilineTextAlignment(.trailing)
+                    .padding(20)
+#if MAC
+                    .background(KeyEventHandling())
+#endif
+            }
+            .background(Color.bg2)
+            
             
             Spacer().frame(width: 300, height: 20, alignment: .center)
             ForEach(0..<list.count) { i in
@@ -95,7 +97,7 @@ struct CalculatorView: View {
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill( str == lastOp ? Color.gray : color)
+                                    .fill( str == lastOp ? Color.btnSelectedColor : color)
                                 if str == "clear" {
                                     Text(try! AttributedString(markdown: "`\(clearText)`"))
                                         .foregroundColor(Color.btnTextColor)

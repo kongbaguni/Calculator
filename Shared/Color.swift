@@ -17,6 +17,8 @@ extension Color {
     static let btn2 = Color(nsColor: NSColor(named: "btn2")!)
     static let btn3 = Color(nsColor: NSColor(named: "btn3")!)
     static let btnTextColor = Color(nsColor: NSColor(named: "btnTextColor")!)
+    static let btnSelectedColor = Color(nsColor: NSColor(named: "btnSelectedColor")!)
+    
     #else
     static let bg1 = Color(UIColor(named: "bg1")!)
     static let bg2 = Color(UIColor(named: "bg2")!)
@@ -25,5 +27,6 @@ extension Color {
     static let btn2 = Color(UIColor(named: "btn2")!)
     static let btn3 = Color(UIColor(named: "btn3")!)
     static let btnTextColor = Color(UIColor(named: "btnTextColor")!)
+    static let btnSelectedColor = Color(UIColor(named: "btnSelectedColor")!)
     #endif
 }
