@@ -16,7 +16,6 @@
 		1B06FA21270D792A0079B080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
 		1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F778273C921A007BC9B2 /* HistoryModel.swift */; };
 		1B29F77A273C921A007BC9B2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F778273C921A007BC9B2 /* HistoryModel.swift */; };
-		1B29F77B273C921A007BC9B2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F778273C921A007BC9B2 /* HistoryModel.swift */; };
 		1B29F780273CC7CC007BC9B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B29F784273CC7CC007BC9B2 /* Localizable.strings */; };
 		1B29F781273CC7CC007BC9B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B29F784273CC7CC007BC9B2 /* Localizable.strings */; };
 		1B29F782273CC7CC007BC9B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B29F784273CC7CC007BC9B2 /* Localizable.strings */; };
@@ -531,7 +530,6 @@
 				1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */,
 				1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
-				1B29F77B273C921A007BC9B2 /* HistoryModel.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
 				1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */,
 			);
