@@ -8,6 +8,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        #if MAC
         TabView {
             CalculatorView()
                 .tabItem {
@@ -19,9 +20,25 @@ struct ContentView: View {
                     Image(systemName: "list.dash")
                     Text("history")
                 }
-        }.frame(minWidth: 300, idealWidth: 300,
+        }
+        .frame(minWidth: 300, idealWidth: 300,
                 maxWidth: CGFloat.greatestFiniteMagnitude,
-                minHeight: 700, idealHeight: 700, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
+                minHeight: 600, idealHeight: 600,
+               maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
+        #else
+        TabView {
+            CalculatorView()
+                .tabItem {
+                    Image(systemName: "square.and.pencil")
+                    Text("app_title")
+                }
+            HistoryListView()
+                .tabItem {
+                    Image(systemName: "list.dash")
+                    Text("history")
+                }
+        }
+        #endif
     }
 }
 

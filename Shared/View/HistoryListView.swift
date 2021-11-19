@@ -30,7 +30,7 @@ struct HistoryListView: View {
                     ForEach(data, id:\.self) { data in
                         Section(header: Text(data.date)) {
                             ForEach(data.list, id:\.self) { str in
-                                let txt = HStack {
+                                let txt = HStack {                                    
                                     Text("\((data.list.firstIndex(of: str) ?? 0) + 1)")
                                         .foregroundColor(Color.gray)
                                     Text(try! AttributedString(markdown: str))
