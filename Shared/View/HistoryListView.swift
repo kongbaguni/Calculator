@@ -9,7 +9,7 @@ import SwiftUI
 import RxSwift
 import RxRealm
 import RealmSwift
-fileprivate let DATE_FORMAT = "yyyy.MM.dd hh:mm"
+fileprivate let DATE_FORMAT = "yyyy.MM.dd HH:mm"
 
 struct HistoryListView: View {
     struct Data:Hashable {

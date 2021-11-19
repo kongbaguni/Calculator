@@ -19,7 +19,9 @@ struct ContentView: View {
                     Image(systemName: "list.dash")
                     Text("history")
                 }
-        }
+        }.frame(minWidth: 300, idealWidth: 300,
+                maxWidth: CGFloat.greatestFiniteMagnitude,
+                minHeight: 700, idealHeight: 700, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
     }
 }
 
