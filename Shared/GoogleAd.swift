@@ -11,11 +11,11 @@ import UIKit
 import SwiftUI
 import GoogleMobileAds
 import AppTrackingTransparency
-fileprivate let gaid = "ca-app-pub-3940256099942544/6978759866" // test ga id
-//fileprivate let gaid = "ca-app-pub-7714069006629518/6684078728" // real ga id
+//fileprivate let gaid = "ca-app-pub-3940256099942544/6978759866" // test ga id
+fileprivate let gaid = "ca-app-pub-7714069006629518/6684078728" // real ga id
 
-fileprivate let bannerGaId = "ca-app-pub-3940256099942544/2934735716" // test ga id
-//fileprivate let bannerGaId = "ca-app-pub-7714069006629518/1697623159" // real ga id
+//fileprivate let bannerGaId = "ca-app-pub-3940256099942544/2934735716" // test ga id
+fileprivate let bannerGaId = "ca-app-pub-7714069006629518/1697623159" // real ga id
 #endif
 
 class GoogleAd : NSObject {
