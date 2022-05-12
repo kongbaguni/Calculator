@@ -16,53 +16,147 @@ struct HistoryListView: View {
         let date:String
         let list:[String]
     }
+    enum AlertType {
+        case deleteHistory
+        case adWatchTime
+    }
+    let googleAd = GoogleAd()
     
+    
+    @State var isAlert = false
+    @State var alertType = AlertType.deleteHistory
+
     @State var data:[Data] = []
     let disposeBag = DisposeBag()
+    var watchAdBtn : some View {
+        Button {
+            googleAd.showAd { isSucess, time in
+                if isSucess == false {
+                    alertType = .adWatchTime
+                    isAlert = !isSucess
+                }
+            }
+        } label : {
+            HStack {
+                Image(systemName: "video.circle")
+                    .imageScale(.large)
+                    .foregroundColor(Color.btnTextColor)
+                    .padding(.trailing,5)
+                
+                Text("watch AD")
+                    .font(.headline)
+                    .foregroundColor(Color.btnTextColor)
+            }
+            .padding(5)
+            
+        }
+    }
     
-    var body: some View {
-        VStack {
-            if data.count == 0 {
-                Text("empty history log...").multilineTextAlignment(.center)
-            } else {
-                List {
-                    let list =
-                    ForEach(data, id:\.self) { data in
-                        Section(header: Text(data.date)) {
-                            ForEach(data.list, id:\.self) { str in
-                                let txt = HStack {                                    
-                                    Text("\((data.list.firstIndex(of: str) ?? 0) + 1)")
-                                        .foregroundColor(Color.gray)
-                                    Text(try! AttributedString(markdown: str))
-                                        .foregroundColor(Color.btnTextColor)
-                                }
-                                #if MAC
-                                txt
-                                #else
-                                txt.listRowSeparator(.hidden)
-                                #endif
+    var deleteHistoryBtn : some View {
+        Button {
+            alertType = .deleteHistory
+            isAlert = true
+        } label: {
+            HStack {
+                Image(systemName:"trash.circle")
+                    .imageScale(.large)
+                    .foregroundColor(Color.btnTextColor)
+                    .padding(.trailing,5)
+                Text("history_delete_button_title")
+                    .font(.headline)
+                    .foregroundColor(Color.btnTextColor)
+            }
+            .padding(5)
 
-                            }
+        }
+    }
+    
+    var bannerView : some View {
+        HStack {
+#if !MAC
+            
+            Spacer()
+            BannerAdView(sizeType: .GADAdSizeMediumRectangle, padding: .zero)
+            Spacer()
+#endif
+        }
+    }
+    
+    var historyListView : some View {
+        LazyVStack {
+            ForEach(data, id:\.self) { data in
+                Section(header: Text(data.date)) {
+                    ForEach(data.list, id:\.self) { str in
+                        HStack {
+                            Text("\((data.list.firstIndex(of: str) ?? 0) + 1)")
+                                .foregroundColor(Color.gray)
+                            Text(try! AttributedString(markdown: str))
+                                .foregroundColor(Color.btnTextColor)
+                            Spacer()
                         }
+                        .padding(5)
+                        .background(Color.bg2)
+                        .cornerRadius(5)
+                        .padding(5)
                         
-                    }
-                    #if MAC
-                    list
-                    #else
-                    list.listStyle(GroupedListStyle())
-                    #endif
-                    
-                    Button {
-                        let realm = try! Realm()
-                        try! realm.write {
-                            realm.deleteAll()
-                        }
-                    } label: {
-                        Text("history_delete_button_title")
                     }
                 }
             }
         }
+    }
+    
+    var body: some View {
+        GeometryReader { geomentry in
+            VStack {
+                if data.count == 0 {
+                    bannerView
+                    Text("empty history log...")
+                        .font(.headline)
+                        .foregroundColor(Color.btnTextColor)
+                        .multilineTextAlignment(.center)
+                    watchAdBtn
+                } else {
+                    if geomentry.size.width < geomentry.size.height {
+                        ScrollView {
+                            bannerView
+                            historyListView
+                            deleteHistoryBtn
+                            watchAdBtn
+                        }
+                    } else {
+                        HStack {
+                            bannerView
+                            ScrollView {
+                                historyListView
+                                deleteHistoryBtn
+                                watchAdBtn
+                             }
+                        }
+                    }
+
+                }
+            }
+
+        }
+        .alert(isPresented: $isAlert, content: {
+            switch alertType {
+            case .deleteHistory:
+                return Alert(title: Text("history_delete_alert_title"),
+                             message: Text("history_delete_alert_message"),
+                             primaryButton: .default(Text("history_delete_alert_confirm"),
+                                                     action: {
+                    let realm = try! Realm()
+                    try! realm.write {
+                        realm.deleteAll()
+                    }
+                }),
+                             secondaryButton: .cancel())
+            case .adWatchTime:
+                return Alert(title: Text("ad watch time error title"),
+                             message: Text("ad watch time error message"),
+                             dismissButton: .cancel(Text("ad watch time error confirm")))
+            }
+        })
         .onAppear {
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in

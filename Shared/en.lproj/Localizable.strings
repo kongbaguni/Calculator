@@ -11,3 +11,12 @@
 "history" = "history";
 "more..." = "more...";
 "empty history log..." = "empty history log...";
+
+"history_delete_alert_title" = "Delete history";
+"history_delete_alert_message" = "Delete calculation history. Deleted history cannot be recovered.";
+"history_delete_alert_confirm" = "Delete";
+"watch AD" = "View video ads";
+
+"ad watch time error title" = "You just watched a video ad.";
+"ad watch time error message" = "Thank you!\nIf you want to see the ad again, please present it later.";
+"ad watch time error confirm" = "Confirm";

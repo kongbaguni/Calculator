@@ -44,21 +44,32 @@ struct CalculatorView: View {
         }
         return "AC"
     }
-    
-    var body: some View {
-        VStack {
-            if history.count > 0 {
-                List {
-                    ForEach(history, id: \.self) { text in
-                        let vstack =  VStack {
-                            Text(try! AttributedString(markdown:text))
-                                .foregroundColor(Color.gray)
-                        }
-#if MAC
-                        vstack
+    var bannerAdView : some View {
+#if !MAC && FULL
+        HStack {
+            Spacer()
+            BannerAdView(sizeType: .GADAdSizeLargeBanner, padding: .zero)
+            Spacer()
+        }
 #else
-                        vstack.listRowSeparator(.hidden)
+        EmptyView()
 #endif
+    }
+    
+    var historylistView: some View {
+        Group {
+            if history.count > 0 {
+                ScrollView {
+                    bannerAdView
+                    LazyVStack {
+                        ForEach(history, id: \.self) { text in
+                            HStack {
+                                Text(try! AttributedString(markdown:text))
+                                    .foregroundColor(Color.gray)
+                                    .padding(5)
+                                Spacer()
+                            }
+                        }
                     }
                 }
                 .background(Color.bg3)
@@ -66,27 +77,32 @@ struct CalculatorView: View {
                 .frame(minWidth: 300, idealWidth: 300, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
             }
             else {
+                bannerAdView
                 Spacer().background(Color.bg3)
             }
-
-            HStack {
-                Spacer()
-                Text(displayText)
-                    .foregroundColor(Color.btnTextColor)
-                    .font(.title)
-                    .multilineTextAlignment(.trailing)
-                    .padding(20)
+        }
+    }
+    
+    var numberDisplayView : some View {
+        HStack {
+            Spacer()
+            Text(displayText)
+                .foregroundColor(Color.btnTextColor)
+                .font(.title)
+                .multilineTextAlignment(.trailing)
+                .padding(20)
 #if MAC
-                    .background(KeyEventHandling())
+                .background(KeyEventHandling())
 #endif
-            }
-            .background(Color.bg2)
-            
-            
-            Spacer().frame(width: 300, height: 20, alignment: .center)
-            ForEach(0..<list.count) { i in
+        }
+        .background(Color.bg2)
+    }
+    
+    var buttons : some View {
+        VStack {
+            ForEach(0..<list.count, id:\.self) { i in
                 HStack {
-                    ForEach(0..<list[i].count) { a in
+                    ForEach(0..<list[i].count, id:\.self) { a in
                         let item = list[i][a]
                         let str = item.value as? String ?? "\(item.value as! Int)"
                         let width:CGFloat = item.value as? Int == 0 ? 110 : 50
@@ -123,8 +139,31 @@ struct CalculatorView: View {
                     }
                 }
             }
-            Spacer().frame(width: 300, height: 20, alignment: .center)
-            
+        }
+    }
+    var body: some View {
+        GeometryReader { geomentry in
+            if geomentry.size.width < geomentry.size.height {
+                VStack {
+                    historylistView
+                    numberDisplayView
+                    Spacer().frame(width: 300, height: 20, alignment: .center)
+                    buttons
+                    Spacer().frame(width: 300, height: 20, alignment: .center)
+                }
+            } else {
+                HStack {
+                    VStack {
+                        historylistView
+                        numberDisplayView
+                    }
+                    VStack {
+                        Spacer()
+                        buttons
+                        Spacer()
+                    }.frame(width:300)
+                }
+            }
         }
         .onAppear {
             NotificationCenter.default.addObserver(forName: .calculator_lastNumber, object: nil, queue: nil) {  noti in

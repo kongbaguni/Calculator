@@ -7,6 +7,7 @@ target 'calculator (iOS)' do
 
   # Pods for calculator (iOS)
   pod "RxRealm"
+  pod 'Google-Mobile-Ads-SDK'
 
 end
 

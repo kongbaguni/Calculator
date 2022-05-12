@@ -11,3 +11,12 @@
 "history" = "계산 기록";
 "more..." = "더보기";
 "empty history log..." = "계산 기록이 없습니다...";
+
+"history_delete_alert_title" = "기록 삭제";
+"history_delete_alert_message" = "계산 기록을 삭제합니다. 삭제된 기록은 복구되지 않습니다.";
+"history_delete_alert_confirm" = "삭제";
+"watch AD" = "동영상 광고 보기";
+
+"ad watch time error title" = "방금 동영상 광고를 보셨습니다.";
+"ad watch time error message" = "감사합니다!\n혹시 광고를 다시 보고 싶으면 잠시 후에 제시도 해주세요.";
+"ad watch time error confirm" = "확인";

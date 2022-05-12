@@ -5,8 +5,24 @@
 //  Created by Changyeol Seo on 2021/10/06.
 //
 import SwiftUI
-
+#if !MAC
+import GoogleMobileAds
+#endif
 struct ContentView: View {
+    init() {
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "22c15f150946f2ec1887fe3673eff404","028bacd3552b31072f19a617f0c8aef3" ]
+        // Sample device ID
+        GADMobileAds.sharedInstance().start { status in
+            print("-------------------------------")
+            print("google ad status : \(status.adapterStatusesByClassName)")
+        }
+        let transparentAppearence = UITabBarAppearance()
+        transparentAppearence.configureWithTransparentBackground()
+        transparentAppearence.backgroundColor = UIColor(named: "bg3")
+
+        UITabBar.appearance().standardAppearance = transparentAppearence
+        UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
+    }
     var body: some View {
         #if MAC
         TabView {
@@ -21,6 +37,7 @@ struct ContentView: View {
                     Text("history")
                 }
         }
+        .tabViewStyle(.automatic)
         .frame(minWidth: 300, idealWidth: 300,
                 maxWidth: CGFloat.greatestFiniteMagnitude,
                 minHeight: 600, idealHeight: 600,
@@ -38,6 +55,7 @@ struct ContentView: View {
                     Text("history")
                 }
         }
+        .tabViewStyle(.automatic)
         #endif
     }
 }

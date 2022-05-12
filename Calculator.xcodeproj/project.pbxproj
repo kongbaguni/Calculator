@@ -50,6 +50,16 @@
 		1BD60CF427294AB2002684D6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD60CF227294AB2002684D6 /* Color.swift */; };
 		1BD60CF527294B99002684D6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD60CF227294AB2002684D6 /* Color.swift */; };
 		254BCED4569D71BA8A395F61 /* Pods_calculator__macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71587E21553DF7AF863D8F1C /* Pods_calculator__macOS_.framework */; };
+		8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */; };
+		8D16E340282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */; };
+		8D16E341282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */; };
+		8D16E343282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */; };
+		8D16E344282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */; };
+		8D16E345282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */; };
+		8D5C8386282B472200423C9F /* GoogleAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8385282B472200423C9F /* GoogleAd.swift */; };
+		8D5C8387282B472C00423C9F /* GoogleAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8385282B472200423C9F /* GoogleAd.swift */; };
+		8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8389282BA17800423C9F /* BannerAdView.swift */; };
+		8D5C838B282BA66000423C9F /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8389282BA17800423C9F /* BannerAdView.swift */; };
 		AD60FDF36B1ED969218A2A2B /* Pods_calculator__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F3747D402E0B36A11E530E /* Pods_calculator__iOS_.framework */; };
 		C34428AB27314A2C003DCB1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -113,6 +123,11 @@
 		68F3747D402E0B36A11E530E /* Pods_calculator__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculator__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71587E21553DF7AF863D8F1C /* Pods_calculator__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculator__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C8DD374C616DC5C66FAA2B /* Pods_calculator_clip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculator_clip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault+Extensions.swift"; sourceTree = "<group>"; };
+		8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		8D5C8385282B472200423C9F /* GoogleAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAd.swift; sourceTree = "<group>"; };
+		8D5C8388282B94B500423C9F /* calculator--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--iOS--Info.plist"; sourceTree = "<group>"; };
+		8D5C8389282BA17800423C9F /* BannerAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		C1846EB23B74F832146E0C36 /* Pods-calculator (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator (iOS).debug.xcconfig"; path = "Target Support Files/Pods-calculator (iOS)/Pods-calculator (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		D05BDD20327CB952C21A3F1A /* Pods-calculator_clip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator_clip.debug.xcconfig"; path = "Target Support Files/Pods-calculator_clip/Pods-calculator_clip.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +163,7 @@
 		1B06FA06270D79280079B080 = {
 			isa = PBXGroup;
 			children = (
+				8D5C8388282B94B500423C9F /* calculator--iOS--Info.plist */,
 				1B39959C273E456F00EAADD8 /* InfoPlist.strings */,
 				1B29F792273DF8ED007BC9B2 /* calculator (iOS).entitlements */,
 				1B06FA0B270D79280079B080 /* Shared */,
@@ -170,6 +186,7 @@
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
 				1B98CDF62710024400FC3E9E /* Calculator.swift */,
 				1BAE669D273A4A5300C82269 /* Stack.swift */,
+				8D5C8385282B472200423C9F /* GoogleAd.swift */,
 				1B29F784273CC7CC007BC9B2 /* Localizable.strings */,
 				1B06FA0E270D792A0079B080 /* Assets.xcassets */,
 				1BD60CF227294AB2002684D6 /* Color.swift */,
@@ -200,6 +217,8 @@
 			children = (
 				1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */,
 				1B399590273E3DC800EAADD8 /* String+Extensions.swift */,
+				8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */,
+				8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +234,7 @@
 		1B29F790273D116D007BC9B2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8D5C8389282BA17800423C9F /* BannerAdView.swift */,
 				1BA96B0D27229E10002B2419 /* CalculatorView.swift */,
 				1B29F786273CF0CA007BC9B2 /* HistoryListView.swift */,
 				1B06FA0D270D79280079B080 /* ContentView.swift */,
@@ -513,15 +533,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D16E343282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */,
 				1B399591273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */,
 				1B29F787273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
+				8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */,
 				1B29F78C273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1BD60CF327294AB2002684D6 /* Color.swift in Sources */,
+				8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1BAE669E273A4A5300C82269 /* Stack.swift in Sources */,
 				1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */,
+				8D5C8386282B472200423C9F /* GoogleAd.swift in Sources */,
 				1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,15 +556,19 @@
 			files = (
 				1B29F788273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
 				1B399592273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
+				8D16E340282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1B29F77A273C921A007BC9B2 /* HistoryModel.swift in Sources */,
 				1B98CDF52710020F00FC3E9E /* KeyEventHandling.swift in Sources */,
+				8D16E344282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */,
 				1B29F78D273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BA96B1027229E61002B2419 /* CalculatorView.swift in Sources */,
 				1BAE669F273A4A5300C82269 /* Stack.swift in Sources */,
+				8D5C838B282BA66000423C9F /* BannerAdView.swift in Sources */,
 				1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */,
 				1B06FA1D270D792A0079B080 /* TestApp.swift in Sources */,
 				1BD60CF427294AB2002684D6 /* Color.swift in Sources */,
+				8D5C8387282B472C00423C9F /* GoogleAd.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,10 +578,12 @@
 			files = (
 				1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */,
 				1B399593273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
+				8D16E345282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */,
 				1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */,
 				1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
+				8D16E341282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,6 +749,7 @@
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "calculator--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -756,6 +787,7 @@
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "calculator--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -857,7 +889,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator_clip/Preview Content\"";
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
@@ -875,7 +907,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -894,7 +926,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator_clip/Preview Content\"";
 				DEVELOPMENT_TEAM = QU9EPTU238;
 				ENABLE_PREVIEWS = YES;
@@ -912,7 +944,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
