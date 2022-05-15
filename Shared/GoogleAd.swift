@@ -20,7 +20,7 @@ fileprivate let bannerGaId = "ca-app-pub-7714069006629518/1697623159" // real ga
 
 class GoogleAd : NSObject {
     
-    var interstitial:GADRewardedInterstitialAd? = nil
+    var interstitial:GADRewardedAd? = nil
     func requestTrackingAuthorization(complete:@escaping()->Void) {
         #if !MAC
         ATTrackingManager.requestTrackingAuthorization { status in
@@ -34,7 +34,7 @@ class GoogleAd : NSObject {
 #if !MAC
         let request = GADRequest()
         requestTrackingAuthorization {
-            GADRewardedInterstitialAd.load(withAdUnitID: gaid, request: request) { [weak self] ad, error in
+            GADRewardedAd.load(withAdUnitID: gaid, request: request) { [weak self] ad, error in
                 if let err = error {
                     print("google ad load error : \(err.localizedDescription)")
                 }
