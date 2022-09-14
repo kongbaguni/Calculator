@@ -19,7 +19,7 @@ struct ContentView: View {
         let transparentAppearence = UITabBarAppearance()
         transparentAppearence.configureWithTransparentBackground()
         transparentAppearence.backgroundColor = UIColor(named: "bg3")
-
+ 
         UITabBar.appearance().standardAppearance = transparentAppearence
         UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
     }

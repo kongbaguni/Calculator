@@ -46,26 +46,7 @@ struct BannerAdView: View {
         }
     }
     
-    private var bannerView:GADBannerView? {
-        #if !MAC
-        switch sizeType {
-        case .GADAdSizeBanner:
-            return GADBannerView(adSize : GADAdSizeBanner)
-        case .GADAdSizeLargeBanner:
-            return GADBannerView(adSize : GADAdSizeLargeBanner)
-        case .GADAdSizeMediumRectangle:
-            return GADBannerView(adSize : GADAdSizeMediumRectangle)
-        case .GADAdSizeFullBanner:
-            return GADBannerView(adSize : GADAdSizeFullBanner)
-        case .GADAdSizeLeaderboard:
-            return GADBannerView(adSize : GADAdSizeLeaderboard)
-        case .GADAdSizeSkyscraper:
-            return GADBannerView(adSize : GADAdSizeSkyscraper)
-        }
-        #else
-        return nil
-        #endif
-    }
+    @State var bannerView:GADBannerView? = nil
     
     var body: some View {
         VStack {
@@ -76,8 +57,48 @@ struct BannerAdView: View {
                     .padding(.bottom,padding.bottom)
                     .padding(.leading, padding.left)
                     .padding(.trailing, padding.right)
+            } else {
+                
+                Button {
+                    initAdView()
+                } label: {
+                    Text("loading...")
+                        .frame(width:bannerSize.width,height:bannerSize.height,alignment: .center)
+                }
+
             }
+        }.onAppear {
+            initAdView()
         }
+        
+    }
+    
+    private func initAdView() {
+        guard bannerView == nil else {
+            return
+        }
+#if !MAC
+        var bView:GADBannerView? {
+            switch sizeType {
+                case .GADAdSizeBanner:
+                    return GADBannerView(adSize : GADAdSizeBanner)
+                case .GADAdSizeLargeBanner:
+                    return GADBannerView(adSize : GADAdSizeLargeBanner)
+                case .GADAdSizeMediumRectangle:
+                    return GADBannerView(adSize : GADAdSizeMediumRectangle)
+                case .GADAdSizeFullBanner:
+                    return GADBannerView(adSize : GADAdSizeFullBanner)
+                case .GADAdSizeLeaderboard:
+                    return GADBannerView(adSize : GADAdSizeLeaderboard)
+                case .GADAdSizeSkyscraper:
+                    return GADBannerView(adSize : GADAdSizeSkyscraper)
+            }
+        }        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            bannerView = bView
+        }
+#endif
+
     }
 }
 
