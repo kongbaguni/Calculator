@@ -138,13 +138,14 @@ struct CalculatorView: View {
             }
         }
         .onLongPressGesture {
+            #if !MAC
             let txt = Calculator.shared.normalStringForClipboardShare
             UIPasteboard.general.string = txt
             isToast = true
             toastTitle = Text("copy to clipboard")
-            toastMessage = txt
-            
+            toastMessage = txt            
             print("longPress")
+            #endif
         }
 
     }

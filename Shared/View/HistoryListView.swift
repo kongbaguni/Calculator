@@ -20,7 +20,9 @@ struct HistoryListView: View {
         case deleteHistory
         case adWatchTime
     }
+    #if !MAC
     let googleAd = GoogleAd()
+    #endif
     
     
     @State var isAlert = false
@@ -29,6 +31,7 @@ struct HistoryListView: View {
     @State var data:[Data] = []
     let disposeBag = DisposeBag()
     var watchAdBtn : some View {
+#if !MAC
         Button {
             googleAd.showAd { isSucess, time in
                 if isSucess == false {
@@ -50,6 +53,9 @@ struct HistoryListView: View {
             .padding(5)
             
         }
+#else
+        EmptyView()
+#endif
     }
     
     var deleteHistoryBtn : some View {

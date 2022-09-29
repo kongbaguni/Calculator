@@ -9,6 +9,13 @@ import SwiftUI
 #if !MAC
 import GoogleMobileAds
 #endif
+#if MAC
+struct BannerAdView: View {
+    var body: some View {
+        EmptyView()
+    }
+}
+#else
 
 struct BannerAdView: View {
     public enum SizeType {
@@ -77,7 +84,6 @@ struct BannerAdView: View {
         guard bannerView == nil else {
             return
         }
-#if !MAC
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             GoogleAd().requestTrackingAuthorization {
                 var bView:GADBannerView? {
@@ -99,8 +105,6 @@ struct BannerAdView: View {
                 bannerView = bView
             }
         }
-#endif
-
     }
 }
-
+#endif

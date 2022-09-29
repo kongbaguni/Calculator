@@ -7,7 +7,6 @@
 //
 
 import UIKit
-#if !MAC
 import SwiftUI
 import GoogleMobileAds
 import AppTrackingTransparency
@@ -16,22 +15,19 @@ fileprivate let gaid = "ca-app-pub-7714069006629518/6684078728" // real ga id
 
 //fileprivate let bannerGaId = "ca-app-pub-3940256099942544/2934735716" // test ga id
 fileprivate let bannerGaId = "ca-app-pub-7714069006629518/1697623159" // real ga id
-#endif
+
 
 class GoogleAd : NSObject {
     
     var interstitial:GADRewardedAd? = nil
     func requestTrackingAuthorization(complete:@escaping()->Void) {
-        #if !MAC
         ATTrackingManager.requestTrackingAuthorization { status in
             print("google ad tracking status : \(status)")
             complete()
         }
-        #endif
     }
     
     private func loadAd(complete:@escaping(_ isSucess:Bool)->Void) {
-#if !MAC
         let request = GADRequest()
         requestTrackingAuthorization {
             GADRewardedAd.load(withAdUnitID: gaid, request: request) { [weak self] ad, error in
@@ -43,13 +39,11 @@ class GoogleAd : NSObject {
                 complete(ad != nil)
             }
         }
-#endif
     }
     
     var callback:(_ isSucess:Bool, _ time:TimeInterval?)->Void = { _,_ in}
     
     func showAd(complete:@escaping(_ isSucess:Bool, _ time:TimeInterval?)->Void) {
-#if !MAC
         let now = Date()
         if let lastTime = UserDefaults.standard.lastAdWatchTime {
             let interval = now.timeIntervalSince1970 - lastTime.timeIntervalSince1970
@@ -74,12 +68,8 @@ class GoogleAd : NSObject {
                 })
             }
         }
-#endif
     }
-     
-    
 }
-#if !MAC
 extension GoogleAd : GADFullScreenContentDelegate {
     //광고 실패
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
@@ -104,16 +94,7 @@ extension GoogleAd : GADFullScreenContentDelegate {
         }
     }
 }
-#endif
 
-#if MAC
-struct GoogleAdBannerView: UIViewRepresentable {
-    func makeUIView(context: Context) -> some View {
-        return EmptyView()
-    }
-    func updateUIView(_ uiView: EmptyView, context: Context) { }
-}
-#else
 struct GoogleAdBannerView: UIViewRepresentable {
     let bannerView:GADBannerView
     func makeUIView(context: Context) -> GADBannerView {
@@ -126,4 +107,3 @@ struct GoogleAdBannerView: UIViewRepresentable {
         uiView.load(GADRequest())
     }
 }
-#endif

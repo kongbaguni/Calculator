@@ -10,6 +10,7 @@ import GoogleMobileAds
 #endif
 struct ContentView: View {
     init() {
+        #if !MAC
 //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "22c15f150946f2ec1887fe3673eff404","028bacd3552b31072f19a617f0c8aef3" ]
         // Sample device ID
         GADMobileAds.sharedInstance().start { status in
@@ -22,6 +23,7 @@ struct ContentView: View {
  
         UITabBar.appearance().standardAppearance = transparentAppearence
         UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
+        #endif
     }
     var body: some View {
         #if MAC
