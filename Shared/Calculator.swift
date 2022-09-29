@@ -13,6 +13,7 @@ import RealmSwift
 extension Notification.Name {
     static let calculator_lastNumber = Notification.Name(rawValue: "calculator_lastNumber")
     static let calculator_lastOperator = Notification.Name(rawValue: "calculator_lastOperator")
+    static let calculator_calculated = Notification.Name(rawValue: "calculator_calculated")
 }
 
 class Calculator {
@@ -287,9 +288,7 @@ class Calculator {
             }
         }
         items.append(Result(doubleValue: result))
-        #if FULL || MAC
         save()
-        #endif
     }
     fileprivate func save() {
 #if FULL || MAC
@@ -297,6 +296,8 @@ class Calculator {
         try! realm.write {
             realm.create(HistoryModel.self, value: ["value":displayMarkDownString], update: .all)
         }
+#else
+        NotificationCenter.default.post(name: .calculator_calculated, object: displayMarkDownString)        
 #endif
     }
 }

@@ -248,6 +248,15 @@ struct CalculatorView: View {
                     }
                     
                 }.disposed(by: self.disposeBag)
+            #else
+            NotificationCenter.default.addObserver(forName: .calculator_calculated, object: nil, queue: nil) { noti in
+                if let markdownString = noti.object as? String {
+                    history.insert(markdownString, at: 0)                    
+                    if history.count > 20 {
+                        history.removeLast()
+                    }
+                }
+            }
             #endif
             
         }
