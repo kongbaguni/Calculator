@@ -111,9 +111,9 @@ struct HistoryListView: View {
                 if data.count == 0 {
                     bannerView
                     Text("empty history log...")
-                        .font(.headline)
-                        .foregroundColor(Color.btnTextColor)
-                        .multilineTextAlignment(.center)
+                        .font(.system(size: 30, weight: .heavy))
+                        .foregroundColor(Color.btnSelectedColor)
+                        .padding(50)
                     watchAdBtn
                 } else {
                     if geomentry.size.width < geomentry.size.height {

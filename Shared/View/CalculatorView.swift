@@ -33,7 +33,7 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String? = nil
     @State var history:[String] = []
-    @State var isNeedMoreHistory:Bool = false
+    @State var isNeedMoreHistory:Bool = false    
     #if FULL || MAC
     let disposeBag = DisposeBag()
     #endif
@@ -58,12 +58,25 @@ struct CalculatorView: View {
     
     var historylistView: some View {
         Group {
-            if history.count > 0 {
+            if (history.count == 0) {
+                ScrollView {
+                    bannerAdView
+                    Text("empty history log...")
+                        .font(.system(size: 30, weight: .heavy))
+                        .foregroundColor(Color.btnSelectedColor)
+                        .padding(50)
+                }
+            }
+            else  {
                 ScrollView {
                     bannerAdView
                     LazyVStack {
-                        ForEach(history, id: \.self) { text in
+                        ForEach(0..<history.count, id : \.self) { idx in
+                            let text = history[idx]
                             HStack {
+                                Text("\(idx)")
+                                    .foregroundColor(Color.idxTextColor)
+                                    .font(.system(size: 20,weight: .heavy))
                                 Button {
                                     if let txt = text.components(separatedBy: " `=` ").last {
                                         let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
@@ -74,22 +87,20 @@ struct CalculatorView: View {
                                     }
                                 } label: {
                                     Text(try! AttributedString(markdown:text))
-                                        .foregroundColor(Color.gray)
+                                        .foregroundColor(Color.btnTextColor)
                                         .padding(5)
+                                        .font(.system(size: 20,weight: .heavy))
                                 }
-
                                 Spacer()
                             }
+                            .padding(10)
                         }
+
                     }
                 }
                 .background(Color.bg3)
                 .listStyle(SidebarListStyle())
                 .frame(minWidth: 300, idealWidth: 300, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
-            }
-            else {
-                bannerAdView
-                Spacer().background(Color.bg3)
             }
         }
     }
@@ -107,6 +118,26 @@ struct CalculatorView: View {
 #endif
         }
         .background(Color.bg2)
+        .onTapGesture {
+            if let last = Calculator.shared.items.last as? Calculator.Number {
+                let str = last.strvalue
+                if str.count > 0 {
+                    let newstr = String(str.dropLast(1))
+                                    
+                    let new = Calculator.Number(strvalue: newstr)
+                    
+                    Calculator.shared.items.removeLast()
+                    Calculator.shared.items.append(new)
+                }
+                
+            }
+        }
+        .onLongPressGesture {
+            UIPasteboard.general.string = Calculator.shared.normalStringForClipboardShare
+            
+            print("longPress")
+        }
+
     }
     
     var buttons : some View {
@@ -193,10 +224,10 @@ struct CalculatorView: View {
                 .subscribe { event in
                     switch event {
                     case .next(let list):
-                        isNeedMoreHistory = list.count > 5
+                        isNeedMoreHistory = list.count > 20
                         var results:[String] = []
                         for item in list {
-                            if results.count == 5 {
+                            if results.count == 20 {
                                 continue
                             }
                             results.append(item.value)

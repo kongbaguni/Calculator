@@ -125,6 +125,15 @@ class Calculator {
         return txt
     }
     
+    var normalStringForClipboardShare:String {
+        return displayMarkDownString
+            .replacingOccurrences(of: "`=`", with: "=")
+            .replacingOccurrences(of: "`✕`", with: "*")
+            .replacingOccurrences(of: "`÷`", with: "/")
+            .replacingOccurrences(of: "`-`", with: "-")
+            .replacingOccurrences(of: "`+`", with: "+")
+    }
+    
     var displayAttributedString:AttributedString {
         let attr = try! AttributedString(markdown:displayMarkDownString)
         return attr
