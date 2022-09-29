@@ -382,9 +382,6 @@
 				ko,
 			);
 			mainGroup = 1B06FA06270D79280079B080;
-			packageReferences = (
-				8D76A5CB28E575460088E67F /* XCRemoteSwiftPackageReference "Toaster" */,
-			);
 			productRefGroup = 1B06FA14270D792A0079B080 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1031,17 +1028,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		8D76A5CB28E575460088E67F /* XCRemoteSwiftPackageReference "Toaster" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Toaster.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 1B06FA07270D79280079B080 /* Project object */;
 }
