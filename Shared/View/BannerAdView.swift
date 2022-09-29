@@ -47,7 +47,7 @@ struct BannerAdView: View {
     }
     
     @State var bannerView:GADBannerView? = nil
-    
+    let gad = GoogleAd()
     var body: some View {
         VStack {
             if let view = bannerView {
@@ -78,24 +78,26 @@ struct BannerAdView: View {
             return
         }
 #if !MAC
-        var bView:GADBannerView? {
-            switch sizeType {
-                case .GADAdSizeBanner:
-                    return GADBannerView(adSize : GADAdSizeBanner)
-                case .GADAdSizeLargeBanner:
-                    return GADBannerView(adSize : GADAdSizeLargeBanner)
-                case .GADAdSizeMediumRectangle:
-                    return GADBannerView(adSize : GADAdSizeMediumRectangle)
-                case .GADAdSizeFullBanner:
-                    return GADBannerView(adSize : GADAdSizeFullBanner)
-                case .GADAdSizeLeaderboard:
-                    return GADBannerView(adSize : GADAdSizeLeaderboard)
-                case .GADAdSizeSkyscraper:
-                    return GADBannerView(adSize : GADAdSizeSkyscraper)
-            }
-        }        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            bannerView = bView
+            GoogleAd().requestTrackingAuthorization {
+                var bView:GADBannerView? {
+                    switch sizeType {
+                        case .GADAdSizeBanner:
+                            return GADBannerView(adSize : GADAdSizeBanner)
+                        case .GADAdSizeLargeBanner:
+                            return GADBannerView(adSize : GADAdSizeLargeBanner)
+                        case .GADAdSizeMediumRectangle:
+                            return GADBannerView(adSize : GADAdSizeMediumRectangle)
+                        case .GADAdSizeFullBanner:
+                            return GADBannerView(adSize : GADAdSizeFullBanner)
+                        case .GADAdSizeLeaderboard:
+                            return GADBannerView(adSize : GADAdSizeLeaderboard)
+                        case .GADAdSizeSkyscraper:
+                            return GADBannerView(adSize : GADAdSizeSkyscraper)
+                    }
+                }
+                bannerView = bView
+            }
         }
 #endif
 

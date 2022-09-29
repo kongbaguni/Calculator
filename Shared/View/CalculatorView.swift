@@ -64,9 +64,20 @@ struct CalculatorView: View {
                     LazyVStack {
                         ForEach(history, id: \.self) { text in
                             HStack {
-                                Text(try! AttributedString(markdown:text))
-                                    .foregroundColor(Color.gray)
-                                    .padding(5)
+                                Button {
+                                    if let txt = text.components(separatedBy: " `=` ").last {
+                                        let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
+                                        
+                                        let number = Calculator.Number(strvalue: nt)
+                                        Calculator.shared.items.removeAll()
+                                        Calculator.shared.items.append(number)
+                                    }
+                                } label: {
+                                    Text(try! AttributedString(markdown:text))
+                                        .foregroundColor(Color.gray)
+                                        .padding(5)
+                                }
+
                                 Spacer()
                             }
                         }
