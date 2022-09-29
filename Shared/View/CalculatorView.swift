@@ -33,7 +33,10 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String? = nil
     @State var history:[String] = []
-    @State var isNeedMoreHistory:Bool = false    
+    @State var isNeedMoreHistory:Bool = false
+    @State var toastTitle:Text? = nil
+    @State var toastMessage:String = ""
+    @State var isToast:Bool = false
     #if FULL || MAC
     let disposeBag = DisposeBag()
     #endif
@@ -121,19 +124,25 @@ struct CalculatorView: View {
         .onTapGesture {
             if let last = Calculator.shared.items.last as? Calculator.Number {
                 let str = last.strvalue
-                if str.count > 0 {
-                    let newstr = String(str.dropLast(1))
-                                    
-                    let new = Calculator.Number(strvalue: newstr)
-                    
-                    Calculator.shared.items.removeLast()
-                    Calculator.shared.items.append(new)
+                switch str.count {
+                    case 0:
+                        break
+                    case 1:
+                        Calculator.shared.items.removeLast()
+                    default:
+                        let newstr = String(str.dropLast(1))
+                        let new = Calculator.Number(strvalue: newstr)
+                        Calculator.shared.items.removeLast()
+                        Calculator.shared.items.append(new)
                 }
-                
             }
         }
         .onLongPressGesture {
-            UIPasteboard.general.string = Calculator.shared.normalStringForClipboardShare
+            let txt = Calculator.shared.normalStringForClipboardShare
+            UIPasteboard.general.string = txt
+            isToast = true
+            toastTitle = Text("copy to clipboard")
+            toastMessage = txt
             
             print("longPress")
         }
@@ -243,6 +252,7 @@ struct CalculatorView: View {
             
         }
         .background(Color.bg1)
+        .toast(title:toastTitle, message: toastMessage, isShowing: $isToast, duration: 4)
     }
 }
 

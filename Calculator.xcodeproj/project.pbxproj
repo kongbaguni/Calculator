@@ -60,6 +60,9 @@
 		8D5C8387282B472C00423C9F /* GoogleAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8385282B472200423C9F /* GoogleAd.swift */; };
 		8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8389282BA17800423C9F /* BannerAdView.swift */; };
 		8D5C838B282BA66000423C9F /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8389282BA17800423C9F /* BannerAdView.swift */; };
+		8D76A5CD28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
+		8D76A5CE28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
+		8D76A5CF28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		AD60FDF36B1ED969218A2A2B /* Pods_calculator__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F3747D402E0B36A11E530E /* Pods_calculator__iOS_.framework */; };
 		C34428AB27314A2C003DCB1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -128,6 +131,7 @@
 		8D5C8385282B472200423C9F /* GoogleAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAd.swift; sourceTree = "<group>"; };
 		8D5C8388282B94B500423C9F /* calculator--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--iOS--Info.plist"; sourceTree = "<group>"; };
 		8D5C8389282BA17800423C9F /* BannerAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
+		8D76A5CC28E576B00088E67F /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		C1846EB23B74F832146E0C36 /* Pods-calculator (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator (iOS).debug.xcconfig"; path = "Target Support Files/Pods-calculator (iOS)/Pods-calculator (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		D05BDD20327CB952C21A3F1A /* Pods-calculator_clip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator_clip.debug.xcconfig"; path = "Target Support Files/Pods-calculator_clip/Pods-calculator_clip.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +187,7 @@
 				1B29F78F273D115D007BC9B2 /* Model */,
 				1B29F790273D116D007BC9B2 /* View */,
 				1B06FA0C270D79280079B080 /* TestApp.swift */,
+				8D76A5CC28E576B00088E67F /* Toast.swift */,
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
 				1B98CDF62710024400FC3E9E /* Calculator.swift */,
 				1BAE669D273A4A5300C82269 /* Stack.swift */,
@@ -543,6 +548,7 @@
 				8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */,
 				1B29F78C273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */,
+				8D76A5CD28E576B00088E67F /* Toast.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1BD60CF327294AB2002684D6 /* Color.swift in Sources */,
 				8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
@@ -558,6 +564,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B29F788273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
+				8D76A5CE28E576B00088E67F /* Toast.swift in Sources */,
 				1B399592273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				8D16E340282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1B29F77A273C921A007BC9B2 /* HistoryModel.swift in Sources */,
@@ -586,6 +593,7 @@
 				1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
+				8D76A5CF28E576B00088E67F /* Toast.swift in Sources */,
 				8D16E341282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1BA96B0B27229DBC002B2419 /* Calculator.swift in Sources */,
 			);
