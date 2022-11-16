@@ -34,7 +34,6 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String? = nil
     @State var history:[String] = []
-    @State var isNeedMoreHistory:Bool = false
     @State var toastTitle:Text? = nil
     @State var toastMessage:String = ""
     @State var isToast:Bool = false
@@ -117,14 +116,25 @@ struct CalculatorView: View {
                     bannerAdView
                     LazyVStack {
                         ForEach(0..<history.count, id : \.self) { idx in
-                            let text = history[idx]
+                            let texts = history[idx].components(separatedBy: " `=` ")
+                            
                             HStack {
                                 Text("\(idx)")
                                     .foregroundColor(Color.idxTextColor)
                                     .font(.system(size: 20,weight: .heavy))
-                                                                
+
+                                Text(try! AttributedString(markdown:texts.first!))
+                                    .foregroundColor(Color.btnTextColor)
+                                    .font(.system(size: 20,weight: .heavy))
+                                    .lineLimit(nil)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                                Text(" `=` ")
+                                    .foregroundColor(Color.btnTextColor)
+                                    .font(.system(size: 20,weight: .heavy))
+                                
                                 Button {
-                                    if let txt = text.components(separatedBy: " `=` ").last {
+                                    if let txt = texts.last {
                                         let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
                                         
                                         let number = Calculator.Number(strvalue: nt)
@@ -132,17 +142,12 @@ struct CalculatorView: View {
                                         Calculator.shared.items.append(number)
                                     }
                                 } label: {
-                                    Text(try! AttributedString(markdown:text))
-                                        .foregroundColor(Color.btnTextColor)
-                                        .padding(5)
+                                    Text(try! AttributedString(markdown:texts.last!))
+                                        .foregroundColor(Color.idxTextColor)
                                         .font(.system(size: 20,weight: .heavy))
-                                        .lineLimit(0)
-                                        .multilineTextAlignment(.center)
-                                        .fixedSize(horizontal: false, vertical: true)
-
-                                }.fixedSize(horizontal: false, vertical: true)
+                                }
                                 Spacer()
-                            }
+                            }.fixedSize(horizontal: false, vertical: true)
 
                             .padding(10)
                         }
@@ -288,7 +293,6 @@ struct CalculatorView: View {
                 .subscribe { event in
                     switch event {
                     case .next(let list):
-                        isNeedMoreHistory = list.count > 20
                         var results:[String] = []
                         for item in list {
                             if results.count == 20 {
