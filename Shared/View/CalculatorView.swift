@@ -176,6 +176,7 @@ struct CalculatorView: View {
 #endif
             }
         }
+        .frame(height: 100)
         .background(Color.bg2)
         .onTapGesture {
             if let last = Calculator.shared.items.last as? Calculator.Number {
