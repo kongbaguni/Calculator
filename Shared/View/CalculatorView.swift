@@ -15,18 +15,19 @@ import RxSwift
 struct Item {
     let color:Color
     let value:AnyHashable
+    let width:CGFloat
 }
 fileprivate let c1 = Color.btn1
 fileprivate let c2 = Color.btn2
 fileprivate let c3 = Color.btn3
 
 fileprivate let list:[[Item]] = [
-//    [.init(color: .yellow, value: "("), .init(color: .yellow, value: ")")],
-    [.init(color: c1, value: "clear"), .init(color: c1, value: "+/-"), .init(color: c1, value:"%"), .init(color: c3, value: "÷")],
-    [.init(color: c2, value: 7), .init(color: c2, value: 8), .init(color: c2, value:9), .init(color: c3, value: "✕")],
-    [.init(color: c2, value: 4), .init(color: c2, value: 5), .init(color: c2, value:6), .init(color: c3, value: "-")],
-    [.init(color: c2, value: 1), .init(color: c2, value: 2), .init(color: c2, value:3), .init(color: c3, value: "+")],
-    [.init(color: c2, value: 0), .init(color: c2, value: "."), .init(color: c3, value: "=")],
+    [.init(color: .yellow, value: "(", width:110), .init(color: .yellow, value: ")", width:110)],
+    [.init(color: c1, value: "clear", width:50), .init(color: c1, value: "+/-",width:50), .init(color: c1, value:"%",width:50), .init(color: c3, value: "÷",width:50)],
+    [.init(color: c2, value: 7, width:50), .init(color: c2, value: 8, width:50), .init(color: c2, value:9, width:50), .init(color: c3, value: "✕", width:50)],
+    [.init(color: c2, value: 4, width:50), .init(color: c2, value: 5, width:50), .init(color: c2, value:6, width:50), .init(color: c3, value: "-", width:50)],
+    [.init(color: c2, value: 1, width:50), .init(color: c2, value: 2, width:50), .init(color: c2, value:3, width:50), .init(color: c3, value: "+", width:50)],
+    [.init(color: c2, value: 0, width:110), .init(color: c2, value: ".",width:50), .init(color: c3, value: "=",width:50)],
 ]
 
 struct CalculatorView: View {
@@ -45,7 +46,7 @@ struct CalculatorView: View {
         let last = Calculator.shared.items.last
         let a = Calculator.shared.items.count == 0
         let b = last is Calculator.Operation
-        let c = last as? Calculator.SpecialOperation == .괄호열기
+        let c = last as? Calculator.Operation == .괄호열기
         return a || b || c
     }
     
@@ -54,14 +55,14 @@ struct CalculatorView: View {
         let last = items.last
     
         let counta = items.filter { item in
-            return (item as? Calculator.SpecialOperation) == .괄호열기
+            return (item as? Calculator.Operation) == .괄호열기
         }.count
         let countb = items.filter { item in
-            return (item as? Calculator.SpecialOperation) == .괄호닫기
+            return (item as? Calculator.Operation) == .괄호닫기
         }.count
         
         let a = items.count > 0
-        let b = last is Calculator.Number || last as? Calculator.SpecialOperation == .괄호닫기
+        let b = last is Calculator.Number || last as? Calculator.Operation == .괄호닫기
         return a && b && counta > countb
     }
     
@@ -71,19 +72,23 @@ struct CalculatorView: View {
         let a = Calculator.shared.items.count > 1
         
         let counta = items.filter { item in
-            return (item as? Calculator.SpecialOperation) == .괄호열기
+            return (item as? Calculator.Operation) == .괄호열기
         }.count
         let countb = items.filter { item in
-            return (item as? Calculator.SpecialOperation) == .괄호닫기
+            return (item as? Calculator.Operation) == .괄호닫기
         }.count
         
-        let b = last is Calculator.Number || (last as? Calculator.SpecialOperation) == .괄호닫기
+        let b = last is Calculator.Number || (last as? Calculator.Operation) == .괄호닫기
         let c = counta == countb
         return a && b && c
     }
     
     var clearText:String {
-        if Calculator.shared.items.last is Calculator.Number || Calculator.shared.items.last is Calculator.SpecialOperation {
+        let last = Calculator.shared.items.last
+        let a = last is Calculator.Number
+        let b = (last as? Calculator.Operation) == .괄호닫기
+        let c = (last as? Calculator.Operation) == .괄호열기
+        if a || b || c {
             return "C"
         }
         return "AC"
@@ -214,7 +219,7 @@ struct CalculatorView: View {
                     ForEach(0..<list[i].count, id:\.self) { a in
                         let item = list[i][a]
                         let str = item.value as? String ?? "\(item.value as! Int)"
-                        let width:CGFloat = item.value as? Int == 0 || str == "(" || str == ")" ? 110 : 50
+                        let width:CGFloat = item.width //.value as? Int == 0 || str == "(" || str == ")" ? 110 : 50
                         let color = item.color
                         let isEnable = str == "(" ? 괄호열기가능 : str == ")" ? 괄호닫기가능 :  str == "=" ? 계산가능 : true
                         Button {
