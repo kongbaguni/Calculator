@@ -105,7 +105,7 @@ class Calculator {
     
     var displayMarkDownString:String {
         var txt = ""
-//        var lastOperation:Operation? = nil
+
         for item in items {
             if let n = item as? Calculator.Number {
                 txt.append(n.formattedString)
@@ -115,13 +115,7 @@ class Calculator {
                 txt.append(r)
             }
             else if let op = item as? Operation {
-//                if let lop = lastOperation {
-//                    if op.isPriorityIsHigherThen(lop) {
-//                        txt = "(\(txt))"
-//                    }
-//                }
                 txt.append(" `\(op.rawValue)` ")
-//                lastOperation = op
             }
             else if let op = item as? SpecialOperation {
                 switch op {
@@ -352,6 +346,7 @@ class Calculator {
         }
         print(stack2)
         items.append(Result(doubleValue: (stack2.top as? Number)?.doubleVlaue ?? 0.0))
+        save()
     }
     
     func calculateSimple() {
