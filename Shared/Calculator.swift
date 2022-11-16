@@ -273,48 +273,47 @@ class Calculator {
         var newArray:Array<Any> {
             var result = Array<Any>()
             var opStack = Stack<Operation>()
-            var operationPriority:Int? = nil
-            func insertTemp(item:Operation) {
-                opStack.push(item)
-                if operationPriority ?? 0 < item.우선순위 {
-                    operationPriority = item.우선순위
-                }
-            }
-                        
-            func tempOut() {
-                operationPriority = nil
-                while opStack.isEmpty == false {
-                    if let item = opStack.pop() {
-                        if item != .괄호열기 {
-                            result.append(item)
-                        }
-                    }
-                }
-            }
             
             for item in items {
-                if item is Number {
-                    result.append(item)
-                }
-                if let it = item as? Operation {
-                    switch it {
-                        case .괄호열기:
-                            operationPriority = nil
-                            opStack.push(it)
-                        case .괄호닫기:
-                            tempOut()
-                        default:
-                            if operationPriority ?? 0 > it.우선순위  {
-                                tempOut()
+                switch (item as? Operation) {
+                    case .괄호열기:
+                        opStack.push(item as! Operation)
+                    case .괄호닫기:
+                        while let opr = opStack.pop() {
+                            if opr != .괄호열기 {
+                                result.append(opr)
                             }
-                            insertTemp(item: it)
-                    }
-                    print(opStack)
-                    print("_------")
+                        }
+                    case .곱하기, .나누기:
+                        guard !opStack.isEmpty else {
+                            opStack.push(item as! Operation)
+                            continue
+                        }
+                        while let opr = opStack.top, (opr == .곱하기 || opr == .나누기) {
+                            result.append(opStack.pop()!)
+                        }
+                        opStack.push(item as! Operation)
+                    case .더하기, .빼기:
+                        guard !opStack.isEmpty else {
+                            opStack.push(item as! Operation)
+                            continue
+                        }
+                        while let opr = opStack.pop() {
+                            guard opr != .괄호열기 else {
+                                opStack.push(item as! Operation)
+                                break
+                            }
+                            result.append(opr)
+                        }
+                        opStack.push(item as! Operation)
+                    default:
+                        result.append(item)
                 }
             }
-            tempOut()
-
+            while let opr = opStack.pop() {
+                result.append(opr)
+            }
+            
             return result
         }
         print("----------")
