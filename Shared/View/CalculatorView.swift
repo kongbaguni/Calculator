@@ -21,6 +21,7 @@ fileprivate let c2 = Color.btn2
 fileprivate let c3 = Color.btn3
 
 fileprivate let list:[[Item]] = [
+//    [.init(color: .yellow, value: "("), .init(color: .yellow, value: ")")],
     [.init(color: c1, value: "clear"), .init(color: c1, value: "+/-"), .init(color: c1, value:"%"), .init(color: c3, value: "÷")],
     [.init(color: c2, value: 7), .init(color: c2, value: 8), .init(color: c2, value:9), .init(color: c3, value: "✕")],
     [.init(color: c2, value: 4), .init(color: c2, value: 5), .init(color: c2, value:6), .init(color: c3, value: "-")],
@@ -41,8 +42,49 @@ struct CalculatorView: View {
     let disposeBag = DisposeBag()
     #endif
     
+    var 괄호열기가능:Bool {
+        let last = Calculator.shared.items.last
+        let a = Calculator.shared.items.count == 0
+        let b = last is Calculator.Operation
+        let c = last as? Calculator.SpecialOperation == .괄호열기
+        return a || b || c
+    }
+    
+    var 괄호닫기가능:Bool {
+        let items = Calculator.shared.items
+        let last = items.last
+    
+        let counta = items.filter { item in
+            return (item as? Calculator.SpecialOperation) == .괄호열기
+        }.count
+        let countb = items.filter { item in
+            return (item as? Calculator.SpecialOperation) == .괄호닫기
+        }.count
+        
+        let a = items.count > 0
+        let b = last is Calculator.Number || last as? Calculator.SpecialOperation == .괄호닫기
+        return a && b && counta > countb
+    }
+    
+    var 계산가능:Bool {
+        let items = Calculator.shared.items
+        let last = items.last
+        let a = Calculator.shared.items.count > 1
+        
+        let counta = items.filter { item in
+            return (item as? Calculator.SpecialOperation) == .괄호열기
+        }.count
+        let countb = items.filter { item in
+            return (item as? Calculator.SpecialOperation) == .괄호닫기
+        }.count
+        
+        let b = last is Calculator.Number || (last as? Calculator.SpecialOperation) == .괄호닫기
+        let c = counta == countb
+        return a && b && c
+    }
+    
     var clearText:String {
-        if Calculator.shared.items.last is Calculator.Number {
+        if Calculator.shared.items.last is Calculator.Number || Calculator.shared.items.last is Calculator.SpecialOperation {
             return "C"
         }
         return "AC"
@@ -80,6 +122,7 @@ struct CalculatorView: View {
                                 Text("\(idx)")
                                     .foregroundColor(Color.idxTextColor)
                                     .font(.system(size: 20,weight: .heavy))
+                                                                
                                 Button {
                                     if let txt = text.components(separatedBy: " `=` ").last {
                                         let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
@@ -93,9 +136,14 @@ struct CalculatorView: View {
                                         .foregroundColor(Color.btnTextColor)
                                         .padding(5)
                                         .font(.system(size: 20,weight: .heavy))
-                                }
+                                        .lineLimit(0)
+                                        .multilineTextAlignment(.center)
+                                        .fixedSize(horizontal: false, vertical: true)
+
+                                }.fixedSize(horizontal: false, vertical: true)
                                 Spacer()
                             }
+
                             .padding(10)
                         }
 
@@ -109,16 +157,19 @@ struct CalculatorView: View {
     }
     
     var numberDisplayView : some View {
-        HStack {
-            Spacer()
-            Text(displayText)
-                .foregroundColor(Color.btnTextColor)
-                .font(.title)
-                .multilineTextAlignment(.trailing)
-                .padding(20)
+        ScrollView {
+            HStack {
+                Spacer()
+                Text(displayText)
+                    .foregroundColor(Color.btnTextColor)
+                    .font(.title)
+                    .multilineTextAlignment(.trailing)
+                    .padding(20)
+                    .fixedSize(horizontal: false, vertical: true)
 #if MAC
-                .background(KeyEventHandling())
+                    .background(KeyEventHandling())
 #endif
+            }
         }
         .background(Color.bg2)
         .onTapGesture {
@@ -157,14 +208,16 @@ struct CalculatorView: View {
                     ForEach(0..<list[i].count, id:\.self) { a in
                         let item = list[i][a]
                         let str = item.value as? String ?? "\(item.value as! Int)"
-                        let width:CGFloat = item.value as? Int == 0 ? 110 : 50
+                        let width:CGFloat = item.value as? Int == 0 || str == "(" || str == ")" ? 110 : 50
                         let color = item.color
-                        
+                        let isEnable = str == "(" ? 괄호열기가능 : str == ")" ? 괄호닫기가능 :  str == "=" ? 계산가능 : true
                         Button {
-                            if str == "clear" {
-                                Calculator.shared.keyInput(key: clearText)
-                            } else {
-                                Calculator.shared.keyInput(key: str)
+                            if isEnable {
+                                if str == "clear" {
+                                    Calculator.shared.keyInput(key: clearText)
+                                } else {
+                                    Calculator.shared.keyInput(key: str)
+                                }
                             }
                         } label: {
                             ZStack {
@@ -187,6 +240,7 @@ struct CalculatorView: View {
                             )
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .opacity(isEnable ? 1.0 : 0.5)
                         
                     }
                 }

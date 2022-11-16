@@ -25,4 +25,8 @@ struct Stack<T> {
     }
     
     private var list = [T]()
+    
+    var count:Int {
+        list.count
+    }
 }

@@ -19,24 +19,28 @@ extension Notification.Name {
 class Calculator {
     static let shared = Calculator()
 
+    public enum SpecialOperation : String {
+        case 괄호열기 = "("
+        case 괄호닫기 = ")"
+    }
+    
     public enum Operation : String {
         case 더하기 = "+"  
         case 곱하기 = "✕"
         case 나누기 = "÷"
         case 빼기 = "-"
         
-        func isPriorityIsHigherThen(_ operation:Operation)->Bool {
+        var 우선순위 : Int {
             switch self {
             case .더하기, .빼기:
-                return false
+                return 0
             default:
-                switch operation {
-                case .더하기, .빼기:
-                    return true
-                case .곱하기,.나누기:
-                    return false
-                }
+                return 1
             }
+        }
+        
+        func isPriorityIsHigherThen(_ operation:Operation)->Bool {
+            self.우선순위 > operation.우선순위
         }
     }
     
@@ -101,7 +105,7 @@ class Calculator {
     
     var displayMarkDownString:String {
         var txt = ""
-        var lastOperation:Operation? = nil
+//        var lastOperation:Operation? = nil
         for item in items {
             if let n = item as? Calculator.Number {
                 txt.append(n.formattedString)
@@ -111,13 +115,21 @@ class Calculator {
                 txt.append(r)
             }
             else if let op = item as? Operation {
-                if let lop = lastOperation {
-                    if op.isPriorityIsHigherThen(lop) {
-                        txt = "(\(txt))"
-                    }
-                }
+//                if let lop = lastOperation {
+//                    if op.isPriorityIsHigherThen(lop) {
+//                        txt = "(\(txt))"
+//                    }
+//                }
                 txt.append(" `\(op.rawValue)` ")
-                lastOperation = op
+//                lastOperation = op
+            }
+            else if let op = item as? SpecialOperation {
+                switch op {
+                    case .괄호닫기:
+                        txt.append(")")
+                    case .괄호열기:
+                        txt.append("(")
+                }
             }
         }
         if txt.isEmpty {
@@ -238,8 +250,9 @@ class Calculator {
             }
             
         case "=":
-            if items.last is Number {
-                calculateSimple()
+            if items.last is Number || items.last as? SpecialOperation == .괄호닫기 {
+//                calculateSimple()
+                calculate()
             }
         case ".":
             if isOver {
@@ -253,11 +266,93 @@ class Calculator {
                     items.append(Number(strvalue: new))
                 }
             }
+        case "(", ")":
+                if let op = SpecialOperation(rawValue: key) {
+                    items.append(op)
+                }
+                
         default:
             break
         }
     }
     
+    func calculate() {
+        var newArray:Array<Any> {
+            var result = Array<Any>()
+            var temp = Stack<Any>()
+            var tempOperationPrioritys:[Int] = []
+            
+            
+            func tempOut() {
+                tempOperationPrioritys.removeAll()
+                while temp.isEmpty == false {
+                    if let item = temp.pop() {
+                        if item is SpecialOperation == false {
+                            result.append(item)
+                        }
+                    }
+                }
+            }
+            
+            for item in items {
+                if item is Number {
+                    result.append(item)
+                }
+                if let it = item as? Operation {
+                    if tempOperationPrioritys.sorted().last ?? 0 > it.우선순위  {
+                        tempOut()
+                        temp.push(item)
+                        tempOperationPrioritys.append(it.우선순위)
+                    } else {
+                        temp.push(item)
+                        tempOperationPrioritys.append(it.우선순위)
+
+                    }
+                }
+                if let it = item as? SpecialOperation {
+                    switch it {
+                        case .괄호열기:
+                            temp.push(it)
+                        case .괄호닫기:
+                            tempOut()
+                    }
+                }
+            }
+            tempOut()
+
+            return result
+        }
+        print("----------")
+        print(newArray)
+        var stack2 = Stack<Any>()
+        for item in newArray {
+            if item is Number {
+                stack2.push(item)
+            }
+            if let op = item as? Operation {
+                if let a = stack2.pop() as? Number, let b = stack2.pop() as? Number {
+                    print("\(a.formattedString) \(op) \(b.formattedString)")
+                    var result:Double {
+                        switch op {
+                            case .곱하기:
+                                return b.doubleVlaue * a.doubleVlaue
+                            case .나누기:
+                                return b.doubleVlaue / a.doubleVlaue
+                            case .더하기:
+                                return b.doubleVlaue + a.doubleVlaue
+                            case .빼기:
+                                return b.doubleVlaue - a.doubleVlaue
+                        }
+                    }
+                    
+                    let num = Number(strvalue: "\(result)")
+                    stack2.push(num)
+                }
+            }
+        }
+        print(stack2)
+        items.append(Result(doubleValue: (stack2.top as? Number)?.doubleVlaue ?? 0.0))
+    }
     
     func calculateSimple() {
         var result:Double = 0
