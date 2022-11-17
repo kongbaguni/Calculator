@@ -47,7 +47,8 @@ struct CalculatorView: View {
         let a = Calculator.shared.items.count == 0
         let b = last is Calculator.Operation
         let c = last as? Calculator.Operation == .괄호열기
-        return a || b || c
+        let d = Calculator.shared.items.last is Calculator.Result
+        return a || b || c || d
     }
     
     var 괄호닫기가능:Bool {
@@ -219,7 +220,7 @@ struct CalculatorView: View {
                     ForEach(0..<list[i].count, id:\.self) { a in
                         let item = list[i][a]
                         let str = item.value as? String ?? "\(item.value as! Int)"
-                        let width:CGFloat = item.width //.value as? Int == 0 || str == "(" || str == ")" ? 110 : 50
+                        let width:CGFloat = item.width 
                         let color = item.color
                         let isEnable = str == "(" ? 괄호열기가능 : str == ")" ? 괄호닫기가능 :  str == "=" ? 계산가능 : true
                         Button {

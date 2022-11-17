@@ -24,9 +24,10 @@ struct Stack<T> {
         return self.list.popLast()
     }
     
-    private var list = [T]()
+    var list = [T]()
     
     var count:Int {
         list.count
     }
+    
 }

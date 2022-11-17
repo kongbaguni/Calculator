@@ -164,108 +164,112 @@ class Calculator {
         }
         
         switch key.uppercased() {
-        case "0","1","2","3","4","5","6","7","8","9":
-            if isOver {
-                return
-            }
-            if items.last is Result {
-                items.removeAll()
-            }
-            
-            if let li = items.last as? Number {
-                let new = "\(li.strvalue)\(key)"
-                items.removeLast()
-                if li.doubleVlaue == 0 && key == "0" && li.strvalue.components(separatedBy: ".").count == 1 {
-                    items.append(Number(strvalue: key))
-                } else {
-                    items.append(Number(strvalue: new))
+            case "0","1","2","3","4","5","6","7","8","9":
+                if isOver {
+                    return
                 }
-            } else {
-                items.append(Number(strvalue: key))
-            }
-            print("number input \(key)")
-        case "C":
-            if items.count > 0 {
-                items.removeLast()
-                NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
-            }
-        case "AC":
-            items.removeAll()
-            NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
-        case "CE":
-            if items.last is Int {
-                items.removeLast()
-            }
-        case "+/-":
-            if let li = items.last as? Number {
-                var new:String = ""
-                if li.strvalue.first == "-" {
-                    new = li.strvalue.replacingOccurrences(of: "-", with: "")
-                } else {
-                    new = "-\(li.strvalue)"
+                if items.last is Result {
+                    items.removeAll()
                 }
-                items.removeLast()
-                items.append(Number(strvalue: new))
-            }
-        case "%":
-            if let li = items.last as? Number {
-                let new = li.doubleVlaue / 100
-                items.removeLast()
-                items.append(Number(strvalue: "\(new)"))
-            }
-        case "/","*","-","+","✕","÷":
-            if items.last is Result {
-                return
-            }
-            if items.count == 0 {
-                return
-            }
-            var inputStr:String {
-                switch key {
-                case "*" :
-                    return "✕"
-                case "/":
-                    return "÷"
-                default:
-                    return key
-                }
-            }
-            
-            if let last = items.last as? Operation {
-                if last != .괄호열기 && last != .괄호닫기 {
-                    if last.rawValue != key {
-                        items.removeLast()
-                        items.append(Operation(rawValue: key)!)
-                        break
+                
+                if let li = items.last as? Number {
+                    let new = "\(li.strvalue)\(key)"
+                    items.removeLast()
+                    if li.doubleVlaue == 0 && key == "0" && li.strvalue.components(separatedBy: ".").count == 1 {
+                        items.append(Number(strvalue: key))
+                    } else {
+                        items.append(Number(strvalue: new))
                     }
+                } else {
+                    items.append(Number(strvalue: key))
                 }
-            }
-            items.append(Operation(rawValue: inputStr)!)
-            
-            
-        case "=":
-            if items.last is Number || items.last as? Operation == .괄호닫기 {
-                calculate()
-            }
-        case ".":
-            if isOver {
-                return
-            }
-
-            if let li = items.last as? Number {
-                if li.strvalue.components(separatedBy: ".").count == 1 {
-                    let new = "\(li.strvalue)."
+                print("number input \(key)")
+            case "C":
+                if items.count > 0 {
+                    items.removeLast()
+                    NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
+                }
+            case "AC":
+                items.removeAll()
+                NotificationCenter.default.post(name: .calculator_lastNumber, object: "0")
+            case "CE":
+                if items.last is Int {
+                    items.removeLast()
+                }
+            case "+/-":
+                if let li = items.last as? Number {
+                    var new:String = ""
+                    if li.strvalue.first == "-" {
+                        new = li.strvalue.replacingOccurrences(of: "-", with: "")
+                    } else {
+                        new = "-\(li.strvalue)"
+                    }
                     items.removeLast()
                     items.append(Number(strvalue: new))
                 }
-            }
-        case "(", ")":
+            case "%":
+                if let li = items.last as? Number {
+                    let new = li.doubleVlaue / 100
+                    items.removeLast()
+                    items.append(Number(strvalue: "\(new)"))
+                }
+            case "/","*","-","+","✕","÷":
+                if items.last is Result {
+                    return
+                }
+                if items.count == 0 {
+                    return
+                }
+                var inputStr:String {
+                    switch key {
+                        case "*" :
+                            return "✕"
+                        case "/":
+                            return "÷"
+                        default:
+                            return key
+                    }
+                }
+                
+                if let last = items.last as? Operation {
+                    if last != .괄호열기 && last != .괄호닫기 {
+                        if last.rawValue != key {
+                            items.removeLast()
+                            items.append(Operation(rawValue: key)!)
+                            break
+                        }
+                    }
+                }
+                items.append(Operation(rawValue: inputStr)!)
+                
+                
+            case "=":
+                if items.last is Number || items.last as? Operation == .괄호닫기 {
+                    calculate()
+                }
+            case ".":
+                if isOver {
+                    return
+                }
+                
+                if let li = items.last as? Number {
+                    if li.strvalue.components(separatedBy: ".").count == 1 {
+                        let new = "\(li.strvalue)."
+                        items.removeLast()
+                        items.append(Number(strvalue: new))
+                    }
+                }
+                
+            case "(", ")":
+                if items.last is Result {
+                    items.removeAll()
+                }
                 if let op = Operation(rawValue: key) {
                     items.append(op)
                 }
                 
-        default:
-            break
+            default:
+                break
         }
     }
     
@@ -274,45 +278,65 @@ class Calculator {
             var result = Array<Any>()
             var opStack = Stack<Operation>()
             
+            func opStackOut(isAll:Bool = true) {
+                if isAll {
+                    while let item = opStack.pop() {
+                        if item != .괄호열기 {
+                            result.append(item)
+                        }
+                    }
+                }
+                else {
+                    while let item = opStack.pop() {
+                        if item == .괄호열기 {
+                            return
+                        }
+                        result.append(item)
+                    }
+                }
+            }
+            
             for item in items {
                 switch (item as? Operation) {
                     case .괄호열기:
                         opStack.push(item as! Operation)
                     case .괄호닫기:
-                        while let opr = opStack.pop() {
-                            if opr != .괄호열기 {
-                                result.append(opr)
-                            }
-                        }
+                        
+                        opStackOut(isAll: false)
                     case .곱하기, .나누기:
-                        guard !opStack.isEmpty else {
-                            opStack.push(item as! Operation)
-                            continue
-                        }
-                        while let opr = opStack.top, (opr == .곱하기 || opr == .나누기) {
-                            result.append(opStack.pop()!)
-                        }
+                        
                         opStack.push(item as! Operation)
+                        
                     case .더하기, .빼기:
-                        guard !opStack.isEmpty else {
-                            opStack.push(item as! Operation)
-                            continue
-                        }
-                        while let opr = opStack.pop() {
-                            guard opr != .괄호열기 else {
-                                opStack.push(item as! Operation)
-                                break
-                            }
-                            result.append(opr)
+                        let a = opStack.list.firstIndex(of: .곱하기) != nil
+                        let b = opStack.list.firstIndex(of: .나누기) != nil
+                        if a || b {
+                            opStackOut(isAll: false)
                         }
                         opStack.push(item as! Operation)
+                        
                     default:
                         result.append(item)
                 }
+                print("-------- item : \(item)")
+                var printStack = ""
+                var printResult = ""
+                for item in opStack.list {
+                    printStack.append(item.rawValue)
+                }
+                for item in result {
+                    if let it = item as? Number {
+                        printResult.append(it.formattedString)
+                    }
+                    if let op = item as? Operation {
+                        printResult.append(op.rawValue)
+                    }
+                }
+                print("stack : \(printStack) | result : \(printResult)")
+                print("--------")
             }
-            while let opr = opStack.pop() {
-                result.append(opr)
-            }
+        
+            opStackOut()
             
             return result
         }
