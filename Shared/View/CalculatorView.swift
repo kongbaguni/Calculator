@@ -20,9 +20,11 @@ struct Item {
 fileprivate let c1 = Color.btn1
 fileprivate let c2 = Color.btn2
 fileprivate let c3 = Color.btn3
+fileprivate let c4 = Color.btn4
+
 
 fileprivate let list:[[Item]] = [
-    [.init(color: .yellow, value: "(", width:110), .init(color: .yellow, value: ")", width:110)],
+    [.init(color: c4, value: "(", width:50), .init(color: c4, value: ")", width:50), .init(color: c4, value: "⌫", width: 110)],
     [.init(color: c1, value: "clear", width:50), .init(color: c1, value: "+/-",width:50), .init(color: c1, value:"%",width:50), .init(color: c3, value: "÷",width:50)],
     [.init(color: c2, value: 7, width:50), .init(color: c2, value: 8, width:50), .init(color: c2, value:9, width:50), .init(color: c3, value: "✕", width:50)],
     [.init(color: c2, value: 4, width:50), .init(color: c2, value: 5, width:50), .init(color: c2, value:6, width:50), .init(color: c3, value: "-", width:50)],
@@ -185,20 +187,7 @@ struct CalculatorView: View {
         .frame(height: 100)
         .background(Color.bg2)
         .onTapGesture {
-            if let last = Calculator.shared.items.last as? Calculator.Number {
-                let str = last.strvalue
-                switch str.count {
-                    case 0:
-                        break
-                    case 1:
-                        Calculator.shared.items.removeLast()
-                    default:
-                        let newstr = String(str.dropLast(1))
-                        let new = Calculator.Number(strvalue: newstr)
-                        Calculator.shared.items.removeLast()
-                        Calculator.shared.items.append(new)
-                }
-            }
+            Calculator.shared.delLastNumber()
         }
         .onLongPressGesture {
             #if !MAC
@@ -220,7 +209,7 @@ struct CalculatorView: View {
                     ForEach(0..<list[i].count, id:\.self) { a in
                         let item = list[i][a]
                         let str = item.value as? String ?? "\(item.value as! Int)"
-                        let width:CGFloat = item.width 
+                        let width:CGFloat = item.width
                         let color = item.color
                         let isEnable = str == "(" ? 괄호열기가능 : str == ")" ? 괄호닫기가능 :  str == "=" ? 계산가능 : true
                         Button {

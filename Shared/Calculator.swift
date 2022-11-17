@@ -268,6 +268,12 @@ class Calculator {
                     items.append(op)
                 }
                 
+            case "⌫":
+                if items.last is Result {
+                    items.removeLast()
+                } else {
+                    delLastNumber()
+                }
             default:
                 break
         }
@@ -425,5 +431,21 @@ class Calculator {
 #else
         NotificationCenter.default.post(name: .calculator_calculated, object: displayMarkDownString)        
 #endif
+    }
+    
+    func delLastNumber() {
+        guard let number = items.last as? Number else {
+            return
+        }
+        let str = number.strvalue
+        switch str.count {
+            case 1:
+                Calculator.shared.items.removeLast()
+            default:
+                let newstr = String(str.dropLast(1))
+                let new = Calculator.Number(strvalue: newstr)
+                Calculator.shared.items.removeLast()
+                Calculator.shared.items.append(new)
+        }
     }
 }
