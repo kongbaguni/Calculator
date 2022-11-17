@@ -306,8 +306,16 @@ class Calculator {
                     case .곱하기, .나누기:
                         
                         opStack.push(item as! Operation)
-                        
-                    case .더하기, .빼기:
+                    case .빼기:
+                        let a = opStack.list.firstIndex(of: .곱하기) != nil
+                        let b = opStack.list.firstIndex(of: .나누기) != nil
+                        let c = opStack.list.firstIndex(of: .빼기) != nil
+                        if a || b || c{
+                            opStackOut(isAll: false)
+                        }
+                        opStack.push(item as! Operation)
+
+                    case .더하기:
                         let a = opStack.list.firstIndex(of: .곱하기) != nil
                         let b = opStack.list.firstIndex(of: .나누기) != nil
                         if a || b {

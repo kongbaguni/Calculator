@@ -8,11 +8,11 @@
 import Foundation
 
 struct Stack<T> {
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         return self.list.isEmpty
     }
     
-    var top: T? {
+    public var top: T? {
         return self.list.last
     }
     
@@ -24,9 +24,9 @@ struct Stack<T> {
         return self.list.popLast()
     }
     
-    var list = [T]()
+    public var list = [T]()
     
-    var count:Int {
+    public var count:Int {
         list.count
     }
     
