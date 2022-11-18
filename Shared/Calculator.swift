@@ -20,7 +20,7 @@ class Calculator {
     static let shared = Calculator()
 
     
-    public enum Operation : String {
+    public enum OperationType : String {
         case 더하기 = "+"  
         case 곱하기 = "✕"
         case 나누기 = "÷"
@@ -38,13 +38,33 @@ class Calculator {
                     return 2
             }
         }
+    }
+    
+    public struct Operation : Equatable {
+        static func == (lhs:Operation, rhs:Operation)->Bool {
+            return lhs.id == rhs.id && lhs.type == rhs.type
+        }
+        let id = UUID().uuidString
+        let type:OperationType
         
+        init(rawValue:String) {
+            self.type = OperationType(rawValue: rawValue)!
+        }
+        
+        var 우선순위:Int {
+            return type.우선순위
+        }
         func isPriorityIsHigherThen(_ operation:Operation)->Bool {
             self.우선순위 > operation.우선순위
         }
     }
     
-    public struct Number {
+    public struct Number : Equatable {
+        static func == (lhs:Number, rhs:Number)->Bool {
+            return lhs.id == rhs.id && lhs.strvalue == rhs.strvalue
+        }
+        
+        let id:String = UUID().uuidString
         let strvalue:String
         var doubleVlaue:Double {
             NSString(string: strvalue).doubleValue
@@ -115,11 +135,11 @@ class Calculator {
                 txt.append(r)
             }
             else if let op = item as? Operation {
-                switch op {
+                switch op.type {
                     case .괄호열기, .괄호닫기:
-                        txt.append("\(op.rawValue)")
+                        txt.append("\(op.type.rawValue)")
                     default:
-                        txt.append(" `\(op.rawValue)` ")
+                        txt.append(" `\(op.type.rawValue)` ")
                 }
             }
         }
@@ -232,19 +252,18 @@ class Calculator {
                 }
                 
                 if let last = items.last as? Operation {
-                    if last != .괄호열기 && last != .괄호닫기 {
-                        if last.rawValue != key {
-                            items.removeLast()
-                            items.append(Operation(rawValue: key)!)
-                            break
-                        }
+                    if last.type != .괄호열기 && last.type != .괄호닫기 {
+                        items.removeLast()
+                        items.append(Operation(rawValue: key))
+                        break
                     }
                 }
-                items.append(Operation(rawValue: inputStr)!)
+                
+                items.append(Operation(rawValue: inputStr))
                 
                 
             case "=":
-                if items.last is Number || items.last as? Operation == .괄호닫기 {
+                if items.last is Number || (items.last as? Operation)?.type == .괄호닫기 {
                     calculate()
                 }
             case ".":
@@ -264,9 +283,7 @@ class Calculator {
                 if items.last is Result {
                     items.removeAll()
                 }
-                if let op = Operation(rawValue: key) {
-                    items.append(op)
-                }
+                items.append(Operation(rawValue: key))
                 
             case "⌫":
                 if items.last is Result {
@@ -287,14 +304,14 @@ class Calculator {
             func opStackOut(isAll:Bool = true) {
                 if isAll {
                     while let item = opStack.pop() {
-                        if item != .괄호열기 {
+                        if item.type != .괄호열기 {
                             result.append(item)
                         }
                     }
                 }
                 else {
                     while let item = opStack.pop() {
-                        if item == .괄호열기 {
+                        if item.type == .괄호열기 {
                             return
                         }
                         result.append(item)
@@ -303,7 +320,7 @@ class Calculator {
             }
             
             for item in items {
-                switch (item as? Operation) {
+                switch (item as? Operation)?.type {
                     case .괄호열기:
                         opStack.push(item as! Operation)
                     case .괄호닫기:
@@ -313,17 +330,28 @@ class Calculator {
                         
                         opStack.push(item as! Operation)
                     case .빼기:
-                        let a = opStack.list.firstIndex(of: .곱하기) != nil
-                        let b = opStack.list.firstIndex(of: .나누기) != nil
-                        let c = opStack.list.firstIndex(of: .빼기) != nil
-                        if a || b || c{
+                        let a = opStack.list.firstIndex { op in
+                            op.type == .곱하기
+                        } != nil
+                        let b = opStack.list.firstIndex { op in
+                            op.type == .나누기
+                        } != nil
+                        let c = opStack.list.firstIndex { op in
+                            op.type == .빼기
+                        } != nil
+
+                        if a || b || c {
                             opStackOut(isAll: false)
                         }
                         opStack.push(item as! Operation)
 
                     case .더하기:
-                        let a = opStack.list.firstIndex(of: .곱하기) != nil
-                        let b = opStack.list.firstIndex(of: .나누기) != nil
+                        let a = opStack.list.firstIndex { op in
+                            op.type == .곱하기
+                        } != nil
+                        let b = opStack.list.firstIndex { op in
+                            op.type == .나누기
+                        } != nil
                         if a || b {
                             opStackOut(isAll: false)
                         }
@@ -332,22 +360,39 @@ class Calculator {
                     default:
                         result.append(item)
                 }
+                #if DEBUG
                 print("-------- item : \(item)")
                 var printStack = ""
                 var printResult = ""
+                var printItems = ""
+                for item in items {
+                    if let it = item as? Number {
+                        printItems.append(" ")
+                        printItems.append(it.formattedString)
+                        printItems.append(" ")
+                    }
+                    if let op = item as? Operation {
+                        printItems.append(op.type.rawValue)
+                    }
+                }
                 for item in opStack.list {
-                    printStack.append(item.rawValue)
+                    printStack.append(item.type.rawValue)
                 }
                 for item in result {
                     if let it = item as? Number {
+                        printResult.append(" ")
                         printResult.append(it.formattedString)
+                        printResult.append(" ")
                     }
                     if let op = item as? Operation {
-                        printResult.append(op.rawValue)
+                        printResult.append(op.type.rawValue)
                     }
                 }
-                print("stack : \(printStack) | result : \(printResult)")
+                print("items : \(printItems)")
+                print("stack : \(printStack)")
+                print("result : \(printResult)")
                 print("--------")
+                #endif
             }
         
             opStackOut()
@@ -363,9 +408,9 @@ class Calculator {
             }
             if let op = item as? Operation {
                 if let a = stack2.pop() as? Number, let b = stack2.pop() as? Number {
-                    print("\(a.formattedString) \(op) \(b.formattedString)")
+                    print("\(b.formattedString) \(op) \(a.formattedString)")
                     var result:Double {
-                        switch op {
+                        switch op.type {
                             case .곱하기:
                                 return b.doubleVlaue * a.doubleVlaue
                             case .나누기:
@@ -397,7 +442,7 @@ class Calculator {
         for item in items {
             if let number = (item as? Number)?.doubleVlaue {
                 if let op = oper {
-                    switch op {
+                    switch op.type {
                     case .더하기:
                         result += number
                     case .빼기:
@@ -435,6 +480,7 @@ class Calculator {
     
     func delLastNumber() {
         guard let number = items.last as? Number else {
+            Calculator.shared.items.removeLast()
             return
         }
         let str = number.strvalue

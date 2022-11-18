@@ -44,11 +44,19 @@ struct CalculatorView: View {
     let disposeBag = DisposeBag()
     #endif
     
+    var AC가능:Bool {
+        Calculator.shared.items.count > 0
+    }
+    
+    var DEL가능:Bool {
+        return Calculator.shared.items.count > 0
+    }
+    
     var 괄호열기가능:Bool {
         let last = Calculator.shared.items.last
         let a = Calculator.shared.items.count == 0
         let b = last is Calculator.Operation
-        let c = last as? Calculator.Operation == .괄호열기
+        let c = (last as? Calculator.Operation)?.type == .괄호열기
         let d = Calculator.shared.items.last is Calculator.Result
         return a || b || c || d
     }
@@ -58,14 +66,14 @@ struct CalculatorView: View {
         let last = items.last
     
         let counta = items.filter { item in
-            return (item as? Calculator.Operation) == .괄호열기
+            return (item as? Calculator.Operation)?.type == .괄호열기
         }.count
         let countb = items.filter { item in
-            return (item as? Calculator.Operation) == .괄호닫기
+            return (item as? Calculator.Operation)?.type == .괄호닫기
         }.count
         
         let a = items.count > 0
-        let b = last is Calculator.Number || last as? Calculator.Operation == .괄호닫기
+        let b = last is Calculator.Number || (last as? Calculator.Operation)?.type == .괄호닫기
         return a && b && counta > countb
     }
     
@@ -75,13 +83,13 @@ struct CalculatorView: View {
         let a = Calculator.shared.items.count > 1
         
         let counta = items.filter { item in
-            return (item as? Calculator.Operation) == .괄호열기
+            return (item as? Calculator.Operation)?.type == .괄호열기
         }.count
         let countb = items.filter { item in
-            return (item as? Calculator.Operation) == .괄호닫기
+            return (item as? Calculator.Operation)?.type == .괄호닫기
         }.count
         
-        let b = last is Calculator.Number || (last as? Calculator.Operation) == .괄호닫기
+        let b = last is Calculator.Number || (last as? Calculator.Operation)?.type == .괄호닫기
         let c = counta == countb
         return a && b && c
     }
@@ -89,8 +97,8 @@ struct CalculatorView: View {
     var clearText:String {
         let last = Calculator.shared.items.last
         let a = last is Calculator.Number
-        let b = (last as? Calculator.Operation) == .괄호닫기
-        let c = (last as? Calculator.Operation) == .괄호열기
+        let b = (last as? Calculator.Operation)?.type == .괄호닫기
+        let c = (last as? Calculator.Operation)?.type == .괄호열기
         if a || b || c {
             return "C"
         }
@@ -211,7 +219,12 @@ struct CalculatorView: View {
                         let str = item.value as? String ?? "\(item.value as! Int)"
                         let width:CGFloat = item.width
                         let color = item.color
-                        let isEnable = str == "(" ? 괄호열기가능 : str == ")" ? 괄호닫기가능 :  str == "=" ? 계산가능 : true
+                        let isEnable = str == "(" ? 괄호열기가능
+                        : str == ")" ? 괄호닫기가능
+                        : str == "=" ? 계산가능
+                        : str == "clear" ? AC가능
+                        : str == "⌫" ? DEL가능
+                        : true
                         Button {
                             if isEnable {
                                 if str == "clear" {
@@ -281,7 +294,7 @@ struct CalculatorView: View {
             NotificationCenter.default.addObserver(forName: .calculator_lastOperator, object: nil, queue: nil) { noti in
                 displayText = Calculator.shared.displayAttributedString
                 if let op = noti.object as? Calculator.Operation {
-                    lastOp = op.rawValue
+                    lastOp = op.type.rawValue
                 }
             }
             #if FULL || MAC
