@@ -40,7 +40,7 @@ class Calculator {
         }
     }
     
-    public struct Operation : Equatable {
+    public struct Operation : Hashable {
         static func == (lhs:Operation, rhs:Operation)->Bool {
             return lhs.id == rhs.id && lhs.type == rhs.type
         }
@@ -59,7 +59,7 @@ class Calculator {
         }
     }
     
-    public struct Number : Equatable {
+    public struct Number : Hashable {
         static func == (lhs:Number, rhs:Number)->Bool {
             return lhs.id == rhs.id && lhs.strvalue == rhs.strvalue
         }
@@ -93,7 +93,11 @@ class Calculator {
         }
     }
     
-    public struct Result {
+    public struct Result : Hashable {
+        static func == (lhs:Result, rhs:Result)->Bool {
+            return lhs.id == rhs.id && lhs.doubleValue == rhs.doubleValue
+        }
+        let id = UUID().uuidString
         let doubleValue:Double
         var formattedString:String? {
             let formatter = NumberFormatter()
@@ -104,7 +108,7 @@ class Calculator {
         }
     }
     
-    var items:[Any] = [] {
+    var items:[AnyHashable] = [] {
         didSet {
             
             if items.count == 0 || items.last is String {
@@ -297,8 +301,78 @@ class Calculator {
     }
     
     func calculate() {
-        var newArray:Array<Any> {
-            var result = Array<Any>()
+        var newItems:Array<AnyHashable> {
+            var result = items
+            
+            func insertSPOP(idx:Int) {
+                var ref = 0
+                for i in 0...idx {
+                    let c = idx - i
+                    let item = result[c]
+                    switch (item as? Operation)?.type {
+                        case .괄호열기:
+                            ref += 1
+                        case .괄호닫기:
+                            ref -= 1
+                        default:
+                            break
+                    }
+                    if ref == 0 {
+                        if item is Number  {
+                            result.insert(Operation(rawValue: "("), at: c )
+                            break
+                        }
+                        if let op = item as? Operation {
+                            switch op.type {
+                                case .더하기, .빼기 :
+                                    result.insert(Operation(rawValue: "("), at: c + 1)
+                                default:
+                                    break
+                            }
+                        }
+
+                        
+                    }
+                }
+                ref = 0
+                
+                for i in idx+1..<result.count {
+                    let item = result[i]
+                    switch (item as? Operation)?.type {
+                        case .괄호열기:
+                            ref += 1
+                        case .괄호닫기:
+                            ref -= 1
+                        default:
+                            break
+                    }
+                    if ref == 0 {
+                        if item is Number {
+                            result.insert(Operation(rawValue: ")"), at: i + 1)
+                            break
+                        }
+                    }
+                }
+            }
+                                   
+            for item in result {
+                if let it = item as? Operation {
+                    switch it.type {
+                        case .곱하기,.나누기:
+                            if let newidx = result.firstIndex(of: it) {
+                                insertSPOP(idx: newidx)
+                            }
+                        default:
+                            break
+                    }
+                }
+            }
+            return result
+        }
+        
+        var newArray:Array<AnyHashable> {
+            let items = newItems
+            var result = Array<AnyHashable>()
             var opStack = Stack<Operation>()
             
             func opStackOut(isAll:Bool = true) {
