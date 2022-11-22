@@ -25,6 +25,7 @@ struct ContentView: View {
         UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
         #endif
     }
+    @State var isShowHistory = false
     var body: some View {
         #if MAC
         TabView {
@@ -45,19 +46,24 @@ struct ContentView: View {
                 minHeight: 600, idealHeight: 600,
                maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
         #else
-        TabView {
+        NavigationView {
             CalculatorView()
                 .tabItem {
                     Image(systemName: "square.and.pencil")
                     Text("app_title")
                 }
-            HistoryListView()
-                .tabItem {
-                    Image(systemName: "list.dash")
-                    Text("history")
-                }
-        }
-        .tabViewStyle(.automatic)
+                .navigationTitle(Text("app_title"))
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing:
+                                        NavigationLink(destination:
+                                                        HistoryListView()
+                                            .navigationTitle(Text("history"))
+                                            .navigationBarTitleDisplayMode(.large),
+                                                       isActive: $isShowHistory,
+                                                       label: { Text("history")})
+                )
+        }.navigationViewStyle(StackNavigationViewStyle())
+        
         #endif
     }
 }

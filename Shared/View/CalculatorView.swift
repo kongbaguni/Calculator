@@ -265,8 +265,8 @@ struct CalculatorView: View {
         GeometryReader { geomentry in
             if geomentry.size.width < geomentry.size.height {
                 VStack {
-                    historylistView
                     numberDisplayView
+                    historylistView
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                     buttons
                     Spacer().frame(width: 300, height: 20, alignment: .center)
@@ -274,8 +274,8 @@ struct CalculatorView: View {
             } else {
                 HStack {
                     VStack {
-                        historylistView
                         numberDisplayView
+                        historylistView
                     }
                     VStack {
                         Spacer()
