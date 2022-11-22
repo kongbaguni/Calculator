@@ -67,9 +67,15 @@ class Calculator {
         let id:String = UUID().uuidString
         let strvalue:String
         var doubleVlaue:Double {
-            NSString(string: strvalue).doubleValue
+            if strvalue == "inf" {
+                return 0.0
+            }
+            return NSString(string: strvalue).doubleValue
         }
         var formattedString:String {
+            if strvalue == "inf" {
+                return "무한"
+            }
             let isLastDot = strvalue.last == "."
             let isLastZero = strvalue.last == "0"
             let formatter = NumberFormatter()
@@ -301,9 +307,9 @@ class Calculator {
     }
     
     func calculate() {
+        // 곱하기, 나누기 주변으로 한번씩 괄호 치기
         var newItems:Array<AnyHashable> {
             var result = items
-            
             func insertSPOP(idx:Int) {
                 var ref = 0
                 for i in 0...idx {
@@ -401,9 +407,9 @@ class Calculator {
                         
                         opStackOut(isAll: false)
                     case .곱하기, .나누기:
-                        
+
                         opStack.push(item as! Operation)
-                    case .빼기:
+                    case .빼기, .더하기:
                         let a = opStack.list.firstIndex { op in
                             op.type == .곱하기
                         } != nil
@@ -413,24 +419,15 @@ class Calculator {
                         let c = opStack.list.firstIndex { op in
                             op.type == .빼기
                         } != nil
+                        let d = opStack.list.firstIndex { op in
+                            op.type == .더하기
+                        } != nil
 
-                        if a || b || c {
+                        if a || b || c || d {
                             opStackOut(isAll: false)
                         }
                         opStack.push(item as! Operation)
 
-                    case .더하기:
-                        let a = opStack.list.firstIndex { op in
-                            op.type == .곱하기
-                        } != nil
-                        let b = opStack.list.firstIndex { op in
-                            op.type == .나누기
-                        } != nil
-                        if a || b {
-                            opStackOut(isAll: false)
-                        }
-                        opStack.push(item as! Operation)
-                        
                     default:
                         result.append(item)
                 }

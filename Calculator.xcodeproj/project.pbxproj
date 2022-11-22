@@ -774,7 +774,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -817,7 +817,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -933,7 +933,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -973,7 +973,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
