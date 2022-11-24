@@ -58,6 +58,10 @@ struct CalculatorView: View {
         let b = last is Calculator.Operation
         let c = (last as? Calculator.Operation)?.type == .괄호열기
         let d = Calculator.shared.items.last is Calculator.Result
+        let f = (last as? Calculator.Operation)?.type == .괄호닫기
+        if f {
+            return false
+        }
         return a || b || c || d
     }
     
