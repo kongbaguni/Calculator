@@ -81,6 +81,13 @@ struct CalculatorView: View {
         return a && b && counta > countb
     }
     
+    var 사칙연산자추가가능:Bool {
+        let items = Calculator.shared.items
+        let a = items.last is Calculator.Number
+        let b = (items.last as? Calculator.Operation)?.type == .괄호닫기
+        return a || b
+    }
+    
     var 계산가능:Bool {
         let items = Calculator.shared.items
         let last = items.last
@@ -113,6 +120,7 @@ struct CalculatorView: View {
         HStack {
             Spacer()
             BannerAdView(sizeType: .GADAdSizeLargeBanner, padding: .zero)
+                .padding(10)
             Spacer()
         }
 #else
@@ -228,6 +236,7 @@ struct CalculatorView: View {
                         : str == "=" ? 계산가능
                         : str == "clear" ? AC가능
                         : str == "⌫" ? DEL가능
+                        : ["÷","✕","-","+"].firstIndex(of: str) != nil ? 사칙연산자추가가능
                         : true
                         Button {
                             if isEnable {

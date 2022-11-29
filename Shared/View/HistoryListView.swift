@@ -83,6 +83,7 @@ struct HistoryListView: View {
             
             Spacer()
             BannerAdView(sizeType: .GADAdSizeMediumRectangle, padding: .zero)
+                .padding(10)
             Spacer()
 #endif
         }
@@ -100,7 +101,7 @@ struct HistoryListView: View {
                                 .foregroundColor(Color.btnTextColor)
                             Spacer()
                         }
-                        .padding(5)
+                        .padding(5)                        
                         .background(Color.bg2)
                         .cornerRadius(5)
                         .padding(5)
