@@ -83,7 +83,7 @@ struct CalculatorView: View {
     
     var 사칙연산자추가가능:Bool {
         let items = Calculator.shared.items
-        let a = items.last is Calculator.Number        
+        let a = items.last is Calculator.Number
         let b = (items.last as? Calculator.Operation)?.type == .괄호닫기
         let c = (items.last as? Calculator.Operation)?.isFourArithmeticOperations == true
         return a || b || c
@@ -250,7 +250,7 @@ struct CalculatorView: View {
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill( str == lastOp ? Color.btnSelectedColor : color)
+                                    .fill(str == lastOp && ["÷","✕","-","+"].firstIndex(of: str) != nil ? Color.btnSelectedColor : color)
                                 if str == "clear" {
                                     Text(try! AttributedString(markdown: "`\(clearText)`"))
                                         .foregroundColor(Color.btnTextColor)
