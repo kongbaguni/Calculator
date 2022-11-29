@@ -57,6 +57,15 @@ class Calculator {
         func isPriorityIsHigherThen(_ operation:Operation)->Bool {
             self.우선순위 > operation.우선순위
         }
+        
+        var isFourArithmeticOperations:Bool {
+            switch self.type {
+                case .더하기, .나누기, .곱하기, .빼기:
+                    return true
+                default:
+                    return false
+            }
+        }
     }
     
     public struct Number : Hashable {

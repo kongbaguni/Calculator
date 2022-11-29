@@ -83,9 +83,10 @@ struct CalculatorView: View {
     
     var 사칙연산자추가가능:Bool {
         let items = Calculator.shared.items
-        let a = items.last is Calculator.Number
+        let a = items.last is Calculator.Number        
         let b = (items.last as? Calculator.Operation)?.type == .괄호닫기
-        return a || b
+        let c = (items.last as? Calculator.Operation)?.isFourArithmeticOperations == true
+        return a || b || c
     }
     
     var 계산가능:Bool {
