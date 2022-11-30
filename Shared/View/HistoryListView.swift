@@ -10,11 +10,12 @@ import RxSwift
 import RxRealm
 import RealmSwift
 fileprivate let DATE_FORMAT = "yyyy.MM.dd HH:mm"
+fileprivate var editModel:HistoryModel? = nil
 
 struct HistoryListView: View {
     struct Data:Hashable {
         let date:String
-        let list:[String]
+        let list:[HistoryModel]
     }
     enum AlertType {
         case deleteHistory
@@ -27,7 +28,8 @@ struct HistoryListView: View {
     
     @State var isAlert = false
     @State var alertType = AlertType.deleteHistory
-
+    @State var isShowEditMemo = false
+    
     @State var data:[Data] = []
     let disposeBag = DisposeBag()
     var watchAdBtn : some View {
@@ -93,13 +95,32 @@ struct HistoryListView: View {
         LazyVStack {
             ForEach(data, id:\.self) { data in
                 Section(header: Text(data.date)) {
-                    ForEach(data.list, id:\.self) { str in
-                        HStack {
-                            Text("\((data.list.firstIndex(of: str) ?? 0) + 1)")
-                                .foregroundColor(Color.gray)
-                            Text(try! AttributedString(markdown: str))
-                                .foregroundColor(Color.btnTextColor)
-                            Spacer()
+                    ForEach(data.list, id:\.self) { model in
+//                        let t = str.components(separatedBy: " : ")
+                        VStack {
+                            HStack {
+                                Text("\((data.list.firstIndex(of: model) ?? 0) + 1)")
+                                    .foregroundColor(.textColorWeak)
+                                Text(try! AttributedString(markdown: model.value))
+                                    .foregroundColor(.textColorNormal)
+                                Spacer()
+                            }
+                            HStack {
+                                Text("memo :")
+                                    .foregroundColor(.textColorWeak)
+                                
+                                Text( model.isMemoEmpty ? "none" : model.memo)
+                                    .foregroundColor( model.isMemoEmpty ? .textColorWeak : .textColorNormal)
+                                
+                                Button {
+                                    editModel = model
+                                    isShowEditMemo = true
+                                } label : {
+                                    Image(systemName: "square.and.pencil")
+                                }
+                                
+                                Spacer()
+                            }
                         }
                         .padding(5)                        
                         .background(Color.bg2)
@@ -164,20 +185,23 @@ struct HistoryListView: View {
                              dismissButton: .cancel(Text("ad watch time error confirm")))
             }
         })
+        .sheet(isPresented: $isShowEditMemo, content: {
+            EditMemoView(model:editModel!)
+        })
         .onAppear {
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in
                     switch event {
                     case .next(let dbList):
                         self.data = []
-                        var result:[String:[String]] = [:]
+                        var result:[String:[HistoryModel]] = [:]
                         
                         for item in dbList {
                             let date = item.date.formatedString(format: DATE_FORMAT)!
                             if result[date] == nil {
-                                result[date] = [item.value]
+                                result[date] = [item]
                             } else {
-                                result[date]?.append(item.value)
+                                result[date]?.append(item)
                             }
                         }
                         print(result)
@@ -206,8 +230,3 @@ struct HistoryListView: View {
     }
 }
 
-struct HistoryListView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryListView()
-    }
-}

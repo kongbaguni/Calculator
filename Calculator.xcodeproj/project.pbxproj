@@ -60,6 +60,8 @@
 		8D76A5CD28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		8D76A5CE28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		8D76A5CF28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
+		8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D582936DD5B008C29FA /* EditMemoView.swift */; };
+		8DEA3D5A2936DD5B008C29FA /* EditMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D582936DD5B008C29FA /* EditMemoView.swift */; };
 		AD60FDF36B1ED969218A2A2B /* Pods_calculator__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F3747D402E0B36A11E530E /* Pods_calculator__iOS_.framework */; };
 		C34428AB27314A2C003DCB1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -130,6 +132,7 @@
 		8D5C8389282BA17800423C9F /* BannerAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		8D76A5CC28E576B00088E67F /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8D76A5D028E595F60088E67F /* calculator--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--macOS--Info.plist"; sourceTree = "<group>"; };
+		8DEA3D582936DD5B008C29FA /* EditMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoView.swift; sourceTree = "<group>"; };
 		C1846EB23B74F832146E0C36 /* Pods-calculator (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator (iOS).debug.xcconfig"; path = "Target Support Files/Pods-calculator (iOS)/Pods-calculator (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		D05BDD20327CB952C21A3F1A /* Pods-calculator_clip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator_clip.debug.xcconfig"; path = "Target Support Files/Pods-calculator_clip/Pods-calculator_clip.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +243,7 @@
 			children = (
 				8D5C8389282BA17800423C9F /* BannerAdView.swift */,
 				1BA96B0D27229E10002B2419 /* CalculatorView.swift */,
+				8DEA3D582936DD5B008C29FA /* EditMemoView.swift */,
 				1B29F786273CF0CA007BC9B2 /* HistoryListView.swift */,
 				1B06FA0D270D79280079B080 /* ContentView.swift */,
 			);
@@ -549,6 +553,7 @@
 				1BD60CF327294AB2002684D6 /* Color.swift in Sources */,
 				8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1BAE669E273A4A5300C82269 /* Stack.swift in Sources */,
+				8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */,
 				1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */,
 				8D5C8386282B472200423C9F /* GoogleAd.swift in Sources */,
 				1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */,
@@ -561,6 +566,7 @@
 			files = (
 				1B29F788273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
 				8D76A5CE28E576B00088E67F /* Toast.swift in Sources */,
+				8DEA3D5A2936DD5B008C29FA /* EditMemoView.swift in Sources */,
 				1B399592273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				8D16E340282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1B29F77A273C921A007BC9B2 /* HistoryModel.swift in Sources */,

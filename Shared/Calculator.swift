@@ -560,7 +560,9 @@ class Calculator {
     
     func delLastNumber() {
         guard let number = items.last as? Number else {
-            Calculator.shared.items.removeLast()
+            if Calculator.shared.items.count > 0 {
+                Calculator.shared.items.removeLast()
+            }
             return
         }
         let str = number.strvalue

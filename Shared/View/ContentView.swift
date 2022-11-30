@@ -8,6 +8,7 @@ import SwiftUI
 #if !MAC
 import GoogleMobileAds
 #endif
+import RealmSwift
 struct ContentView: View {
     init() {
         #if !MAC
@@ -23,6 +24,12 @@ struct ContentView: View {
  
         UITabBar.appearance().standardAppearance = transparentAppearence
         UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
+        
+        let config = Realm.Configuration(
+            schemaVersion: 2)
+        // Use this configuration when opening realms
+        Realm.Configuration.defaultConfiguration = config
+        _ = try! Realm()
         #endif
     }
     @State var isShowHistory = false

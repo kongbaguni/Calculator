@@ -32,12 +32,19 @@ fileprivate let list:[[Item]] = [
     [.init(color: c2, value: 0, width:110), .init(color: c2, value: ".",width:50), .init(color: c3, value: "=",width:50)],
 ]
 
+fileprivate var editNoteIdx:Int?
+
 struct CalculatorView: View {
     @State var count = 0
     @State var displayText:AttributedString = "0"
-    @State var lastOp:String? = nil
+    @State var lastOp:String?
     @State var history:[String] = []
-    @State var toastTitle:Text? = nil
+    #if FULL
+    @State var historyModels:[HistoryModel] = []
+    
+    @State var isShowEditNote:Bool = false
+    #endif
+    @State var toastTitle:Text?
     @State var toastMessage:String = ""
     @State var isToast:Bool = false
     #if FULL || MAC
@@ -128,64 +135,94 @@ struct CalculatorView: View {
         EmptyView()
 #endif
     }
+
+    var emptyHistoryView : some View {
+        ScrollView {
+            bannerAdView
+            Text("empty history log...")
+                .font(.system(size: 30, weight: .heavy))
+                .foregroundColor(Color.btnSelectedColor)
+                .padding(50)
+        }
+    }
+    
+    var historylistViewlist : some View {
+        ScrollView {
+            bannerAdView
+            LazyVStack {
+                ForEach(0..<history.count, id : \.self) { idx in
+                    let texts = history[idx].components(separatedBy: " `=` ")
+                    VStack {
+                        HStack {
+                            Text("\(idx)")
+                                .foregroundColor(Color.idxTextColor)
+                                .font(.system(size: 20,weight: .heavy))
+                            
+                            Text(try! AttributedString(markdown:texts.first!))
+                                .foregroundColor(Color.btnTextColor)
+                                .font(.system(size: 20,weight: .heavy))
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Text(" `=` ")
+                                .foregroundColor(Color.btnTextColor)
+                                .font(.system(size: 20,weight: .heavy))
+                            
+                            Button {
+                                if let txt = texts.last {
+                                    let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
+                                    
+                                    let number = Calculator.Number(strvalue: nt)
+                                    Calculator.shared.items.removeAll()
+                                    Calculator.shared.items.append(number)
+                                }
+                            } label: {
+                                Text(try! AttributedString(markdown:texts.last!))
+                                    .foregroundColor(Color.idxTextColor)
+                                    .font(.system(size: 20,weight: .heavy))
+                            }
+                            
+                            Spacer()
+                        }.fixedSize(horizontal: false, vertical: true)
+#if FULL
+                        HStack {
+                            Text("memo :")
+                                .foregroundColor(.idxTextColor)
+                            historyModels[idx].memo.isEmpty
+                            ? Text("none")
+                                .foregroundColor(.textColorWeak)
+                            : Text(historyModels[idx].memo)
+                                .foregroundColor(.textColorNormal)
+                            Button {
+                                print(idx)
+                                editNoteIdx = idx
+                                print(editNoteIdx!)
+                                isShowEditNote = true
+                            } label : {
+                                Image(systemName: "square.and.pencil")
+                            }
+                            Spacer()
+                        }
+#endif
+
+                    }
+
+                    .padding(10)
+                }
+
+            }
+        }
+        .background(Color.bg3)
+        .listStyle(SidebarListStyle())
+        .frame(minWidth: 300, idealWidth: 300, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
+    }
     
     var historylistView: some View {
         Group {
-            if (history.count == 0) {
-                ScrollView {
-                    bannerAdView
-                    Text("empty history log...")
-                        .font(.system(size: 30, weight: .heavy))
-                        .foregroundColor(Color.btnSelectedColor)
-                        .padding(50)
-                }
-            }
-            else  {
-                ScrollView {
-                    bannerAdView
-                    LazyVStack {
-                        ForEach(0..<history.count, id : \.self) { idx in
-                            let texts = history[idx].components(separatedBy: " `=` ")
-                            
-                            HStack {
-                                Text("\(idx)")
-                                    .foregroundColor(Color.idxTextColor)
-                                    .font(.system(size: 20,weight: .heavy))
-
-                                Text(try! AttributedString(markdown:texts.first!))
-                                    .foregroundColor(Color.btnTextColor)
-                                    .font(.system(size: 20,weight: .heavy))
-                                    .lineLimit(nil)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                
-                                Text(" `=` ")
-                                    .foregroundColor(Color.btnTextColor)
-                                    .font(.system(size: 20,weight: .heavy))
-                                
-                                Button {
-                                    if let txt = texts.last {
-                                        let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
-                                        
-                                        let number = Calculator.Number(strvalue: nt)
-                                        Calculator.shared.items.removeAll()
-                                        Calculator.shared.items.append(number)
-                                    }
-                                } label: {
-                                    Text(try! AttributedString(markdown:texts.last!))
-                                        .foregroundColor(Color.idxTextColor)
-                                        .font(.system(size: 20,weight: .heavy))
-                                }
-                                Spacer()
-                            }.fixedSize(horizontal: false, vertical: true)
-
-                            .padding(10)
-                        }
-
-                    }
-                }
-                .background(Color.bg3)
-                .listStyle(SidebarListStyle())
-                .frame(minWidth: 300, idealWidth: 300, maxWidth: CGFloat.greatestFiniteMagnitude, minHeight: 100, idealHeight: 100, maxHeight: CGFloat.greatestFiniteMagnitude, alignment: .center)
+            if history.count == 0 {
+                emptyHistoryView
+            } else {
+                historylistViewlist
             }
         }
     }
@@ -317,13 +354,16 @@ struct CalculatorView: View {
                     switch event {
                     case .next(let list):
                         var results:[String] = []
+                        var models:[HistoryModel] = []
                         for item in list {
                             if results.count == 20 {
                                 continue
                             }
                             results.append(item.value)
+                            models.append(item)
                         }
                         history = results
+                        historyModels = models
                         print(results)
                     default:
                         break
@@ -342,6 +382,12 @@ struct CalculatorView: View {
             #endif
             
         }
+#if FULL || MAC
+        .sheet(isPresented: $isShowEditNote, content: {
+            let model = historyModels[editNoteIdx!]
+            EditMemoView(model: model)
+        })
+#endif
         .background(Color.bg1)
         .toast(title:toastTitle, message: toastMessage, isShowing: $isToast, duration: 4)
     }

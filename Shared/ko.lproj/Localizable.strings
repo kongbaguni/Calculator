@@ -21,3 +21,9 @@
 "ad watch time error message" = "감사합니다!\n혹시 광고를 다시 보고 싶으면 잠시 후에 제시도 해주세요.";
 "ad watch time error confirm" = "확인";
 "copy to clipboard" = "클립보드로 복사됨";
+"memo :" = "메모 :";
+"none" = "없음";
+"confirm" = "확인";
+"save" = "저장";
+"memo" = "메모";
+"edit memo" = "메모 편집";
