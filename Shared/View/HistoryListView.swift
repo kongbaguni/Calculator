@@ -96,11 +96,10 @@ struct HistoryListView: View {
             ForEach(data, id:\.self) { data in
                 Section(header: Text(data.date)) {
                     ForEach(data.list, id:\.self) { model in
-//                        let t = str.components(separatedBy: " : ")
                         VStack {
                             HStack {
                                 Text("\((data.list.firstIndex(of: model) ?? 0) + 1)")
-                                    .foregroundColor(.textColorWeak)
+                                    .foregroundColor(.idxTextColor)
                                 Text(try! AttributedString(markdown: model.value))
                                     .foregroundColor(.textColorNormal)
                                 Spacer()
@@ -109,8 +108,9 @@ struct HistoryListView: View {
                                 Text("memo :")
                                     .foregroundColor(.textColorWeak)
                                 
-                                Text( model.isMemoEmpty ? "none" : model.memo)
-                                    .foregroundColor( model.isMemoEmpty ? .textColorWeak : .textColorNormal)
+                                model.isMemoEmpty
+                                ? Text("none").foregroundColor(.textColorWeak)
+                                : Text(model.memo).foregroundColor(.textColorNormal)
                                 
                                 Button {
                                     editModel = model
