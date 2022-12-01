@@ -31,6 +31,12 @@ struct HistoryListView: View {
     @State var isShowEditMemo = false
     
     @State var data:[Data] = []
+    @State var query:String = ""
+    
+    var trimQuery : String {
+        return query.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
     let disposeBag = DisposeBag()
     var watchAdBtn : some View {
 #if !MAC
@@ -123,7 +129,8 @@ struct HistoryListView: View {
                             }
                         }
                         .padding(5)                        
-                        .background(Color.bg2)
+                        .background(
+                            model.memo.components(separatedBy: trimQuery).count > 1 ? Color.bg3 : Color.bg2)
                         .cornerRadius(5)
                         .padding(5)
                         
@@ -144,28 +151,28 @@ struct HistoryListView: View {
                         .padding(50)
                     watchAdBtn
                 } else {
-                    if geomentry.size.width < geomentry.size.height {
-                        ScrollView {
-                            bannerView
-                            historyListView
-                            deleteHistoryBtn
-                            watchAdBtn
-                        }
-                    } else {
-                        HStack {
-                            bannerView
+                    switch UIDevice.current.orientation {
+                        case .landscapeLeft, .landscapeRight:
+                            HStack {
+                                bannerView
+                                ScrollView {
+                                    historyListView
+                                    deleteHistoryBtn
+                                    watchAdBtn
+                                }
+                            }
+                        default:
                             ScrollView {
                                 historyListView
+                                bannerView
                                 deleteHistoryBtn
                                 watchAdBtn
-                             }
-                        }
+                            }
                     }
-
                 }
             }
-
         }
+        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
         .alert(isPresented: $isAlert, content: {
             switch alertType {
             case .deleteHistory:
