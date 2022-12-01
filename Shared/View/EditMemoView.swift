@@ -18,14 +18,17 @@ struct EditMemoView: View {
                 .foregroundColor(.textColorWeak)
                 .font(.system(size: 30, weight: .bold))
                 .padding(20)
-            Text(try! AttributedString(markdown: model.value))
-                .foregroundColor(Color.textColorStrong)
-                .font(.system(size: 20, weight: .bold))
-                .padding(20)
+            HStack {
+                Text(try! AttributedString(markdown: model.value))
+                    .foregroundColor(Color.textColorStrong)
+                    .font(.system(size: 20, weight: .bold))
+                    .padding(10)
+                Spacer()
+            }
             HStack {
                 TextField("memo", text: $text)
                     .foregroundColor(.textColorNormal)
-                    .padding(20)
+                    .padding(.leading,10)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button {
                     let realm = try! Realm()
@@ -35,7 +38,9 @@ struct EditMemoView: View {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("confirm")
-                }.padding(20)
+                }
+                .padding(.trailing,10)
+                .buttonStyle(BorderedButtonStyle())
             }
             Spacer()
         }
