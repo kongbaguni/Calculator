@@ -10,16 +10,21 @@ import RxSwift
 import RxRealm
 import RealmSwift
 fileprivate let DATE_FORMAT = "yyyy.MM.dd HH:mm"
-fileprivate var editModel:HistoryModel? = nil
+fileprivate var editId:ObjectId? = nil
 
 struct HistoryListView: View {
     struct Data:Hashable {
+        static func == (lhs: HistoryListView.Data, rhs: HistoryListView.Data) -> Bool {
+            return lhs.date == rhs.date
+        }
+        
         let date:String
-        let list:[HistoryModel]
+        let list:[HistoryModel.ThreadSafeModel]
     }
     enum AlertType {
         case deleteHistory
         case adWatchTime
+        case deleteItem
     }
     #if !MAC
     let googleAd = GoogleAd()
@@ -119,10 +124,18 @@ struct HistoryListView: View {
                                 : Text(model.memo).foregroundColor(.textColorNormal)
                                 
                                 Button {
-                                    editModel = model
+                                    editId = model.id
                                     isShowEditMemo = true
                                 } label : {
                                     Image(systemName: "square.and.pencil")
+                                }
+                                
+                                Button {
+                                    editId = model.id
+                                    isAlert = true
+                                    alertType = .deleteItem
+                                } label : {
+                                    Image(systemName: "trash")
                                 }
                                 
                                 Spacer()
@@ -190,29 +203,48 @@ struct HistoryListView: View {
                 return Alert(title: Text("ad watch time error title"),
                              message: Text("ad watch time error message"),
                              dismissButton: .cancel(Text("ad watch time error confirm")))
+            case .deleteItem:
+                    return Alert(title: Text("history_delete_alert_title"),
+                                 message: Text("history_delete_alert_message"),
+                                 primaryButton: .default(Text("history_delete_alert_confirm"),
+                                                         action: {
+                        if let id = editId {
+                            editId = nil
+                            let realm = try! Realm()
+                            if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
+                                try! realm.write {
+                                    realm.delete(target)
+                                }
+                            }
+                        }
+                    }),
+                                 secondaryButton: .cancel())
+
             }
         })
         .sheet(isPresented: $isShowEditMemo, content: {
-            EditMemoView(model:editModel!)
+            if let id = editId {
+                EditMemoView(id:id)
+            }
         })
         .onAppear {
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in
                     switch event {
                     case .next(let dbList):
-                        self.data = []
-                        var result:[String:[HistoryModel]] = [:]
+                        self.data.removeAll()
+                        var result:[String:[HistoryModel.ThreadSafeModel]] = [:]
                         
                         for item in dbList {
                             let date = item.date.formatedString(format: DATE_FORMAT)!
                             if result[date] == nil {
-                                result[date] = [item]
+                                result[date] = [item.threadSafeModel]
                             } else {
-                                result[date]?.append(item)
+                                result[date]?.append(item.threadSafeModel)
                             }
                         }
                         print(result)
-                        data = []
+                        data.removeAll()
                         for item in result {
                             data.append(Data(date: item.key, list: item.value))
                         }

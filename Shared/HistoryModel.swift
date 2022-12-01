@@ -15,12 +15,22 @@ class HistoryModel : Object, ObjectKeyIdentifiable {
     @Persisted var date:Date = Date()
     @Persisted var memo:String = ""
 
-    var isMemoEmpty:Bool {
-        let new = memo.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
-        return new.isEmpty
+    
+    struct ThreadSafeModel:Hashable {
+        static func == (lhs: HistoryModel.ThreadSafeModel, rhs: HistoryModel.ThreadSafeModel) -> Bool {
+            return lhs.id == rhs.id && lhs.value == rhs.value && lhs.memo == rhs.memo && lhs.date == rhs.date
+        }
+        let id:ObjectId
+        let value:String
+        let memo:String
+        let date:Date
+        
+        var isMemoEmpty:Bool {
+            memo.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }
     }
     
-    var valueWithMemo : String {
-        isMemoEmpty ? value : "\(value) : \(memo)"
+    var threadSafeModel:ThreadSafeModel {
+        return .init(id:id, value: value, memo: memo, date: date)
     }
 }

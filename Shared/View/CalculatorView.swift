@@ -39,8 +39,8 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
     @State var history:[String] = []
-    #if FULL
-    @State var historyModels:[HistoryModel] = []
+#if FULL
+    @State var historyModels:[HistoryModel.ThreadSafeModel] = []
     
     @State var isShowEditNote:Bool = false
     #endif
@@ -353,18 +353,21 @@ struct CalculatorView: View {
                 .subscribe { event in
                     switch event {
                     case .next(let list):
-                        var results:[String] = []
-                        var models:[HistoryModel] = []
-                        for item in list {
-                            if results.count == 20 {
-                                continue
+                            var results:[String] = []
+                            var models:[HistoryModel.ThreadSafeModel] = []
+                            for item in list {
+                                if results.count == 20 {
+                                    continue
+                                }
+                                results.append(item.value)
+                                models.append(item.threadSafeModel)
+                                print(item.threadSafeModel.memo)
                             }
-                            results.append(item.value)
-                            models.append(item)
-                        }
-                        history = results
-                        historyModels = models
-                        print(results)
+                            history.removeAll()
+                            historyModels.removeAll()
+                            history = results
+                            historyModels = models
+                            print(results)
                     default:
                         break
                     }
@@ -385,7 +388,7 @@ struct CalculatorView: View {
 #if FULL || MAC
         .sheet(isPresented: $isShowEditNote, content: {
             let model = historyModels[editNoteIdx!]
-            EditMemoView(model: model)
+            EditMemoView(id: model.id)
         })
 #endif
         .background(Color.bg1)

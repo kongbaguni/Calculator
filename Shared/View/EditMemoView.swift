@@ -10,7 +10,13 @@ import RealmSwift
 
 struct EditMemoView: View {
     @Environment(\.presentationMode) var presentationMode
-    let model:HistoryModel
+//    let model:HistoryModel
+    let id:ObjectId
+    var model:HistoryModel? {
+        let realm = try! Realm()
+        return realm.object(ofType: HistoryModel.self, forPrimaryKey: id)
+    }
+    
     @State var text:String = ""
     var body: some View {
         VStack {
@@ -19,7 +25,7 @@ struct EditMemoView: View {
                 .font(.system(size: 30, weight: .bold))
                 .padding(20)
             HStack {
-                Text(try! AttributedString(markdown: model.value))
+                Text(try! AttributedString(markdown: model?.value ?? ""))
                     .foregroundColor(Color.textColorStrong)
                     .font(.system(size: 20, weight: .bold))
                     .padding(10)
@@ -33,7 +39,7 @@ struct EditMemoView: View {
                 Button {
                     let realm = try! Realm()
                     realm.beginWrite()
-                    model.memo = text
+                    model?.memo = text
                     try! realm.commitWrite()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
@@ -45,7 +51,7 @@ struct EditMemoView: View {
             Spacer()
         }
         .onAppear {
-            text = model.memo
+            text = model?.memo ?? ""
         }
     }
 }
