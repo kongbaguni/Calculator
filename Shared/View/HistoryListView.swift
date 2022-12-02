@@ -9,7 +9,7 @@ import SwiftUI
 import RxSwift
 import RxRealm
 import RealmSwift
-fileprivate let DATE_FORMAT = "yyyy.MM.dd HH:mm"
+fileprivate let DATE_FORMAT = "yyyy.MM.dd"
 fileprivate var editId:ObjectId? = nil
 
 struct HistoryListView: View , KeyboardReadable{
@@ -112,7 +112,14 @@ struct HistoryListView: View , KeyboardReadable{
     var historyListView : some View {
         LazyVStack {
             ForEach(data, id:\.self) { data in
-                Section(header: Text(data.date)) {
+                Section(header: HStack {
+                    Text(data.date)
+                        .foregroundColor(.textColorWeak)
+                    Spacer()
+                }
+                    .padding(.leading, 5)
+                    .padding(.top, 20)
+                ) {
                     ForEach(data.list, id:\.self) { model in
                         VStack {
                             HStack {
@@ -148,11 +155,12 @@ struct HistoryListView: View , KeyboardReadable{
                                 Spacer()
                             }
                         }
-                        .padding(5)                        
+                        .padding(5)
                         .background(
                             model.memo.components(separatedBy: trimQuery).count > 1 ? Color.bg3 : Color.bg2)
+                        .padding(.leading,5)
+                        .padding(.trailing,5)
                         .cornerRadius(5)
-                        .padding(5)
                         
                     }
                 }
