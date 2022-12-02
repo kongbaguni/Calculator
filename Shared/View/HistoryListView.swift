@@ -12,10 +12,10 @@ import RealmSwift
 fileprivate let DATE_FORMAT = "yyyy.MM.dd HH:mm"
 fileprivate var editId:ObjectId? = nil
 
-struct HistoryListView: View {
+struct HistoryListView: View , KeyboardReadable{
     struct Data:Hashable {
         static func == (lhs: HistoryListView.Data, rhs: HistoryListView.Data) -> Bool {
-            return lhs.date == rhs.date
+            lhs.date == rhs.date && lhs.list == rhs.list
         }
         
         let date:String
@@ -37,6 +37,13 @@ struct HistoryListView: View {
     
     @State var data:[Data] = []
     @State var query:String = ""
+    @State var isLandscape = true
+    @State var isKeyboardVisible = false
+//    init() {
+//        NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [self] note in
+//            isLandscape.toggle()
+//        }
+//    }
     
     var trimQuery : String {
         return query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -152,36 +159,47 @@ struct HistoryListView: View {
             }
         }
     }
+    var emptyView : some View {
+        VStack {
+            bannerView
+            Text("empty history log...")
+                .font(.system(size: 30, weight: .heavy))
+                .foregroundColor(Color.btnSelectedColor)
+                .padding(50)
+            watchAdBtn
+        }
+    }
+    
+    var landscapeLayout : some View {
+        HStack {
+            bannerView
+            ScrollView {
+                historyListView
+                deleteHistoryBtn
+                watchAdBtn
+            }
+        }
+    }
+    
+    var portraitLayout : some View {
+        ScrollView {
+            historyListView
+            bannerView
+            deleteHistoryBtn
+            watchAdBtn
+        }
+    }
     
     var body: some View {
         GeometryReader { geomentry in
             VStack {
                 if data.count == 0 {
-                    bannerView
-                    Text("empty history log...")
-                        .font(.system(size: 30, weight: .heavy))
-                        .foregroundColor(Color.btnSelectedColor)
-                        .padding(50)
-                    watchAdBtn
+                    emptyView
+                }
+                else if geomentry.size.width < geomentry.size.height || isKeyboardVisible {
+                    portraitLayout
                 } else {
-                    switch UIDevice.current.orientation {
-                        case .landscapeLeft, .landscapeRight:
-                            HStack {
-                                bannerView
-                                ScrollView {
-                                    historyListView
-                                    deleteHistoryBtn
-                                    watchAdBtn
-                                }
-                            }
-                        default:
-                            ScrollView {
-                                historyListView
-                                bannerView
-                                deleteHistoryBtn
-                                watchAdBtn
-                            }
-                    }
+                    landscapeLayout
                 }
             }
         }
@@ -190,7 +208,7 @@ struct HistoryListView: View {
             switch alertType {
             case .deleteHistory:
                 return Alert(title: Text("history_delete_alert_title"),
-                             message: Text("history_delete_alert_message"),
+                             message: Text("history_all_delete_alert_message"),
                              primaryButton: .default(Text("history_delete_alert_confirm"),
                                                      action: {
                     let realm = try! Realm()
@@ -227,12 +245,17 @@ struct HistoryListView: View {
                 EditMemoView(id:id)
             }
         })
+        .onReceive(keyboardPublisher) { newIsKeyboardVisible in
+            print("Is keyboard visible? ", newIsKeyboardVisible)
+            isKeyboardVisible = newIsKeyboardVisible
+        }
         .onAppear {
+            isLandscape = UIDevice.current.orientation.isLandscape
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in
                     switch event {
                     case .next(let dbList):
-                        self.data.removeAll()
+                        data.removeAll()
                         var result:[String:[HistoryModel.ThreadSafeModel]] = [:]
                         
                         for item in dbList {
@@ -243,8 +266,6 @@ struct HistoryListView: View {
                                 result[date]?.append(item.threadSafeModel)
                             }
                         }
-                        print(result)
-                        data.removeAll()
                         for item in result {
                             data.append(Data(date: item.key, list: item.value))
                         }

@@ -35,6 +35,11 @@ fileprivate let list:[[Item]] = [
 fileprivate var editNoteIdx:Int?
 
 struct CalculatorView: View {
+    enum AlertType {
+        case deleteItem
+        case onlyMessage
+    }
+    
     @State var count = 0
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
@@ -42,11 +47,15 @@ struct CalculatorView: View {
 #if FULL
     @State var historyModels:[HistoryModel.ThreadSafeModel] = []
     
-    @State var isShowEditNote:Bool = false
+    @State var isShowEditNote = false
     #endif
     @State var toastTitle:Text?
-    @State var toastMessage:String = ""
-    @State var isToast:Bool = false
+    @State var toastMessage = ""
+    @State var isToast = false
+    @State var isAlert = false
+    @State var alertType:AlertType = .onlyMessage
+    @State var alertMessage = ""
+    @State var alertTitle = ""
     #if FULL || MAC
     let disposeBag = DisposeBag()
     #endif
@@ -138,17 +147,16 @@ struct CalculatorView: View {
 
     var emptyHistoryView : some View {
         ScrollView {
-            bannerAdView
             Text("empty history log...")
                 .font(.system(size: 30, weight: .heavy))
                 .foregroundColor(Color.btnSelectedColor)
                 .padding(50)
+            bannerAdView
         }
     }
     
     var historylistViewlist : some View {
         ScrollView {
-            bannerAdView
             LazyVStack {
                 ForEach(0..<history.count, id : \.self) { idx in
                     let texts = history[idx].components(separatedBy: " `=` ")
@@ -201,6 +209,15 @@ struct CalculatorView: View {
                             } label : {
                                 Image(systemName: "square.and.pencil")
                             }
+                            
+                            Button {
+                                editNoteIdx = idx
+                                alertType = .deleteItem
+                                isAlert = true
+                            } label : {
+                                Image(systemName: "trash")
+                            }
+                            
                             Spacer()
                         }
 #endif
@@ -211,6 +228,7 @@ struct CalculatorView: View {
                 }
 
             }
+            bannerAdView
         }
         .background(Color.bg3)
         .listStyle(SidebarListStyle())
@@ -391,6 +409,33 @@ struct CalculatorView: View {
             EditMemoView(id: model.id)
         })
 #endif
+        .alert(isPresented: $isAlert, content: {
+            switch alertType {
+            case .deleteItem:
+                    return Alert(title: Text("history_delete_alert_title"),
+                                 message: Text("history_delete_alert_message"),
+                                 primaryButton: .default(Text("history_delete_alert_confirm"),
+                                                         action: {
+#if FULL || MAC
+                        if let i = editNoteIdx {
+                            editNoteIdx = nil
+                            let id = historyModels[i].id
+                            let realm = try! Realm()
+                            if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
+                                try! realm.write {
+                                    realm.delete(target)
+                                }
+                            }
+                        }
+#endif
+                    }),
+                                 secondaryButton: .cancel())
+            case .onlyMessage:
+                    return Alert(title: Text(alertTitle),
+                                 message: Text(alertMessage))
+                    
+            }
+        })
         .background(Color.bg1)
         .toast(title:toastTitle, message: toastMessage, isShowing: $isToast, duration: 4)
     }

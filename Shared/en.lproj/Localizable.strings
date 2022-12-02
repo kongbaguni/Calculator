@@ -13,6 +13,7 @@
 "empty history log..." = "empty history log...";
 
 "history_delete_alert_title" = "Delete history";
+"history_all_delete_alert_message" = "Delete All calculation history. Deleted history cannot be recovered.";
 "history_delete_alert_message" = "Delete calculation history. Deleted history cannot be recovered.";
 "history_delete_alert_confirm" = "Delete";
 "watch AD" = "View video ads";

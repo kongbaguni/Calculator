@@ -62,6 +62,9 @@
 		8D76A5CF28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D582936DD5B008C29FA /* EditMemoView.swift */; };
 		8DEA3D5A2936DD5B008C29FA /* EditMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D582936DD5B008C29FA /* EditMemoView.swift */; };
+		8DEA3D5C2939845B008C29FA /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */; };
+		8DEA3D5D2939845B008C29FA /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */; };
+		8DEA3D5E2939845B008C29FA /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */; };
 		AD60FDF36B1ED969218A2A2B /* Pods_calculator__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F3747D402E0B36A11E530E /* Pods_calculator__iOS_.framework */; };
 		C34428AB27314A2C003DCB1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -133,6 +136,7 @@
 		8D76A5CC28E576B00088E67F /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8D76A5D028E595F60088E67F /* calculator--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--macOS--Info.plist"; sourceTree = "<group>"; };
 		8DEA3D582936DD5B008C29FA /* EditMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoView.swift; sourceTree = "<group>"; };
+		8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		C1846EB23B74F832146E0C36 /* Pods-calculator (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator (iOS).debug.xcconfig"; path = "Target Support Files/Pods-calculator (iOS)/Pods-calculator (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		D05BDD20327CB952C21A3F1A /* Pods-calculator_clip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator_clip.debug.xcconfig"; path = "Target Support Files/Pods-calculator_clip/Pods-calculator_clip.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +195,7 @@
 				1B06FA0C270D79280079B080 /* TestApp.swift */,
 				8D76A5CC28E576B00088E67F /* Toast.swift */,
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
+				8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */,
 				1B98CDF62710024400FC3E9E /* Calculator.swift */,
 				1BAE669D273A4A5300C82269 /* Stack.swift */,
 				8D5C8385282B472200423C9F /* GoogleAd.swift */,
@@ -551,6 +556,7 @@
 				8D76A5CD28E576B00088E67F /* Toast.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1BD60CF327294AB2002684D6 /* Color.swift in Sources */,
+				8DEA3D5C2939845B008C29FA /* KeyboardReadable.swift in Sources */,
 				8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1BAE669E273A4A5300C82269 /* Stack.swift in Sources */,
 				8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */,
@@ -566,6 +572,7 @@
 			files = (
 				1B29F788273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
 				8D76A5CE28E576B00088E67F /* Toast.swift in Sources */,
+				8DEA3D5D2939845B008C29FA /* KeyboardReadable.swift in Sources */,
 				8DEA3D5A2936DD5B008C29FA /* EditMemoView.swift in Sources */,
 				1B399592273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
 				8D16E340282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
@@ -591,6 +598,7 @@
 				1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */,
 				1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
+				8DEA3D5E2939845B008C29FA /* KeyboardReadable.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
 				8D76A5CF28E576B00088E67F /* Toast.swift in Sources */,
 				8D16E341282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,

@@ -13,6 +13,7 @@
 "empty history log..." = "계산 기록이 없습니다...";
 
 "history_delete_alert_title" = "기록 삭제";
+"history_all_delete_alert_message" = "모든 계산 기록을 삭제합니다. 삭제된 기록은 복구되지 않습니다.";
 "history_delete_alert_message" = "계산 기록을 삭제합니다. 삭제된 기록은 복구되지 않습니다.";
 "history_delete_alert_confirm" = "삭제";
 "watch AD" = "동영상 광고 보기";
