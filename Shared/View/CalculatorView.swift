@@ -44,7 +44,7 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
     @State var history:[String] = []
-#if FULL
+    #if FULL || MAC
     @State var historyModels:[HistoryModel.ThreadSafeModel] = []
     
     @State var isShowEditNote = false
@@ -355,6 +355,12 @@ struct CalculatorView: View {
             }
         }
         .onAppear {
+            let config = Realm.Configuration(
+                schemaVersion: 2)
+            // Use this configuration when opening realms
+            Realm.Configuration.defaultConfiguration = config
+
+            
             NotificationCenter.default.addObserver(forName: .calculator_lastNumber, object: nil, queue: nil) {  noti in
                 displayText = Calculator.shared.displayAttributedString
                 lastOp = nil

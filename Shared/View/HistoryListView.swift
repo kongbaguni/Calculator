@@ -12,7 +12,7 @@ import RealmSwift
 fileprivate let DATE_FORMAT = "yyyy.MM.dd"
 fileprivate var editId:ObjectId? = nil
 
-struct HistoryListView: View , KeyboardReadable{
+struct HistoryListView: View , KeyboardReadable {
     struct Data:Hashable {
         static func == (lhs: HistoryListView.Data, rhs: HistoryListView.Data) -> Bool {
             lhs.date == rhs.date && lhs.list == rhs.list
@@ -211,7 +211,11 @@ struct HistoryListView: View , KeyboardReadable{
                 }
             }
         }
+        #if !MAC
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
+        #else
+        .searchable(text: $query)
+        #endif
         .alert(isPresented: $isAlert, content: {
             switch alertType {
             case .deleteHistory:
@@ -253,12 +257,16 @@ struct HistoryListView: View , KeyboardReadable{
                 EditMemoView(id:id)
             }
         })
+        #if !MAC
         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
             print("Is keyboard visible? ", newIsKeyboardVisible)
             isKeyboardVisible = newIsKeyboardVisible
         }
+        #endif
         .onAppear {
+            #if !MAC
             isLandscape = UIDevice.current.orientation.isLandscape
+            #endif
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in
                     switch event {

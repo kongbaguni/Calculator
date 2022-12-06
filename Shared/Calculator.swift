@@ -298,12 +298,28 @@ class Calculator {
                     }
                 }
                 
-            case "(", ")":
-                if items.last is Result {
+            case "(":
+                let last = items.last
+                if last is Result {
                     items.removeAll()
+                }
+                if last is Number {
+                    return
                 }
                 items.append(Operation(rawValue: key))
                 
+            case ")":
+                let last = items.last
+                if let op = last as? Operation {
+                    switch op.type {
+                        case .괄호닫기:
+                            break
+                        default:
+                            return
+                    }
+                }
+
+                items.append(Operation(rawValue: key))
             case "⌫":
                 if items.last is Result {
                     items.removeLast()

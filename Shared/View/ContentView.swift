@@ -24,12 +24,6 @@ struct ContentView: View {
  
         UITabBar.appearance().standardAppearance = transparentAppearence
         UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
-        
-        let config = Realm.Configuration(
-            schemaVersion: 2)
-        // Use this configuration when opening realms
-        Realm.Configuration.defaultConfiguration = config
-        _ = try! Realm()
         #endif
     }
     @State var isShowHistory = false
@@ -69,8 +63,8 @@ struct ContentView: View {
                                                        isActive: $isShowHistory,
                                                        label: { Text("history")})
                 )
-        }.navigationViewStyle(StackNavigationViewStyle())
-        
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
         #endif
     }
 }
