@@ -162,7 +162,7 @@ struct CalculatorView: View {
                     let texts = history[idx].components(separatedBy: " `=` ")
                     VStack {
                         HStack {
-                            Text("\(idx)")
+                            Text("*")
                                 .foregroundColor(Color.idxTextColor)
                                 .font(.system(size: 20,weight: .heavy))
                             
@@ -192,7 +192,7 @@ struct CalculatorView: View {
                             
                             Spacer()
                         }.fixedSize(horizontal: false, vertical: true)
-#if FULL
+#if FULL || MAC
                         HStack {
                             Text("memo :")
                                 .foregroundColor(.idxTextColor)

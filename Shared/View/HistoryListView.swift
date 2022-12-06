@@ -123,7 +123,7 @@ struct HistoryListView: View , KeyboardReadable {
                     ForEach(data.list, id:\.self) { model in
                         VStack {
                             HStack {
-                                Text("\((data.list.firstIndex(of: model) ?? 0) + 1)")
+                                Text("*")
                                     .foregroundColor(.idxTextColor)
                                 Text(try! AttributedString(markdown: model.value))
                                     .foregroundColor(.textColorNormal)
@@ -213,8 +213,8 @@ struct HistoryListView: View , KeyboardReadable {
         }
         #if !MAC
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
-        #else
-        .searchable(text: $query)
+//        #else
+//        .searchable(text: $query, placement: .toolbar)
         #endif
         .alert(isPresented: $isAlert, content: {
             switch alertType {
