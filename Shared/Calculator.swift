@@ -151,7 +151,9 @@ class Calculator {
             }
             else if let r = (item as? Result)?.formattedString {
                 txt.append(" `=` ")
+                txt.append("**")
                 txt.append(r)
+                txt.append("**")
             }
             else if let op = item as? Operation {
                 switch op.type {
