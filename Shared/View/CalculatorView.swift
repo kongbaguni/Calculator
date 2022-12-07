@@ -355,11 +355,12 @@ struct CalculatorView: View {
             }
         }
         .onAppear {
+#if FULL || MAC
             let config = Realm.Configuration(
                 schemaVersion: 2)
             // Use this configuration when opening realms
             Realm.Configuration.defaultConfiguration = config
-
+#endif 
             
             NotificationCenter.default.addObserver(forName: .calculator_lastNumber, object: nil, queue: nil) {  noti in
                 displayText = Calculator.shared.displayAttributedString
