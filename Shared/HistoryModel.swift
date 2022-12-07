@@ -35,6 +35,7 @@ class HistoryModel : Object, ObjectKeyIdentifiable {
                 .replacingOccurrences(of: "`-`", with: "-")
                 .replacingOccurrences(of: "`+`", with: "+")
                 .replacingOccurrences(of: "`=`", with: "=")
+                .replacingOccurrences(of: "**", with: "")
             UIPasteboard.general.string = newStr
             return newStr
         }
