@@ -28,6 +28,16 @@ class HistoryModel : Object, ObjectKeyIdentifiable {
         var isMemoEmpty:Bool {
             memo.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
+        
+        public func copyToPastboard()->String {
+            let newStr = value.replacingOccurrences(of: "`✕`", with: "*")
+                .replacingOccurrences(of: "`÷`", with: "/")
+                .replacingOccurrences(of: "`-`", with: "-")
+                .replacingOccurrences(of: "`+`", with: "+")
+                .replacingOccurrences(of: "`=`", with: "=")
+            UIPasteboard.general.string = newStr
+            return newStr
+        }
     }
     
     var threadSafeModel:ThreadSafeModel {

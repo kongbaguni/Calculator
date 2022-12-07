@@ -30,6 +30,9 @@ struct HistoryListView: View , KeyboardReadable {
     let googleAd = GoogleAd()
     #endif
     
+    @State var isToast = false
+    @State var toastTitle:Text? = nil
+    @State var toastMessage = ""
     
     @State var isAlert = false
     @State var alertType = AlertType.deleteHistory
@@ -144,6 +147,15 @@ struct HistoryListView: View , KeyboardReadable {
                                     Image(systemName: "square.and.pencil")
                                 }
                                 
+                                Button {                                    
+                                    toastTitle = Text("copy to clipboard")
+                                    toastMessage = model.copyToPastboard()
+                                    isToast = true
+                                } label : {
+                                    Image(systemName: "doc.on.doc")
+                                }
+
+                                
                                 Button {
                                     editId = model.id
                                     isAlert = true
@@ -211,6 +223,7 @@ struct HistoryListView: View , KeyboardReadable {
                 }
             }
         }
+        .toast(title:toastTitle, message: toastMessage, isShowing: $isToast, duration: 4)
         #if !MAC
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
 //        #else

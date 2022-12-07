@@ -211,6 +211,14 @@ struct CalculatorView: View {
                             }
                             
                             Button {
+                                toastTitle = Text("copy to clipboard")
+                                toastMessage = historyModels[idx].copyToPastboard()
+                                isToast = true
+                            } label : {
+                                Image(systemName: "doc.on.doc")
+                            }
+                            
+                            Button {
                                 editNoteIdx = idx
                                 alertType = .deleteItem
                                 isAlert = true
