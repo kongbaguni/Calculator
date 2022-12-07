@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		009402E20A5133A0BE7EE80D /* Pods_calculator_clip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8DD374C616DC5C66FAA2B /* Pods_calculator_clip.framework */; };
-		1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0C270D79280079B080 /* TestApp.swift */; };
-		1B06FA1D270D792A0079B080 /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0C270D79280079B080 /* TestApp.swift */; };
+		1B06FA1C270D792A0079B080 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0C270D79280079B080 /* MainApp.swift */; };
+		1B06FA1D270D792A0079B080 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0C270D79280079B080 /* MainApp.swift */; };
 		1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0D270D79280079B080 /* ContentView.swift */; };
 		1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0D270D79280079B080 /* ContentView.swift */; };
 		1B06FA20270D792A0079B080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B06FA0E270D792A0079B080 /* Assets.xcassets */; };
@@ -96,7 +96,7 @@
 /* Begin PBXFileReference section */
 		022E86F576ED10ECD15A2A07 /* Pods-calculator (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator (iOS).release.xcconfig"; path = "Target Support Files/Pods-calculator (iOS)/Pods-calculator (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		1698CCE1984CD55F6DC382C4 /* Pods-calculator (macOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator (macOS).debug.xcconfig"; path = "Target Support Files/Pods-calculator (macOS)/Pods-calculator (macOS).debug.xcconfig"; sourceTree = "<group>"; };
-		1B06FA0C270D79280079B080 /* TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
+		1B06FA0C270D79280079B080 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		1B06FA0D270D79280079B080 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1B06FA0E270D792A0079B080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B06FA13270D792A0079B080 /* kongbaguniCaculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kongbaguniCaculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,7 +192,7 @@
 				1B29F78A273D08E7007BC9B2 /* Extensions */,
 				1B29F78F273D115D007BC9B2 /* Model */,
 				1B29F790273D116D007BC9B2 /* View */,
-				1B06FA0C270D79280079B080 /* TestApp.swift */,
+				1B06FA0C270D79280079B080 /* MainApp.swift */,
 				8D76A5CC28E576B00088E67F /* Toast.swift */,
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
 				8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */,
@@ -562,7 +562,7 @@
 				8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */,
 				1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */,
 				8D5C8386282B472200423C9F /* GoogleAd.swift in Sources */,
-				1B06FA1C270D792A0079B080 /* TestApp.swift in Sources */,
+				1B06FA1C270D792A0079B080 /* MainApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,7 +583,7 @@
 				1BAE669F273A4A5300C82269 /* Stack.swift in Sources */,
 				1B98CDF82710024400FC3E9E /* Calculator.swift in Sources */,
 				1B06FA1F270D792A0079B080 /* ContentView.swift in Sources */,
-				1B06FA1D270D792A0079B080 /* TestApp.swift in Sources */,
+				1B06FA1D270D792A0079B080 /* MainApp.swift in Sources */,
 				1BD60CF427294AB2002684D6 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -788,7 +788,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -831,7 +831,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -947,7 +947,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -987,7 +987,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
