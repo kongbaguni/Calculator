@@ -15,7 +15,14 @@ import RxSwift
 struct Item {
     let color:Color
     let value:AnyHashable
+    let imageName:String?
     let width:CGFloat
+    var image:Image? {
+        if let name = imageName {
+            return .init(systemName:name)
+        }
+        return nil
+    }
 }
 fileprivate let c1 = Color.btn1
 fileprivate let c2 = Color.btn2
@@ -23,13 +30,42 @@ fileprivate let c3 = Color.btn3
 fileprivate let c4 = Color.btn4
 
 
+
 fileprivate let list:[[Item]] = [
-    [.init(color: c4, value: "(", width:50), .init(color: c4, value: ")", width:50), .init(color: c4, value: "⌫", width: 110)],
-    [.init(color: c1, value: "clear", width:50), .init(color: c1, value: "+/-",width:50), .init(color: c1, value:"%",width:50), .init(color: c3, value: "÷",width:50)],
-    [.init(color: c2, value: 7, width:50), .init(color: c2, value: 8, width:50), .init(color: c2, value:9, width:50), .init(color: c3, value: "✕", width:50)],
-    [.init(color: c2, value: 4, width:50), .init(color: c2, value: 5, width:50), .init(color: c2, value:6, width:50), .init(color: c3, value: "-", width:50)],
-    [.init(color: c2, value: 1, width:50), .init(color: c2, value: 2, width:50), .init(color: c2, value:3, width:50), .init(color: c3, value: "+", width:50)],
-    [.init(color: c2, value: 0, width:110), .init(color: c2, value: ".",width:50), .init(color: c3, value: "=",width:50)],
+    [
+        .init(color: c4, value: "(", imageName: nil, width:50),
+        .init(color: c4, value: ")", imageName: nil, width:50),
+        .init(color: c4, value: "⌫", imageName: "delete.left", width: 110)
+    ],
+    [
+        .init(color: c1, value: "clear", imageName: nil, width:50),
+        .init(color: c1, value: "+/-", imageName: "plus.forwardslash.minus", width:50),
+        .init(color: c1, value: "%" , imageName: "percent", width:50),
+        .init(color: c3, value: "÷" , imageName: "divide", width:50)
+    ],
+    
+    [
+        .init(color: c2, value: 7, imageName: nil, width:50),
+        .init(color: c2, value: 8, imageName: nil, width:50),
+        .init(color: c2, value: 9, imageName: nil, width:50),
+        .init(color: c3, value: "✕", imageName: "multiply", width:50)
+    ],
+    [
+        .init(color: c2, value: 4, imageName: nil, width:50),
+        .init(color: c2, value: 5, imageName: nil, width:50),
+        .init(color: c2, value: 6, imageName: nil, width:50),
+        .init(color: c3, value: "-", imageName: "minus", width:50)
+    ],
+    [
+        .init(color: c2, value: 1, imageName: nil, width:50),
+        .init(color: c2, value: 2, imageName: nil, width:50),
+        .init(color: c2, value: 3, imageName: nil, width:50),
+        .init(color: c3, value: "+", imageName: "plus", width:50)
+    ],
+    [
+        .init(color: c2, value: 0, imageName: nil, width:110),
+        .init(color: c2, value: ".", imageName: nil, width:50),
+        .init(color: c3, value: "=", imageName: "equal",width:50)],
 ]
 
 fileprivate var editNoteIdx:Int?
@@ -314,7 +350,13 @@ struct CalculatorView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
                                     .fill(str == lastOp && ["÷","✕","-","+"].firstIndex(of: str) != nil ? Color.btnSelectedColor : color)
-                                if str == "clear" {
+                                if let img = item.image {
+                                    img
+                                        .foregroundColor(Color.btnTextColor)
+                                        .symbolRenderingMode(.hierarchical)
+                                    
+                                }
+                                else if str == "clear" {
                                     Text(try! AttributedString(markdown: "`\(clearText)`"))
                                         .foregroundColor(Color.btnTextColor)
                                         .padding(0.5)
