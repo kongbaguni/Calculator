@@ -35,10 +35,11 @@ fileprivate let list:[[Item]] = [
     [
         .init(color: c4, value: "(", imageName: nil, width:50),
         .init(color: c4, value: ")", imageName: nil, width:50),
-        .init(color: c4, value: "⌫", imageName: "delete.left", width: 110)
+        .init(color: c4, value: "clear", imageName: nil, width:50),
+        .init(color: c4, value: "⌫", imageName: "delete.left", width: 50)
     ],
     [
-        .init(color: c1, value: "clear", imageName: nil, width:50),
+        .init(color: c1, value: "root", imageName: "x.squareroot", width: 50),
         .init(color: c1, value: "+/-", imageName: "plus.forwardslash.minus", width:50),
         .init(color: c1, value: "%" , imageName: "percent", width:50),
         .init(color: c3, value: "÷" , imageName: "divide", width:50)
@@ -95,6 +96,10 @@ struct CalculatorView: View {
     #if FULL || MAC
     let disposeBag = DisposeBag()
     #endif
+    
+    var 단항연산가능:Bool {
+        Calculator.shared.items.last is Calculator.Number
+    }
     
     var AC가능:Bool {
         Calculator.shared.items.count > 0
@@ -337,6 +342,7 @@ struct CalculatorView: View {
                         : str == "clear" ? AC가능
                         : str == "⌫" ? DEL가능
                         : ["÷","✕","-","+"].firstIndex(of: str) != nil ? 사칙연산자추가가능
+                        : ["root","+/-","%"].firstIndex(of: str) != nil ? 단항연산가능
                         : true
                         Button {
                             if isEnable {

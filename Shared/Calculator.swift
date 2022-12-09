@@ -322,6 +322,14 @@ class Calculator {
                 }
 
                 items.append(Operation(rawValue: key))
+            case "ROOT":
+                if let num = items.last as? Number {
+                    let value = num.doubleVlaue
+                    let newValue = sqrt(value)
+                    let new = Number(strvalue: "\(newValue)")
+                    items.removeLast()
+                    items.append(new)
+                }
             case "⌫":
                 if items.last is Result {
                     items.removeLast()
