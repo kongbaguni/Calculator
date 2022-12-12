@@ -43,7 +43,6 @@
 		1BAE669F273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
 		1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE669D273A4A5300C82269 /* Stack.swift */; };
 		1BC668632721612200006C20 /* calculator_clipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC668622721612200006C20 /* calculator_clipApp.swift */; };
-		1BC668672721612300006C20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC668662721612300006C20 /* Assets.xcassets */; };
 		1BC6686A2721612300006C20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BC668692721612300006C20 /* Preview Assets.xcassets */; };
 		1BC6686F2721612300006C20 /* kongbaguniCaculatorClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 1BC668602721612200006C20 /* kongbaguniCaculatorClip.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1BD60CF327294AB2002684D6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD60CF227294AB2002684D6 /* Color.swift */; };
@@ -123,7 +122,6 @@
 		1BAE669D273A4A5300C82269 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		1BC668602721612200006C20 /* kongbaguniCaculatorClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kongbaguniCaculatorClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC668622721612200006C20 /* calculator_clipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculator_clipApp.swift; sourceTree = "<group>"; };
-		1BC668662721612300006C20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BC668692721612300006C20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1BC6686B2721612300006C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BC6686C2721612300006C20 /* calculator_clip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calculator_clip.entitlements; sourceTree = "<group>"; };
@@ -268,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				1BC668622721612200006C20 /* calculator_clipApp.swift */,
-				1BC668662721612300006C20 /* Assets.xcassets */,
 				1BC6686B2721612300006C20 /* Info.plist */,
 				1BC6686C2721612300006C20 /* calculator_clip.entitlements */,
 				1BC668682721612300006C20 /* Preview Content */,
@@ -449,7 +446,6 @@
 				1BC6686A2721612300006C20 /* Preview Assets.xcassets in Resources */,
 				1B39959A273E456F00EAADD8 /* InfoPlist.strings in Resources */,
 				C34428AB27314A2C003DCB1B /* Assets.xcassets in Resources */,
-				1BC668672721612300006C20 /* Assets.xcassets in Resources */,
 				1B39958F273E3C0000EAADD8 /* Launch Screen.storyboard in Resources */,
 				1B29F782273CC7CC007BC9B2 /* Localizable.strings in Resources */,
 				8D84E4552941655300BF9C6E /* GoogleService-Info.plist in Resources */,
@@ -828,7 +824,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.4;
+				MARKETING_VERSION = 1.3.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -871,7 +867,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.4;
+				MARKETING_VERSION = 1.3.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -987,7 +983,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.4;
+				MARKETING_VERSION = 1.3.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -1027,7 +1023,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.4;
+				MARKETING_VERSION = 1.3.5;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
