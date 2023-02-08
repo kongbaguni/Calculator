@@ -26,9 +26,7 @@ struct HistoryListView: View , KeyboardReadable {
         case adWatchTime
         case deleteItem
     }
-    #if !MAC
     let googleAd = GoogleAd()
-    #endif
     
     @State var isToast = false
     @State var toastTitle:Text? = nil
@@ -54,7 +52,6 @@ struct HistoryListView: View , KeyboardReadable {
     
     let disposeBag = DisposeBag()
     var watchAdBtn : some View {
-#if !MAC
         Button {
             googleAd.showAd { isSucess, time in
                 if isSucess == false {
@@ -76,9 +73,6 @@ struct HistoryListView: View , KeyboardReadable {
             .padding(5)
             
         }
-#else
-        EmptyView()
-#endif
     }
     
     var deleteHistoryBtn : some View {
@@ -102,13 +96,10 @@ struct HistoryListView: View , KeyboardReadable {
     
     var bannerView : some View {
         HStack {
-#if !MAC
-            
             Spacer()
             BannerAdView(sizeType: .GADAdSizeMediumRectangle, padding: .zero)
                 .padding(10)
             Spacer()
-#endif
         }
     }
     
@@ -224,11 +215,9 @@ struct HistoryListView: View , KeyboardReadable {
             }
         }
         .toast(title:toastTitle, message: toastMessage, isShowing: $isToast, duration: 4)
-        #if !MAC
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
 //        #else
 //        .searchable(text: $query, placement: .toolbar)
-        #endif
         .alert(isPresented: $isAlert, content: {
             switch alertType {
             case .deleteHistory:
@@ -270,16 +259,12 @@ struct HistoryListView: View , KeyboardReadable {
                 EditMemoView(id:id)
             }
         })
-        #if !MAC
         .onReceive(keyboardPublisher) { newIsKeyboardVisible in
             print("Is keyboard visible? ", newIsKeyboardVisible)
             isKeyboardVisible = newIsKeyboardVisible
         }
-        #endif
         .onAppear {
-            #if !MAC
             isLandscape = UIDevice.current.orientation.isLandscape
-            #endif
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in
                     switch event {

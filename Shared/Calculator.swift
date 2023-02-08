@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-#if FULL || MAC
+#if FULL
 import RealmSwift
 #endif
 extension Notification.Name {
@@ -574,7 +574,7 @@ class Calculator {
         save()
     }
     fileprivate func save() {
-#if FULL || MAC
+#if FULL 
         let realm = try! Realm()
         try! realm.write {
             realm.create(HistoryModel.self, value: ["value":displayMarkDownString], update: .all)

@@ -6,16 +6,7 @@
 //
 
 import SwiftUI
-#if !MAC
 import GoogleMobileAds
-#endif
-#if MAC
-struct BannerAdView: View {
-    var body: some View {
-        EmptyView()
-    }
-}
-#else
 
 struct BannerAdView: View {
     public enum SizeType {
@@ -107,4 +98,3 @@ struct BannerAdView: View {
         }
     }
 }
-#endif

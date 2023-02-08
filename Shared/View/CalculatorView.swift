@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-#if FULL || MAC
+#if FULL
 import RealmSwift
 import RxRealm
 import RxSwift
@@ -81,7 +81,7 @@ struct CalculatorView: View {
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
     @State var history:[String] = []
-    #if FULL || MAC
+    #if FULL
     @State var historyModels:[HistoryModel.ThreadSafeModel] = []
     
     @State var isShowEditNote = false
@@ -93,7 +93,7 @@ struct CalculatorView: View {
     @State var alertType:AlertType = .onlyMessage
     @State var alertMessage = ""
     @State var alertTitle = ""
-    #if FULL || MAC
+    #if FULL
     let disposeBag = DisposeBag()
     #endif
     
@@ -174,7 +174,7 @@ struct CalculatorView: View {
         return "AC"
     }
     var bannerAdView : some View {
-#if !MAC && FULL
+#if FULL
         HStack {
             Spacer()
             BannerAdView(sizeType: .GADAdSizeLargeBanner, padding: .zero)
@@ -233,7 +233,7 @@ struct CalculatorView: View {
                             
                             Spacer()
                         }.fixedSize(horizontal: false, vertical: true)
-#if FULL || MAC
+#if FULL
                         HStack {
                             Text("memo :")
                                 .foregroundColor(.idxTextColor)
@@ -304,9 +304,8 @@ struct CalculatorView: View {
                     .multilineTextAlignment(.trailing)
                     .padding(20)
                     .fixedSize(horizontal: false, vertical: true)
-#if MAC
-                    .background(KeyEventHandling())
-#endif
+//                    .background(KeyEventHandling())
+//                TODO : iOS 에서 키 이벤트 핸들링 방법 찾아볼것
             }
         }
         .frame(height: 100)
@@ -315,14 +314,12 @@ struct CalculatorView: View {
             Calculator.shared.delLastNumber()
         }
         .onLongPressGesture {
-            #if !MAC
             let txt = Calculator.shared.normalStringForClipboardShare
             UIPasteboard.general.string = txt
             isToast = true
             toastTitle = Text("copy to clipboard")
             toastMessage = txt            
             print("longPress")
-            #endif
         }
 
     }
@@ -411,7 +408,7 @@ struct CalculatorView: View {
             }
         }
         .onAppear {
-#if FULL || MAC
+#if FULL
             let config = Realm.Configuration(
                 schemaVersion: 2)
             // Use this configuration when opening realms
@@ -429,7 +426,7 @@ struct CalculatorView: View {
                     lastOp = op.type.rawValue
                 }
             }
-            #if FULL || MAC
+            #if FULL
             Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
                 .subscribe { event in
                     switch event {
@@ -466,7 +463,7 @@ struct CalculatorView: View {
             #endif
             
         }
-#if FULL || MAC
+#if FULL
         .sheet(isPresented: $isShowEditNote, content: {
             let model = historyModels[editNoteIdx!]
             EditMemoView(id: model.id)
@@ -479,7 +476,7 @@ struct CalculatorView: View {
                                  message: Text("history_delete_alert_message"),
                                  primaryButton: .default(Text("history_delete_alert_confirm"),
                                                          action: {
-#if FULL || MAC
+#if FULL 
                         if let i = editNoteIdx {
                             editNoteIdx = nil
                             let id = historyModels[i].id

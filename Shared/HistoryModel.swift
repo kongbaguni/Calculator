@@ -38,8 +38,6 @@ class HistoryModel : Object, ObjectKeyIdentifiable {
                 .replacingOccurrences(of: "**", with: "")
             #if FULL
             UIPasteboard.general.string = newStr
-            #elseif MAC
-            NSPasteboard.general.setString(newStr, forType: .string)
             #endif
             return newStr
         }
