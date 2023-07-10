@@ -575,7 +575,7 @@ class Calculator {
     }
     fileprivate func save() {
 #if FULL 
-        let realm = try! Realm()
+        let realm = Realm.shared
         try! realm.write {
             realm.create(HistoryModel.self, value: ["value":displayMarkDownString], update: .all)
         }

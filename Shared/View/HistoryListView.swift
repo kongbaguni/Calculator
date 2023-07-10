@@ -225,7 +225,7 @@ struct HistoryListView: View , KeyboardReadable {
                              message: Text("history_all_delete_alert_message"),
                              primaryButton: .default(Text("history_delete_alert_confirm"),
                                                      action: {
-                    let realm = try! Realm()
+                    let realm = Realm.shared
                     try! realm.write {
                         realm.deleteAll()
                     }
@@ -242,7 +242,7 @@ struct HistoryListView: View , KeyboardReadable {
                                                          action: {
                         if let id = editId {
                             editId = nil
-                            let realm = try! Realm()
+                            let realm = Realm.shared
                             if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
                                 try! realm.write {
                                     realm.delete(target)
@@ -265,7 +265,7 @@ struct HistoryListView: View , KeyboardReadable {
         }
         .onAppear {
             isLandscape = UIDevice.current.orientation.isLandscape
-            Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
+            Observable.collection(from: Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
                 .subscribe { event in
                     switch event {
                     case .next(let dbList):

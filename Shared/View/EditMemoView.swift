@@ -13,7 +13,7 @@ struct EditMemoView: View {
 //    let model:HistoryModel
     let id:ObjectId
     var model:HistoryModel? {
-        let realm = try! Realm()
+        let realm = Realm.shared
         return realm.object(ofType: HistoryModel.self, forPrimaryKey: id)
     }
     
@@ -37,7 +37,7 @@ struct EditMemoView: View {
                     .padding(.leading,10)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button {
-                    let realm = try! Realm()
+                    let realm = Realm.shared
                     realm.beginWrite()
                     model?.memo = text
                     try! realm.commitWrite()

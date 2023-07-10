@@ -7,6 +7,7 @@
 import SwiftUI
 import GoogleMobileAds
 import RealmSwift
+import WidgetKit
 struct ContentView: View {
     init() {
 //        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "22c15f150946f2ec1887fe3673eff404","028bacd3552b31072f19a617f0c8aef3" ]
@@ -21,6 +22,12 @@ struct ContentView: View {
  
         UITabBar.appearance().standardAppearance = transparentAppearence
         UITabBar.appearance().scrollEdgeAppearance = transparentAppearence
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { noti in
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+
+        
     }
     @State var isShowHistory = false
     var body: some View {

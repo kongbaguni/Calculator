@@ -427,7 +427,7 @@ struct CalculatorView: View {
                 }
             }
             #if FULL
-            Observable.collection(from: try! Realm().objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
+            Observable.collection(from: Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
                 .subscribe { event in
                     switch event {
                     case .next(let list):
@@ -480,7 +480,7 @@ struct CalculatorView: View {
                         if let i = editNoteIdx {
                             editNoteIdx = nil
                             let id = historyModels[i].id
-                            let realm = try! Realm()
+                            let realm = Realm.shared
                             if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
                                 try! realm.write {
                                     realm.delete(target)
