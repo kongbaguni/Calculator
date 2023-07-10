@@ -68,14 +68,14 @@ struct widgetEntryView : View {
                         Group {
                             HStack {
                                 Text(try! AttributedString(markdown: history.value))
-                                    .foregroundColor(Color.textColorWeak)
+                                    .foregroundColor(Color.textColorNormal)
                                 Spacer()
                             }
                             if(history.memo.isEmpty == false) {
                                 HStack {
                                     Text(history.memo)
                                         .font(.system(size: 10))
-                                        .foregroundColor(Color.textColorNormal)
+                                        .foregroundColor(Color.textColorWeak)
                                     Spacer()
                                 }
                             }
