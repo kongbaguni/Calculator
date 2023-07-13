@@ -76,7 +76,7 @@ struct CalculatorView: View {
         case deleteItem
         case onlyMessage
     }
-    
+    let isAppClip:Bool
     @State var count = 0
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
@@ -291,6 +291,15 @@ struct CalculatorView: View {
             } else {
                 historylistViewlist
             }
+            if isAppClip {
+                Button {
+                    let url = URL(string:"https://apps.apple.com/us/app/kong-calculator/id1594969449")!
+                    UIApplication.shared.open(url)
+                } label: {
+                    Text("View in App Store")
+                }
+
+            }
         }
     }
     
@@ -503,6 +512,6 @@ struct CalculatorView: View {
 
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorView()
+        CalculatorView(isAppClip:false)
     }
 }

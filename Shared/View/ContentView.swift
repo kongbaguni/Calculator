@@ -32,7 +32,7 @@ struct ContentView: View {
     @State var isShowHistory = false
     var body: some View {
         NavigationView {
-            CalculatorView()
+            CalculatorView(isAppClip:false)
                 .tabItem {
                     Image(systemName: "square.and.pencil")
                     Text("app_title")

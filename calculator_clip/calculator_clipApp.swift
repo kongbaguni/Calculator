@@ -11,7 +11,7 @@ import SwiftUI
 struct calculator_clipApp: App {
     var body: some Scene {
         WindowGroup {
-            CalculatorView()
+            CalculatorView(isAppClip:true)
         }
     }
 }
