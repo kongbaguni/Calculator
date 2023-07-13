@@ -159,6 +159,7 @@
 		8D5C8385282B472200423C9F /* GoogleAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAd.swift; sourceTree = "<group>"; };
 		8D5C8388282B94B500423C9F /* calculator--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--iOS--Info.plist"; sourceTree = "<group>"; };
 		8D5C8389282BA17800423C9F /* BannerAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
+		8D6202462A5FD31E00E737B0 /* calculator_clipRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calculator_clipRelease.entitlements; sourceTree = "<group>"; };
 		8D76A5CC28E576B00088E67F /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8D76A5D028E595F60088E67F /* calculator--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--macOS--Info.plist"; sourceTree = "<group>"; };
 		8D84E4522941655200BF9C6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -307,6 +308,7 @@
 		1BC668612721612200006C20 /* calculator_clip */ = {
 			isa = PBXGroup;
 			children = (
+				8D6202462A5FD31E00E737B0 /* calculator_clipRelease.entitlements */,
 				1BC668622721612200006C20 /* calculator_clipApp.swift */,
 				1BC6686B2721612300006C20 /* Info.plist */,
 				1BC6686C2721612300006C20 /* calculator_clip.entitlements */,
@@ -932,7 +934,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clip.entitlements;
+				CODE_SIGN_ENTITLEMENTS = calculator_clip/calculator_clipRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
