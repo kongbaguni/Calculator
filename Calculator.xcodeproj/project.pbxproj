@@ -65,6 +65,7 @@
 		8D76A5CF28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		8D84E4532941655300BF9C6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D84E4522941655200BF9C6E /* GoogleService-Info.plist */; };
 		8D84E4552941655300BF9C6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D84E4522941655200BF9C6E /* GoogleService-Info.plist */; };
+		8DC4B34B2A6529F000E4A561 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 8DC4B34A2A6529F000E4A561 /* ActivityIndicatorView */; };
 		8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D582936DD5B008C29FA /* EditMemoView.swift */; };
 		8DEA3D5C2939845B008C29FA /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */; };
 		8DEA3D5E2939845B008C29FA /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */; };
@@ -173,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BFAC8B7299235BD00F056DC /* RxCocoa in Frameworks */,
+				8DC4B34B2A6529F000E4A561 /* ActivityIndicatorView in Frameworks */,
 				1BE71E172991B2A5007F07F1 /* FirebaseAnalyticsSwift in Frameworks */,
 				1BFAC8BC299235FA00F056DC /* RxRealm in Frameworks */,
 				1BE71E012991AE76007F07F1 /* GoogleMobileAds in Frameworks */,
@@ -367,6 +369,7 @@
 				1BFAC8B6299235BD00F056DC /* RxCocoa */,
 				1BFAC8B8299235BD00F056DC /* RxSwift */,
 				1BFAC8BB299235FA00F056DC /* RxRealm */,
+				8DC4B34A2A6529F000E4A561 /* ActivityIndicatorView */,
 			);
 			productName = "Test (iOS)";
 			productReference = 1B06FA13270D792A0079B080 /* kongbaguniCaculator.app */;
@@ -445,6 +448,7 @@
 				1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				1BFAC8B5299235BD00F056DC /* XCRemoteSwiftPackageReference "RxSwift" */,
 				1BFAC8BA299235FA00F056DC /* XCRemoteSwiftPackageReference "RxRealm" */,
+				8DC4B3492A6529F000E4A561 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			productRefGroup = 1B06FA14270D792A0079B080 /* Products */;
 			projectDirPath = "";
@@ -763,7 +767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -807,7 +811,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -843,7 +847,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -875,7 +879,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -914,7 +918,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -956,7 +960,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -1046,6 +1050,14 @@
 				kind = branch;
 			};
 		};
+		8DC4B3492A6529F000E4A561 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1093,6 +1105,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BFAC8BA299235FA00F056DC /* XCRemoteSwiftPackageReference "RxRealm" */;
 			productName = RxRealm;
+		};
+		8DC4B34A2A6529F000E4A561 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DC4B3492A6529F000E4A561 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
