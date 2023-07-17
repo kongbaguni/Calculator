@@ -49,7 +49,7 @@ struct BannerAdView: View {
         didSet {
             if bannerView != nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(7)) {
-                    loading = false
+                    isLoading = false
                 }
             }
         }
