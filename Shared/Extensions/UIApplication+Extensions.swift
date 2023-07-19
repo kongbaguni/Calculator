@@ -23,3 +23,19 @@ extension UIApplication {
     }
     
 }
+extension UIApplication {
+    var rootViewController:UIViewController? {
+        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        return scene?.windows.last?.rootViewController
+    }
+    
+    var lastViewController:UIViewController? {
+        var vc = rootViewController
+        if let ovc = vc {
+            while ovc.presentedViewController != nil {
+                vc = ovc.presentedViewController
+            }
+        }
+        return vc
+    }
+}
