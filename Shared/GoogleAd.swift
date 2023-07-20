@@ -99,7 +99,7 @@ struct GoogleAdBannerView: UIViewRepresentable {
     let bannerView:GADBannerView
     func makeUIView(context: Context) -> GADBannerView {
         bannerView.adUnitID = bannerGaId
-        bannerView.rootViewController = UIApplication.shared.keyWindow?.rootViewController        
+        bannerView.rootViewController = UIApplication.shared.lastViewController
         return bannerView
     }
   

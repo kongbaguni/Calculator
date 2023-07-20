@@ -45,36 +45,32 @@ struct BannerAdView: View {
         }
     }
     
-    @State var bannerView:GADBannerView? = nil {
-        didSet {
-            if bannerView != nil {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(7)) {
-                    isLoading = false
-                }
-            }
-        }
-    }
+    let bannerView:GADBannerView
+    
     @State var isLoading = true
     let gad = GoogleAd()
     var body: some View {
         ZStack {
             ActivityIndicatorView(isVisible: $isLoading, type: .default()).frame(width:40, height:40)
-            if let view = bannerView {
-                GoogleAdBannerView(bannerView: view)
-                    .frame(width: bannerSize.width, height: bannerSize.height, alignment: .center)
-                    .padding(.top,padding.top)
-                    .padding(.bottom,padding.bottom)
-                    .padding(.leading, padding.left)
-                    .padding(.trailing, padding.right)
+            GoogleAdBannerView(bannerView: bannerView)
+                .frame(width: bannerSize.width, height: bannerSize.height, alignment: .center)
+                .padding(.top,padding.top)
+                .padding(.bottom,padding.bottom)
+                .padding(.leading, padding.left)
+                .padding(.trailing, padding.right)
+        }
+        .onAppear {
+            gad.requestTrackingAuthorization {
+                
             }
         }
         
     }
     
-    init(sizeType: SizeType, padding: UIEdgeInsets) {
+    init(sizeType: SizeType, padding: UIEdgeInsets = .zero) {
         self.sizeType = sizeType
         self.padding = padding
-        var bView:GADBannerView? {
+        var bView:GADBannerView {
             switch sizeType {
             case .GADAdSizeBanner:
                 return GADBannerView(adSize : GADAdSizeBanner)

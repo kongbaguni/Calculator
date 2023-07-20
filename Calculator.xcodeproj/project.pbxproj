@@ -28,6 +28,7 @@
 		1B399593273E3DC800EAADD8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B399590273E3DC800EAADD8 /* String+Extensions.swift */; };
 		1B399598273E456F00EAADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B39959C273E456F00EAADD8 /* InfoPlist.strings */; };
 		1B39959A273E456F00EAADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B39959C273E456F00EAADD8 /* InfoPlist.strings */; };
+		1B692B042A68B6780007F5FB /* UserMessagingPlatformHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B692B032A68B6780007F5FB /* UserMessagingPlatformHelper.swift */; };
 		1B8FDB352A4E650C007BE5E5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8FDB342A4E650C007BE5E5 /* WidgetKit.framework */; };
 		1B8FDB372A4E650C007BE5E5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8FDB362A4E650C007BE5E5 /* SwiftUI.framework */; };
 		1B8FDB3A2A4E650C007BE5E5 /* widgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FDB392A4E650C007BE5E5 /* widgetBundle.swift */; };
@@ -133,6 +134,7 @@
 		1B399590273E3DC800EAADD8 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1B39959B273E456F00EAADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B39959D273E457100EAADD8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1B692B032A68B6780007F5FB /* UserMessagingPlatformHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessagingPlatformHelper.swift; sourceTree = "<group>"; };
 		1B8FDB332A4E650C007BE5E5 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B8FDB342A4E650C007BE5E5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1B8FDB362A4E650C007BE5E5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -232,6 +234,7 @@
 				1B29F78F273D115D007BC9B2 /* Model */,
 				1B29F790273D116D007BC9B2 /* View */,
 				1B06FA0C270D79280079B080 /* MainApp.swift */,
+				1B692B032A68B6780007F5FB /* UserMessagingPlatformHelper.swift */,
 				8D76A5CC28E576B00088E67F /* Toast.swift */,
 				1B98CDF32710020F00FC3E9E /* KeyEventHandling.swift */,
 				8DEA3D5B2939845B008C29FA /* KeyboardReadable.swift */,
@@ -540,6 +543,7 @@
 				8DEA3D5C2939845B008C29FA /* KeyboardReadable.swift in Sources */,
 				8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
 				1B8FDB442A4E650D007BE5E5 /* widget.intentdefinition in Sources */,
+				1B692B042A68B6780007F5FB /* UserMessagingPlatformHelper.swift in Sources */,
 				1BAE669E273A4A5300C82269 /* Stack.swift in Sources */,
 				8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */,
 				1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */,
