@@ -22,8 +22,6 @@ extension UIApplication {
             .first(where: \.isKeyWindow)
     }
     
-}
-extension UIApplication {
     var rootViewController:UIViewController? {
         let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         return scene?.windows.last?.rootViewController
