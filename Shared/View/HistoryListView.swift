@@ -87,6 +87,7 @@ struct HistoryListView: View , KeyboardReadable {
                     }
                 }
             } else {
+                adPoint -= 1
                 alertType = .deleteHistory
                 isAlert = true
             }
