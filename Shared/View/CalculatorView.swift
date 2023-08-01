@@ -210,7 +210,7 @@ struct CalculatorView: View {
                             
                             Button {
                                 if let txt = texts.last {
-                                    let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "")
+                                    let nt = txt.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "*", with: "")
                                     
                                     let number = Calculator.Number(strvalue: nt)
                                     Calculator.shared.items.removeAll()
