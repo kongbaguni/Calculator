@@ -11,6 +11,9 @@ import RealmSwift
 struct EditMemoView: View {
     @Environment(\.presentationMode) var presentationMode
 //    let model:HistoryModel
+    @AppStorage("adpoint") var adPoint = 0
+
+    let googleAd = GoogleAd()
     let id:ObjectId
     var model:HistoryModel? {
         let realm = Realm.shared
@@ -37,11 +40,24 @@ struct EditMemoView: View {
                     .padding(.leading,10)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button {
-                    let realm = Realm.shared
-                    realm.beginWrite()
-                    model?.memo = text
-                    try! realm.commitWrite()
-                    presentationMode.wrappedValue.dismiss()
+                    func save() {
+                        let realm = Realm.shared
+                        realm.beginWrite()
+                        model?.memo = text
+                        try! realm.commitWrite()
+                        presentationMode.wrappedValue.dismiss()
+                        adPoint -= 1
+                    }
+                    if adPoint > 0 {
+                        save()
+                    } else {
+                        googleAd.showAd { isSucess, time in
+                            if isSucess {
+                                adPoint += 5
+                            }
+                            save()
+                        }
+                    }
                 } label: {
                     Text("confirm")
                 }

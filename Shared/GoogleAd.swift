@@ -54,16 +54,18 @@ class GoogleAd : NSObject {
             self?.requestAd = false
             if isSucess == false {
                 DispatchQueue.main.async {
-                    complete(true,nil)
+                    complete(false,nil)
                 }
                 return
             }
             UserDefaults.standard.lastAdWatchTime = Date()
                         
             if let vc = UIApplication.shared.keyWindow?.rootViewController {
-                self?.interstitial?.present(fromRootViewController: vc, userDidEarnRewardHandler: {
-                    
-                })
+                DispatchQueue.main.async {
+                    self?.interstitial?.present(fromRootViewController: vc, userDidEarnRewardHandler: {
+                        
+                    })
+                }
             }
         }
     }
@@ -74,7 +76,7 @@ extension GoogleAd : GADFullScreenContentDelegate {
         print("google ad \(#function)")
         print(error.localizedDescription)
         DispatchQueue.main.async {
-            self.callback(true, nil)
+            self.callback(false, nil)
         }
     }
     func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {

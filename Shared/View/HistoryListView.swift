@@ -54,10 +54,12 @@ struct HistoryListView: View , KeyboardReadable {
     var watchAdBtn : some View {
         Button {
             googleAd.showAd { isSucess, time in
-                if isSucess == false {
+                if isSucess {
+                    adPoint += 5
+                }
+                else {
                     alertType = .adWatchTime
                     isAlert = !isSucess
-                    adPoint += 5
                 }
             }
         } label : {
@@ -70,6 +72,8 @@ struct HistoryListView: View , KeyboardReadable {
                 Text("watch AD")
                     .font(.headline)
                     .foregroundColor(Color.btnTextColor)
+                
+                Text("Ad Point : \(adPoint)")
             }
             .padding(5)
             
@@ -78,19 +82,8 @@ struct HistoryListView: View , KeyboardReadable {
     
     var deleteHistoryBtn : some View {
         Button {
-            if adPoint <= 0 {
-                googleAd.showAd { isSucess, time in
-                    if isSucess {
-                        adPoint += 5
-                        alertType = .deleteHistory
-                        isAlert = true
-                    }
-                }
-            } else {
-                adPoint -= 1
-                alertType = .deleteHistory
-                isAlert = true
-            }
+            alertType = .deleteHistory
+            isAlert = true
         } label: {
             HStack {
                 Image(systemName:"trash.circle")
@@ -237,9 +230,23 @@ struct HistoryListView: View , KeyboardReadable {
                              message: Text("history_all_delete_alert_message"),
                              primaryButton: .default(Text("history_delete_alert_confirm"),
                                                      action: {
-                    let realm = Realm.shared
-                    try! realm.write {
-                        realm.deleteAll()
+                    func deleteAll() {
+                        let realm = Realm.shared
+                        try! realm.write {
+                            realm.deleteAll()
+                        }
+                        adPoint -= 1
+                    }
+                    
+                    if adPoint > 0 {
+                        deleteAll()
+                    } else {
+                        googleAd.showAd { isSucess, time in
+                            if isSucess {
+                                adPoint += 5
+                            }
+                            deleteAll()
+                        }
                     }
                 }),
                              secondaryButton: .cancel())
@@ -252,15 +259,30 @@ struct HistoryListView: View , KeyboardReadable {
                                  message: Text("history_delete_alert_message"),
                                  primaryButton: .default(Text("history_delete_alert_confirm"),
                                                          action: {
-                        if let id = editId {
-                            editId = nil
-                            let realm = Realm.shared
-                            if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
-                                try! realm.write {
-                                    realm.delete(target)
+                        func deleteItem() {
+                            if let id = editId {
+                                editId = nil
+                                let realm = Realm.shared
+                                if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
+                                    try! realm.write {
+                                        realm.delete(target)
+                                    }
                                 }
+                                adPoint -= 1
                             }
                         }
+                        
+                        if adPoint > 0 {
+                            deleteItem()
+                        } else {
+                            googleAd.showAd { isSucess, _ in
+                                if isSucess {
+                                    adPoint += 5
+                                }
+                                deleteItem()
+                            }
+                        }
+                        
                     }),
                                  secondaryButton: .cancel())
 

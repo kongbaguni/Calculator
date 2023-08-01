@@ -251,28 +251,9 @@ struct CalculatorView: View {
                             }
                             
                             Button {
-                                #if FUll
-                                if adPoint <= 0 {
-                                    ad.showAd { isSucess, interval in
-                                        if isSucess {
-                                            adPoint += 5
-                                            editNoteIdx = idx
-                                            alertType = .deleteItem
-                                            isAlert = true
-                                        }
-                                    }
-                                }
-                                else {
-                                    adPoint -= 1
-                                    editNoteIdx = idx
-                                    alertType = .deleteItem
-                                    isAlert = true
-                                }
-                                #else
                                 editNoteIdx = idx
                                 alertType = .deleteItem
                                 isAlert = true
-                                #endif
                             } label : {
                                 Image(systemName: "trash")
                             }
@@ -373,7 +354,26 @@ struct CalculatorView: View {
                                     if str == "clear" {
                                         Calculator.shared.keyInput(key: clearText)
                                     } else {
+                                        #if FULL
+                                        if str == "=" {
+                                            if adPoint > 0 {
+                                                Calculator.shared.keyInput(key: str)
+                                            }
+                                            else {
+                                                ad.showAd { isSucess, interval in
+                                                    if isSucess {
+                                                        adPoint += 5
+                                                    }
+                                                    Calculator.shared.keyInput(key: str)
+                                                }
+                                            }
+                                            
+                                        } else {
+                                            Calculator.shared.keyInput(key: str)
+                                        }
+                                        #else
                                         Calculator.shared.keyInput(key: str)
+                                        #endif
                                     }
                                 }
                             } label: {
@@ -504,15 +504,28 @@ struct CalculatorView: View {
                                  message: Text("history_delete_alert_message"),
                                  primaryButton: .default(Text("history_delete_alert_confirm"),
                                                          action: {
-#if FULL 
-                        if let i = editNoteIdx {
-                            editNoteIdx = nil
-                            let id = historyModels[i].id
-                            let realm = Realm.shared
-                            if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
-                                try! realm.write {
-                                    realm.delete(target)
+#if FULL
+                        func deleteItem() {
+                            if let i = editNoteIdx {
+                                editNoteIdx = nil
+                                let id = historyModels[i].id
+                                let realm = Realm.shared
+                                if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
+                                    try! realm.write {
+                                        realm.delete(target)
+                                    }
                                 }
+                                adPoint -= 1
+                            }
+                        }
+                        if adPoint > 0 {
+                            deleteItem()
+                        } else {
+                            ad.showAd { isSucess, time in
+                                if(isSucess) {
+                                    adPoint += 5
+                                }
+                                deleteItem()
                             }
                         }
 #endif
