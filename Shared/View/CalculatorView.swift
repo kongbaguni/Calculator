@@ -324,7 +324,7 @@ struct CalculatorView: View {
 
     }
     
-    var buttons : some View {
+    func makeButtons(height:CGFloat)-> some View {
         HStack {
             #if FULL
             ScrollView {
@@ -365,7 +365,7 @@ struct CalculatorView: View {
                                                     if isSucess {
                                                         adPoint += 4
                                                     }
-                                                    Calculator.shared.keyInput(key: str)                                                    
+                                                    Calculator.shared.keyInput(key: str)
                                                 }
                                             }
                                             
@@ -397,7 +397,7 @@ struct CalculatorView: View {
                                             .padding(0.5)
                                     }
                                 }
-                                .frame(width: width, height: 50, alignment: .center)
+                                .frame(width: width, height: (height / list.count) - 10 , alignment: .center)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.btnTextColor, lineWidth: 1)
@@ -410,7 +410,7 @@ struct CalculatorView: View {
                     }
                 }
             }
-        }.frame(height:360)
+        }.frame(height:height)
     }
     var body: some View {
         GeometryReader { geomentry in
@@ -419,7 +419,7 @@ struct CalculatorView: View {
                     numberDisplayView
                     historylistView
                     Spacer().frame(width: 300, height: 20, alignment: .center)
-                    buttons
+                    makeButtons(height:360)
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                 }
             } else {
@@ -430,7 +430,7 @@ struct CalculatorView: View {
                     }
                     VStack {
                         Spacer()
-                        buttons
+                        makeButtons(height:geomentry.size.height)
                         Spacer()
                     }.frame(width:300)
                 }
