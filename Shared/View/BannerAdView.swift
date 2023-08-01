@@ -59,6 +59,8 @@ struct BannerAdView: View {
                 .padding(.leading, padding.left)
                 .padding(.trailing, padding.right)
         }
+        .border(.primary, width:1)
+        .shadow(radius:10,x:5,y:5)
         .onAppear {
             gad.requestTrackingAuthorization {
                 

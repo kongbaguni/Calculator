@@ -176,18 +176,7 @@ struct CalculatorView: View {
         }
         return "AC"
     }
-    var bannerAdView : some View {
-#if FULL
-        HStack {
-            Spacer()
-            BannerAdView(sizeType: .GADAdSizeLargeBanner, padding: .zero)
-                .padding(10)
-            Spacer()
-        }
-#else
-        EmptyView()
-#endif
-    }
+   
 
     var emptyHistoryView : some View {
         ScrollView {
@@ -195,7 +184,6 @@ struct CalculatorView: View {
                 .font(.system(size: 30, weight: .heavy))
                 .foregroundColor(Color.btnSelectedColor)
                 .padding(50)
-            bannerAdView
         }
     }
     
@@ -299,7 +287,7 @@ struct CalculatorView: View {
                 }
 
             }
-            bannerAdView
+            
         }
         .background(Color.bg3)
         .listStyle(SidebarListStyle())
@@ -360,7 +348,9 @@ struct CalculatorView: View {
             #if FULL
             ScrollView {
                 BannerAdView(sizeType: .GADAdSizeSkyscraper, padding: .zero)
-            }.border(.primary, width:1)
+            }
+            .border(.primary, width:2)
+            .shadow(radius:10,x:5,y:5)
             #endif
             VStack {
                 ForEach(0..<list.count, id:\.self) { i in
