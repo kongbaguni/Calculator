@@ -397,7 +397,7 @@ struct CalculatorView: View {
                                             .padding(0.5)
                                     }
                                 }
-                                .frame(width: width, height: (height / list.count) - 10 , alignment: .center)
+                                .frame(width: width, height: (height / CGFloat(list.count)) - 10 , alignment: .center)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.btnTextColor, lineWidth: 1)
