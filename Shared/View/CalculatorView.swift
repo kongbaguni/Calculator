@@ -419,7 +419,7 @@ struct CalculatorView: View {
                     numberDisplayView
                     historylistView
                     Spacer().frame(width: 300, height: 20, alignment: .center)
-                    makeButtons(height:360)
+                    makeButtons(height: 360)
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                 }
             } else {
@@ -430,9 +430,10 @@ struct CalculatorView: View {
                     }
                     VStack {
                         Spacer()
-                        makeButtons(height:geomentry.size.height)
+                        makeButtons(height: geomentry.size.height)
+                            
                         Spacer()
-                    }.frame(width:300)
+                    }
                 }
             }
         }
