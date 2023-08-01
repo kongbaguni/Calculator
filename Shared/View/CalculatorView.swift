@@ -77,13 +77,14 @@ struct CalculatorView: View {
         case onlyMessage
     }
     let isAppClip:Bool
-    let ad = GoogleAd()
+    
     @AppStorage("adpoint") var adPoint = 0
     @State var count = 0
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
     @State var history:[String] = []
     #if FULL
+    let ad = GoogleAd()
     @State var historyModels:[HistoryModel.ThreadSafeModel] = []
     
     @State var isShowEditNote = false
@@ -262,6 +263,7 @@ struct CalculatorView: View {
                             }
                             
                             Button {
+                                #if FUll
                                 if adPoint <= 0 {
                                     ad.showAd { isSucess, interval in
                                         if isSucess {
@@ -271,12 +273,18 @@ struct CalculatorView: View {
                                             isAlert = true
                                         }
                                     }
-                                } else {
+                                }
+                                else {
                                     adPoint -= 1
                                     editNoteIdx = idx
                                     alertType = .deleteItem
                                     isAlert = true
                                 }
+                                #else
+                                editNoteIdx = idx
+                                alertType = .deleteItem
+                                isAlert = true
+                                #endif
                             } label : {
                                 Image(systemName: "trash")
                             }
