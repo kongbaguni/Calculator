@@ -358,13 +358,14 @@ struct CalculatorView: View {
                                         if str == "=" {
                                             if adPoint > 0 {
                                                 Calculator.shared.keyInput(key: str)
+                                                adPoint -= 1
                                             }
                                             else {
                                                 ad.showAd { isSucess, interval in
                                                     if isSucess {
-                                                        adPoint += 5
+                                                        adPoint += 4
                                                     }
-                                                    Calculator.shared.keyInput(key: str)
+                                                    Calculator.shared.keyInput(key: str)                                                    
                                                 }
                                             }
                                             
