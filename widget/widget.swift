@@ -55,35 +55,45 @@ struct SimpleEntry: TimelineEntry {
 
 struct widgetEntryView : View {
     var entry: Provider.Entry
+    
+    var historyView: some View {
+        Group {
+            ForEach(entry.history, id: \.self) { history in
+                Group {
+                    HStack {
+                        Text(try! AttributedString(markdown: history.value))
+                            .foregroundColor(Color.textColorNormal)
+                        Spacer()
+                    }
+                    HStack {
+                        Text(history.memo)
+                            .font(.system(size: 10))
+                            .foregroundColor(Color.textColorWeak)
+                        Spacer()
+                    }
+                }.padding(.bottom, 2)
+            }
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
+        }
+    }
+    
+    var main: some View {
+        Group {
+            if entry.history.count == 0 {
+                Image("launchImage")
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                historyView
+            }
+        }
+    }
+    
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                if(entry.history.count == 0) {
-                    Image("launchImage")
-                        .resizable()
-                        .scaledToFill()
-                }
-                else {
-                    ForEach(entry.history, id: \.self) { history in
-                        Group {
-                            HStack {
-                                Text(try! AttributedString(markdown: history.value))
-                                    .foregroundColor(Color.textColorNormal)
-                                Spacer()
-                            }
-                            if(history.memo.isEmpty == false) {
-                                HStack {
-                                    Text(history.memo)
-                                        .font(.system(size: 10))
-                                        .foregroundColor(Color.textColorWeak)
-                                    Spacer()
-                                }
-                            }
-                        }.padding(.bottom, 2)
-                    }
-                    .padding(.leading, 10)
-                    .padding(.trailing, 10)
-                }
+                main
             }
             .padding(.top, 10)
         }

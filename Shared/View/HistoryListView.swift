@@ -27,7 +27,7 @@ struct HistoryListView: View , KeyboardReadable {
         case deleteItem
     }
     let googleAd = GoogleAd()
-    
+    @AppStorage("adpoint") var adPoint = 0
     @State var isToast = false
     @State var toastTitle:Text? = nil
     @State var toastMessage = ""
@@ -57,6 +57,7 @@ struct HistoryListView: View , KeyboardReadable {
                 if isSucess == false {
                     alertType = .adWatchTime
                     isAlert = !isSucess
+                    adPoint += 5
                 }
             }
         } label : {
@@ -77,8 +78,18 @@ struct HistoryListView: View , KeyboardReadable {
     
     var deleteHistoryBtn : some View {
         Button {
-            alertType = .deleteHistory
-            isAlert = true
+            if adPoint <= 0 {
+                googleAd.showAd { isSucess, time in
+                    if isSucess {
+                        adPoint += 5
+                        alertType = .deleteHistory
+                        isAlert = true
+                    }
+                }
+            } else {
+                alertType = .deleteHistory
+                isAlert = true
+            }
         } label: {
             HStack {
                 Image(systemName:"trash.circle")

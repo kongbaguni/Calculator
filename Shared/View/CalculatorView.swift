@@ -334,63 +334,70 @@ struct CalculatorView: View {
     }
     
     var buttons : some View {
-        VStack {
-            ForEach(0..<list.count, id:\.self) { i in
-                HStack {
-                    ForEach(0..<list[i].count, id:\.self) { a in
-                        let item = list[i][a]
-                        let str = item.value as? String ?? "\(item.value as! Int)"
-                        let width:CGFloat = item.width
-                        let color = item.color
-                        let isEnable = str == "(" ? 괄호열기가능
-                        : str == ")" ? 괄호닫기가능
-                        : str == "=" ? 계산가능
-                        : str == "clear" ? AC가능
-                        : str == "⌫" ? DEL가능
-                        : ["÷","✕","-","+"].firstIndex(of: str) != nil ? 사칙연산자추가가능
-                        : ["root","+/-","%"].firstIndex(of: str) != nil ? 단항연산가능
-                        : true
-                        Button {
-                            if isEnable {
-                                if str == "clear" {
-                                    Calculator.shared.keyInput(key: clearText)
-                                } else {
-                                    Calculator.shared.keyInput(key: str)
+        HStack {
+            #if FULL
+            ScrollView {
+                BannerAdView(sizeType: .GADAdSizeSkyscraper, padding: .zero)
+            }.border(.primary, width:1)
+            #endif
+            VStack {
+                ForEach(0..<list.count, id:\.self) { i in
+                    HStack {
+                        ForEach(0..<list[i].count, id:\.self) { a in
+                            let item = list[i][a]
+                            let str = item.value as? String ?? "\(item.value as! Int)"
+                            let width:CGFloat = item.width
+                            let color = item.color
+                            let isEnable = str == "(" ? 괄호열기가능
+                            : str == ")" ? 괄호닫기가능
+                            : str == "=" ? 계산가능
+                            : str == "clear" ? AC가능
+                            : str == "⌫" ? DEL가능
+                            : ["÷","✕","-","+"].firstIndex(of: str) != nil ? 사칙연산자추가가능
+                            : ["root","+/-","%"].firstIndex(of: str) != nil ? 단항연산가능
+                            : true
+                            Button {
+                                if isEnable {
+                                    if str == "clear" {
+                                        Calculator.shared.keyInput(key: clearText)
+                                    } else {
+                                        Calculator.shared.keyInput(key: str)
+                                    }
                                 }
+                            } label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(str == lastOp && ["÷","✕","-","+"].firstIndex(of: str) != nil ? Color.btnSelectedColor : color)
+                                    if let img = item.image {
+                                        img
+                                            .foregroundColor(Color.btnTextColor)
+                                            .symbolRenderingMode(.hierarchical)
+                                        
+                                    }
+                                    else if str == "clear" {
+                                        Text(try! AttributedString(markdown: "`\(clearText)`"))
+                                            .foregroundColor(Color.btnTextColor)
+                                            .padding(0.5)
+                                    } else {
+                                        Text(try! AttributedString(markdown: "`\(str)`"))
+                                            .foregroundColor(Color.btnTextColor)
+                                            .padding(0.5)
+                                    }
+                                }
+                                .frame(width: width, height: 50, alignment: .center)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.btnTextColor, lineWidth: 1)
+                                )
                             }
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(str == lastOp && ["÷","✕","-","+"].firstIndex(of: str) != nil ? Color.btnSelectedColor : color)
-                                if let img = item.image {
-                                    img
-                                        .foregroundColor(Color.btnTextColor)
-                                        .symbolRenderingMode(.hierarchical)
-                                    
-                                }
-                                else if str == "clear" {
-                                    Text(try! AttributedString(markdown: "`\(clearText)`"))
-                                        .foregroundColor(Color.btnTextColor)
-                                        .padding(0.5)
-                                } else {
-                                    Text(try! AttributedString(markdown: "`\(str)`"))
-                                        .foregroundColor(Color.btnTextColor)
-                                        .padding(0.5)
-                                }
-                            }
-                            .frame(width: width, height: 50, alignment: .center)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.btnTextColor, lineWidth: 1)
-                            )
+                            .buttonStyle(PlainButtonStyle())
+                            .opacity(isEnable ? 1.0 : 0.5)
+                            
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .opacity(isEnable ? 1.0 : 0.5)
-                        
                     }
                 }
             }
-        }
+        }.frame(height:360)
     }
     var body: some View {
         GeometryReader { geomentry in

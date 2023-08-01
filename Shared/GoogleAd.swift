@@ -45,27 +45,19 @@ class GoogleAd : NSObject {
     
     var requestAd = false
     func showAd(complete:@escaping(_ isSucess:Bool, _ time:TimeInterval?)->Void) {
+        callback = complete
         if requestAd {
             return
         }
         requestAd = true
-        let now = Date()
-        if let lastTime = UserDefaults.standard.lastAdWatchTime {
-            let interval = now.timeIntervalSince1970 - lastTime.timeIntervalSince1970
-            if interval < 60 {
-                complete(false,interval)
-                return
-            }
-        }
-        callback = complete
         loadAd { [weak self] isSucess in
+            self?.requestAd = false
             if isSucess == false {
                 DispatchQueue.main.async {
                     complete(true,nil)
                 }
                 return
             }
-            self?.requestAd = false 
             UserDefaults.standard.lastAdWatchTime = Date()
                         
             if let vc = UIApplication.shared.keyWindow?.rootViewController {
