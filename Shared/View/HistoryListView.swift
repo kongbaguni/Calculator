@@ -25,6 +25,7 @@ struct HistoryListView: View , KeyboardReadable {
         case deleteHistory
         case adWatchTime
         case deleteItem
+        case showAd
     }
     let googleAd = GoogleAd()
     @AppStorage("adpoint") var adPoint = 0
@@ -45,7 +46,7 @@ struct HistoryListView: View , KeyboardReadable {
 //            isLandscape.toggle()
 //        }
 //    }
-    
+        
     var trimQuery : String {
         return query.trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -53,15 +54,8 @@ struct HistoryListView: View , KeyboardReadable {
     let disposeBag = DisposeBag()
     var watchAdBtn : some View {
         Button {
-            googleAd.showAd { isSucess, time in
-                if isSucess {
-                    adPoint += 5
-                }
-                else {
-                    alertType = .adWatchTime
-                    isAlert = !isSucess
-                }
-            }
+            isAlert = true
+            alertType = .showAd
         } label : {
             HStack {
                 Image(systemName: "video.circle")
@@ -224,6 +218,20 @@ struct HistoryListView: View , KeyboardReadable {
 //        .searchable(text: $query, placement: .toolbar)
         .alert(isPresented: $isAlert, content: {
             switch alertType {
+                case .showAd :
+                    return Alert(
+                        title: Text("show ad alert title"),
+                        primaryButton: .default(Text("confirm"), action: {
+                            googleAd.showAd { isSucess, time in
+                                if isSucess {
+                                    adPoint += 5
+                                }
+                                else {
+                                    alertType = .adWatchTime
+                                    isAlert = !isSucess
+                                }
+                            }
+                        }), secondaryButton: .cancel())
             case .deleteHistory:
                 return Alert(title: Text("history_delete_alert_title"),
                              message: Text("history_all_delete_alert_message"),
