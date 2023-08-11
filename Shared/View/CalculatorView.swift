@@ -327,7 +327,7 @@ struct CalculatorView: View {
     func makeButtons(height:CGFloat)-> some View {
         HStack {
             #if FULL
-            NativeAdView(size: .init(width: 120, height: 380))
+            NativeAdView(size: .init(width: 120, height: height))
             #endif
             VStack {
                 ForEach(0..<list.count, id:\.self) { i in
