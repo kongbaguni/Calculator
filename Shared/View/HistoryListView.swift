@@ -102,6 +102,14 @@ struct HistoryListView: View , KeyboardReadable {
         }
     }
     
+    var bannerViewLandscape : some View {
+        HStack {
+            Spacer()
+            NativeAdView(size: .init(width: UIScreen.main.bounds.width * 0.4 - 20, height: 400))
+            Spacer()
+        }
+    }
+    
     var historyListView : some View {
         LazyVStack {
             ForEach(data, id:\.self) { data in
@@ -191,7 +199,7 @@ struct HistoryListView: View , KeyboardReadable {
     
     var landscapeLayout : some View {
         HStack {
-            bannerView
+            bannerViewLandscape
             ScrollView {
                 historyListView
                 deleteHistoryBtn

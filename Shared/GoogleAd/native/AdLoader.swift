@@ -17,7 +17,13 @@ class AdLoader : NSObject {
     
     private let adLoader:GADAdLoader
         
-    private var nativeAds:[GADNativeAd] = []
+    private var nativeAds:[GADNativeAd] = [] {
+        didSet {
+            if nativeAds.count > _adsCountMax {
+                _adsCountMax = nativeAds.count
+            }
+        }
+    }
     
     public var nativeAd:GADNativeAd? {
         if let ad = nativeAds.first {
@@ -28,13 +34,19 @@ class AdLoader : NSObject {
         return nil
     }
     
+    private var _adsCountMax:Int = 0
+    
+    public var nativeAdsCount:Int {
+        return _adsCountMax
+    }
+    
     public func getNativeAd(getAd:@escaping(_ ad:GADNativeAd)->Void) {
         if let ad = nativeAd {
             getAd(ad)
             return
         }
         loadAd()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {[weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {[weak self] in
             self?.getNativeAd(getAd: getAd)
         }
     }
@@ -72,4 +84,3 @@ extension AdLoader : GADNativeAdLoaderDelegate {
     }
     
 }
-
