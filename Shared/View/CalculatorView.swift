@@ -327,11 +327,7 @@ struct CalculatorView: View {
     func makeButtons(height:CGFloat)-> some View {
         HStack {
             #if FULL
-            ScrollView {
-                BannerAdView(sizeType: .GADAdSizeSkyscraper, padding: .zero)
-            }
-            .border(.primary, width:2)
-            .shadow(radius:10,x:5,y:5)
+            NativeAdView(size: .init(width: 120, height: 380))
             #endif
             VStack {
                 ForEach(0..<list.count, id:\.self) { i in

@@ -33,6 +33,9 @@ struct ContentView: View {
                 
             }
         }
+        GoogleAdPrompt.promptWithDelay {
+            
+        }
     }
     
     @State var isShowHistory = false
