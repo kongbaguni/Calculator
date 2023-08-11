@@ -105,7 +105,7 @@ struct HistoryListView: View , KeyboardReadable {
     var bannerViewLandscape : some View {
         HStack {
             Spacer()
-            NativeAdView(size: .init(width: UIScreen.main.bounds.width * 0.4 - 20, height: 400))
+            NativeAdView(size: .init(width: UIScreen.main.bounds.width * 0.4 - 20, height: UIScreen.main.bounds.height - 100))
             Spacer()
         }
     }
