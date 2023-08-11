@@ -75,6 +75,8 @@ struct CalculatorView: View {
     enum AlertType {
         case deleteItem
         case onlyMessage
+        case lowPointWhenDelete
+        case lowPointWhenInputEqual
     }
     let isAppClip:Bool
     
@@ -357,12 +359,8 @@ struct CalculatorView: View {
                                                 adPoint -= 1
                                             }
                                             else {
-                                                ad.showAd { isSucess, interval in
-                                                    if isSucess {
-                                                        adPoint += 4
-                                                    }
-                                                    Calculator.shared.keyInput(key: str)
-                                                }
+                                                isAlert = true
+                                                alertType = .lowPointWhenInputEqual
                                             }
                                             
                                         } else {
@@ -497,6 +495,27 @@ struct CalculatorView: View {
 #endif
         .alert(isPresented: $isAlert, content: {
             switch alertType {
+                case .lowPointWhenDelete:
+                    return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
+                        ad.showAd { isSucess, time in
+                            if(isSucess) {
+                                adPoint += 5
+                            }
+                            isAlert = true
+                            alertType = .deleteItem
+                        }
+                    }), secondaryButton: .cancel())
+
+                case .lowPointWhenInputEqual:
+                    return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
+                        ad.showAd { isSucess, interval in
+                            if isSucess {
+                                adPoint += 4
+                            }
+                            Calculator.shared.keyInput(key: "=")
+                        }
+                    }), secondaryButton: .cancel())
+
             case .deleteItem:
                     return Alert(title: Text("history_delete_alert_title"),
                                  message: Text("history_delete_alert_message"),
@@ -519,12 +538,8 @@ struct CalculatorView: View {
                         if adPoint > 0 {
                             deleteItem()
                         } else {
-                            ad.showAd { isSucess, time in
-                                if(isSucess) {
-                                    adPoint += 5
-                                }
-                                deleteItem()
-                            }
+                            isAlert = true
+                            alertType = .lowPointWhenDelete
                         }
 #endif
                     }),
