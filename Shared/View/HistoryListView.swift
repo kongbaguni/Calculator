@@ -26,6 +26,7 @@ struct HistoryListView: View , KeyboardReadable {
         case adWatchTime
         case deleteItem
         case showAd
+        case lowPoint
     }
     let googleAd = GoogleAd()
     @AppStorage("adpoint") var adPoint = 0
@@ -130,8 +131,13 @@ struct HistoryListView: View , KeyboardReadable {
                                 : Text(model.memo).foregroundColor(.textColorNormal)
                                 
                                 Button {
-                                    editId = model.id
-                                    isShowEditMemo = true
+                                    if adPoint < 1 {
+                                        isAlert = true
+                                        alertType = .lowPoint
+                                    } else {
+                                        editId = model.id
+                                        isShowEditMemo = true
+                                    }
                                 } label : {
                                     Image(systemName: "square.and.pencil")
                                 }
@@ -148,7 +154,11 @@ struct HistoryListView: View , KeyboardReadable {
                                 Button {
                                     editId = model.id
                                     isAlert = true
-                                    alertType = .deleteItem
+                                    if adPoint < 1 {
+                                        alertType = .lowPoint
+                                    } else {
+                                        alertType = .deleteItem
+                                    }
                                 } label : {
                                     Image(systemName: "trash")
                                 }
@@ -218,6 +228,21 @@ struct HistoryListView: View , KeyboardReadable {
 //        .searchable(text: $query, placement: .toolbar)
         .alert(isPresented: $isAlert, content: {
             switch alertType {
+                case .lowPoint:
+                    return Alert(
+                        title: Text("low point warning"),
+                        primaryButton: .default(Text("confirm"), action: {
+                            googleAd.showAd { isSucess, time in
+                                if isSucess {
+                                    adPoint += 5
+                                }
+                                else {
+                                    alertType = .adWatchTime
+                                    isAlert = !isSucess
+                                }
+                            }
+                        }), secondaryButton: .cancel())
+
                 case .showAd :
                     return Alert(
                         title: Text("show ad alert title"),
