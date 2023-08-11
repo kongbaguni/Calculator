@@ -21,12 +21,12 @@ struct NativeAdView : View {
     
     var body: some View {
         ZStack {
-            if let view = nativeAd?.makeView(size: size) {
-                view.padding(2.5)
-            }
             VStack(alignment: .center) {
                 ActivityIndicatorView(isVisible: $loading, type: .default()).frame(width: 50, height: 50)
             }.frame(height:size.height)
+            if let view = nativeAd?.makeView(size: size) {
+                view.padding(2.5)
+            }
         }.onAppear {
             loading = true
             AdLoader.shared.getNativeAd(getAd: {[self] ad in
