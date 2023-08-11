@@ -40,15 +40,14 @@ class AdLoader : NSObject {
         return _adsCountMax
     }
     
+    private var callback:(_ ad:GADNativeAd)->Void = { _ in }
     public func getNativeAd(getAd:@escaping(_ ad:GADNativeAd)->Void) {
         if let ad = nativeAd {
             getAd(ad)
             return
         }
         loadAd()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {[weak self] in
-            self?.getNativeAd(getAd: getAd)
-        }
+        callback = getAd
     }
     
     override init() {
@@ -73,6 +72,8 @@ extension AdLoader : GADNativeAdLoaderDelegate {
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
         print("\(#function) \(#line) nativeAdsCount : \(nativeAds.count)")
         nativeAds.append(nativeAd)
+        callback(nativeAd)
+        callback = {_ in }
     }
     
     func adLoaderDidFinishLoading(_ adLoader: GADAdLoader) {
