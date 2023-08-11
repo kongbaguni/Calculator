@@ -102,8 +102,7 @@ struct HistoryListView: View , KeyboardReadable {
     var bannerView : some View {
         HStack {
             Spacer()
-            BannerAdView(sizeType: .GADAdSizeMediumRectangle, padding: .zero)
-                .padding(10)
+            NativeAdView(size: .init(width: UIScreen.main.bounds.width - 20, height: 120))
             Spacer()
         }
     }
