@@ -34,7 +34,7 @@ struct NativeAdView : View {
                 nativeAd = ad
                 loading = false
             })
-        }
+        }.padding(5)
 
     }
 }
