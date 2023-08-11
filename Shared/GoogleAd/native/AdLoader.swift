@@ -34,7 +34,7 @@ class AdLoader : NSObject {
             return
         }
         loadAd()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {[weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {[weak self] in
             self?.getNativeAd(getAd: getAd)
         }
     }
