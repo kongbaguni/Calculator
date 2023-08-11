@@ -497,6 +497,7 @@ struct CalculatorView: View {
             switch alertType {
                 case .lowPointWhenDelete:
                     return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
+                        #if FULL
                         ad.showAd { isSucess, time in
                             if(isSucess) {
                                 adPoint += 5
@@ -504,16 +505,19 @@ struct CalculatorView: View {
                             isAlert = true
                             alertType = .deleteItem
                         }
+                        #endif
                     }), secondaryButton: .cancel())
 
                 case .lowPointWhenInputEqual:
                     return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
+                        #if FULL
                         ad.showAd { isSucess, interval in
                             if isSucess {
                                 adPoint += 4
                             }
                             Calculator.shared.keyInput(key: "=")
                         }
+                        #endif
                     }), secondaryButton: .cancel())
 
             case .deleteItem:
