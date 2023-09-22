@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B0551692A5B9939002904B5 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 1B0551682A5B9939002904B5 /* RxRealm */; };
 		1B05516A2A5B9940002904B5 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F778273C921A007BC9B2 /* HistoryModel.swift */; };
 		1B05516D2A5B9D42002904B5 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B05516C2A5B9D42002904B5 /* Realm+Extensions.swift */; };
 		1B05516F2A5B9D57002904B5 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B05516C2A5B9D42002904B5 /* Realm+Extensions.swift */; };
@@ -15,6 +14,9 @@
 		1B0551712A5BC674002904B5 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD60CF227294AB2002684D6 /* Color.swift */; };
 		1B06FA1C270D792A0079B080 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0C270D79280079B080 /* MainApp.swift */; };
 		1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06FA0D270D79280079B080 /* ContentView.swift */; };
+		1B0B64EF2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0B64EE2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift */; };
+		1B0B64F02ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0B64EE2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift */; };
+		1B0B64F22ABD547E00BDE8D5 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0B64F12ABD547E00BDE8D5 /* View+Extensions.swift */; };
 		1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F778273C921A007BC9B2 /* HistoryModel.swift */; };
 		1B29F780273CC7CC007BC9B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B29F784273CC7CC007BC9B2 /* Localizable.strings */; };
 		1B29F782273CC7CC007BC9B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B29F784273CC7CC007BC9B2 /* Localizable.strings */; };
@@ -22,6 +24,17 @@
 		1B29F78C273D08FF007BC9B2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */; };
 		1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B29F78B273D08FF007BC9B2 /* Date+Extensions.swift */; };
 		1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA96B0D27229E10002B2419 /* CalculatorView.swift */; };
+		1B2A94A52ABC3D7500EC83A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94A42ABC3D7500EC83A3 /* FirebaseAnalytics */; };
+		1B2A94A72ABC3D7500EC83A3 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94A62ABC3D7500EC83A3 /* FirebaseAnalyticsOnDeviceConversion */; };
+		1B2A94A92ABC3D7500EC83A3 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94A82ABC3D7500EC83A3 /* FirebaseAnalyticsSwift */; };
+		1B2A94AB2ABC3D7500EC83A3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94AA2ABC3D7500EC83A3 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		1B2A94AD2ABC3D7500EC83A3 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94AC2ABC3D7500EC83A3 /* FirebaseAppCheck */; };
+		1B2A94AF2ABC3D7500EC83A3 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94AE2ABC3D7500EC83A3 /* FirebaseAppDistribution-Beta */; };
+		1B2A94B12ABC3D7500EC83A3 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94B02ABC3D7500EC83A3 /* FirebaseCrashlytics */; };
+		1B2A94D22ABD1F4B00EC83A3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94D12ABD1F4B00EC83A3 /* Realm */; };
+		1B2A94D42ABD1F4B00EC83A3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94D32ABD1F4B00EC83A3 /* RealmSwift */; };
+		1B2A94D62ABD1F5B00EC83A3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94D52ABD1F5B00EC83A3 /* Realm */; };
+		1B2A94D82ABD1F5B00EC83A3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2A94D72ABD1F5B00EC83A3 /* RealmSwift */; };
 		1B39958D273E3BFE00EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
 		1B39958F273E3C0000EAADD8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B39958C273E3BA200EAADD8 /* Launch Screen.storyboard */; };
 		1B399591273E3DC800EAADD8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B399590273E3DC800EAADD8 /* String+Extensions.swift */; };
@@ -49,13 +62,6 @@
 		1BD60CF327294AB2002684D6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD60CF227294AB2002684D6 /* Color.swift */; };
 		1BD60CF527294B99002684D6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD60CF227294AB2002684D6 /* Color.swift */; };
 		1BE71E012991AE76007F07F1 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE71E002991AE76007F07F1 /* GoogleMobileAds */; };
-		1BE71E152991B2A5007F07F1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE71E142991B2A5007F07F1 /* FirebaseAnalytics */; };
-		1BE71E172991B2A5007F07F1 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE71E162991B2A5007F07F1 /* FirebaseAnalyticsSwift */; };
-		1BE71E192991B2A5007F07F1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE71E182991B2A5007F07F1 /* FirebaseCrashlytics */; };
-		1BE71E1B2991B2A5007F07F1 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE71E1A2991B2A5007F07F1 /* FirebasePerformance */; };
-		1BFAC8B7299235BD00F056DC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 1BFAC8B6299235BD00F056DC /* RxCocoa */; };
-		1BFAC8B9299235BD00F056DC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BFAC8B8299235BD00F056DC /* RxSwift */; };
-		1BFAC8BC299235FA00F056DC /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 1BFAC8BB299235FA00F056DC /* RxRealm */; };
 		8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */; };
 		8D16E341282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */; };
 		8D16E343282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */; };
@@ -132,6 +138,8 @@
 		1B06FA0E270D792A0079B080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B06FA13270D792A0079B080 /* kongbaguniCaculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kongbaguniCaculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B06FA1B270D792A0079B080 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		1B0B64EE2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extensions.swift"; sourceTree = "<group>"; };
+		1B0B64F12ABD547E00BDE8D5 /* View+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		1B29F778273C921A007BC9B2 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		1B29F783273CC7CC007BC9B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1B29F785273CC7CF007BC9B2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -191,15 +199,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BFAC8B7299235BD00F056DC /* RxCocoa in Frameworks */,
+				1B2A94A52ABC3D7500EC83A3 /* FirebaseAnalytics in Frameworks */,
 				8DC4B34B2A6529F000E4A561 /* ActivityIndicatorView in Frameworks */,
-				1BE71E172991B2A5007F07F1 /* FirebaseAnalyticsSwift in Frameworks */,
-				1BFAC8BC299235FA00F056DC /* RxRealm in Frameworks */,
 				1BE71E012991AE76007F07F1 /* GoogleMobileAds in Frameworks */,
-				1BE71E192991B2A5007F07F1 /* FirebaseCrashlytics in Frameworks */,
-				1BE71E152991B2A5007F07F1 /* FirebaseAnalytics in Frameworks */,
-				1BE71E1B2991B2A5007F07F1 /* FirebasePerformance in Frameworks */,
-				1BFAC8B9299235BD00F056DC /* RxSwift in Frameworks */,
+				1B2A94A72ABC3D7500EC83A3 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				1B2A94D22ABD1F4B00EC83A3 /* Realm in Frameworks */,
+				1B2A94AB2ABC3D7500EC83A3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				1B2A94AF2ABC3D7500EC83A3 /* FirebaseAppDistribution-Beta in Frameworks */,
+				1B2A94A92ABC3D7500EC83A3 /* FirebaseAnalyticsSwift in Frameworks */,
+				1B2A94D42ABD1F4B00EC83A3 /* RealmSwift in Frameworks */,
+				1B2A94B12ABC3D7500EC83A3 /* FirebaseCrashlytics in Frameworks */,
+				1B2A94AD2ABC3D7500EC83A3 /* FirebaseAppCheck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +217,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B0551692A5B9939002904B5 /* RxRealm in Frameworks */,
+				1B2A94D82ABD1F5B00EC83A3 /* RealmSwift in Frameworks */,
+				1B2A94D62ABD1F5B00EC83A3 /* Realm in Frameworks */,
 				1B8FDB372A4E650C007BE5E5 /* SwiftUI.framework in Frameworks */,
 				1B8FDB352A4E650C007BE5E5 /* WidgetKit.framework in Frameworks */,
 			);
@@ -289,6 +300,7 @@
 				1B399590273E3DC800EAADD8 /* String+Extensions.swift */,
 				8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */,
 				8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */,
+				1B0B64EE2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -315,6 +327,7 @@
 		1B8FDB382A4E650C007BE5E5 /* widget */ = {
 			isa = PBXGroup;
 			children = (
+				1B0B64F12ABD547E00BDE8D5 /* View+Extensions.swift */,
 				1B8FDB392A4E650C007BE5E5 /* widgetBundle.swift */,
 				1B8FDB3B2A4E650C007BE5E5 /* widgetLiveActivity.swift */,
 				1B8FDB3D2A4E650C007BE5E5 /* widget.swift */,
@@ -405,14 +418,16 @@
 			name = "calculator (iOS)";
 			packageProductDependencies = (
 				1BE71E002991AE76007F07F1 /* GoogleMobileAds */,
-				1BE71E142991B2A5007F07F1 /* FirebaseAnalytics */,
-				1BE71E162991B2A5007F07F1 /* FirebaseAnalyticsSwift */,
-				1BE71E182991B2A5007F07F1 /* FirebaseCrashlytics */,
-				1BE71E1A2991B2A5007F07F1 /* FirebasePerformance */,
-				1BFAC8B6299235BD00F056DC /* RxCocoa */,
-				1BFAC8B8299235BD00F056DC /* RxSwift */,
-				1BFAC8BB299235FA00F056DC /* RxRealm */,
 				8DC4B34A2A6529F000E4A561 /* ActivityIndicatorView */,
+				1B2A94A42ABC3D7500EC83A3 /* FirebaseAnalytics */,
+				1B2A94A62ABC3D7500EC83A3 /* FirebaseAnalyticsOnDeviceConversion */,
+				1B2A94A82ABC3D7500EC83A3 /* FirebaseAnalyticsSwift */,
+				1B2A94AA2ABC3D7500EC83A3 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				1B2A94AC2ABC3D7500EC83A3 /* FirebaseAppCheck */,
+				1B2A94AE2ABC3D7500EC83A3 /* FirebaseAppDistribution-Beta */,
+				1B2A94B02ABC3D7500EC83A3 /* FirebaseCrashlytics */,
+				1B2A94D12ABD1F4B00EC83A3 /* Realm */,
+				1B2A94D32ABD1F4B00EC83A3 /* RealmSwift */,
 			);
 			productName = "Test (iOS)";
 			productReference = 1B06FA13270D792A0079B080 /* kongbaguniCaculator.app */;
@@ -432,7 +447,8 @@
 			);
 			name = widgetExtension;
 			packageProductDependencies = (
-				1B0551682A5B9939002904B5 /* RxRealm */,
+				1B2A94D52ABD1F5B00EC83A3 /* Realm */,
+				1B2A94D72ABD1F5B00EC83A3 /* RealmSwift */,
 			);
 			productName = widgetExtension;
 			productReference = 1B8FDB332A4E650C007BE5E5 /* widgetExtension.appex */;
@@ -451,6 +467,8 @@
 			dependencies = (
 			);
 			name = calculator_clip;
+			packageProductDependencies = (
+			);
 			productName = calculator_clip;
 			productReference = 1BC668602721612200006C20 /* kongbaguniCaculatorClip.app */;
 			productType = "com.apple.product-type.application.on-demand-install-capable";
@@ -477,7 +495,7 @@
 				};
 			};
 			buildConfigurationList = 1B06FA0A270D79280079B080 /* Build configuration list for PBXProject "Calculator" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -488,10 +506,9 @@
 			mainGroup = 1B06FA06270D79280079B080;
 			packageReferences = (
 				1BE71DFF2991AE76007F07F1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
-				1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				1BFAC8B5299235BD00F056DC /* XCRemoteSwiftPackageReference "RxSwift" */,
-				1BFAC8BA299235FA00F056DC /* XCRemoteSwiftPackageReference "RxRealm" */,
 				8DC4B3492A6529F000E4A561 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1B2A94D02ABD1F4B00EC83A3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 1B06FA14270D792A0079B080 /* Products */;
 			projectDirPath = "";
@@ -577,6 +594,7 @@
 				8D3D9F992A85FBDD00DC9897 /* GADNativeAd+Extensions.swift in Sources */,
 				1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */,
 				1B29F787273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
+				1B0B64EF2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift in Sources */,
 				8D3D9F9B2A85FBDD00DC9897 /* AdLoader.swift in Sources */,
 				8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */,
 				1B29F78C273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
@@ -610,6 +628,7 @@
 				1B05516A2A5B9940002904B5 /* HistoryModel.swift in Sources */,
 				1B8FDB3E2A4E650C007BE5E5 /* widget.swift in Sources */,
 				1B8FDB3C2A4E650C007BE5E5 /* widgetLiveActivity.swift in Sources */,
+				1B0B64F22ABD547E00BDE8D5 /* View+Extensions.swift in Sources */,
 				1B8FDB3A2A4E650C007BE5E5 /* widgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,6 +643,7 @@
 				1B29F791273D1299007BC9B2 /* CalculatorView.swift in Sources */,
 				1B29F78E273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
 				1BAE66A0273A4A5300C82269 /* Stack.swift in Sources */,
+				1B0B64F02ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift in Sources */,
 				8DEA3D5E2939845B008C29FA /* KeyboardReadable.swift in Sources */,
 				1BD60CF527294B99002684D6 /* Color.swift in Sources */,
 				8D76A5CF28E576B00088E67F /* Toast.swift in Sources */,
@@ -817,7 +837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -859,7 +879,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D FULL";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor;
 				PRODUCT_NAME = kongbaguniCaculator;
@@ -966,7 +986,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -1008,7 +1028,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.6;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D CLIPAPP";
 				PRODUCT_BUNDLE_IDENTIFIER = net.kongbaguni.calculaor.clip;
 				PRODUCT_NAME = kongbaguniCaculatorClip;
@@ -1066,36 +1086,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.15.0;
+			};
+		};
+		1B2A94D02ABD1F4B00EC83A3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1BE71DFF2991AE76007F07F1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 9.0.0;
-			};
-		};
-		1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
-		1BFAC8B5299235BD00F056DC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		1BFAC8BA299235FA00F056DC /* XCRemoteSwiftPackageReference "RxRealm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		8DC4B3492A6529F000E4A561 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
@@ -1109,50 +1121,65 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1B0551682A5B9939002904B5 /* RxRealm */ = {
+		1B2A94A42ABC3D7500EC83A3 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1BFAC8BA299235FA00F056DC /* XCRemoteSwiftPackageReference "RxRealm" */;
-			productName = RxRealm;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		1B2A94A62ABC3D7500EC83A3 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		1B2A94A82ABC3D7500EC83A3 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		1B2A94AA2ABC3D7500EC83A3 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		1B2A94AC2ABC3D7500EC83A3 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		1B2A94AE2ABC3D7500EC83A3 /* FirebaseAppDistribution-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAppDistribution-Beta";
+		};
+		1B2A94B02ABC3D7500EC83A3 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94A32ABC3D7500EC83A3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		1B2A94D12ABD1F4B00EC83A3 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94D02ABD1F4B00EC83A3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		1B2A94D32ABD1F4B00EC83A3 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94D02ABD1F4B00EC83A3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		1B2A94D52ABD1F5B00EC83A3 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94D02ABD1F4B00EC83A3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		1B2A94D72ABD1F5B00EC83A3 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B2A94D02ABD1F4B00EC83A3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		1BE71E002991AE76007F07F1 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1BE71DFF2991AE76007F07F1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
-		};
-		1BE71E142991B2A5007F07F1 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		1BE71E162991B2A5007F07F1 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
-		1BE71E182991B2A5007F07F1 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		1BE71E1A2991B2A5007F07F1 /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE71E132991B2A5007F07F1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
-		1BFAC8B6299235BD00F056DC /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BFAC8B5299235BD00F056DC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		1BFAC8B8299235BD00F056DC /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BFAC8B5299235BD00F056DC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		1BFAC8BB299235FA00F056DC /* RxRealm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BFAC8BA299235FA00F056DC /* XCRemoteSwiftPackageReference "RxRealm" */;
-			productName = RxRealm;
 		};
 		8DC4B34A2A6529F000E4A561 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;

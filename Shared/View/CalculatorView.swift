@@ -8,8 +8,6 @@
 import SwiftUI
 #if FULL
 import RealmSwift
-import RxRealm
-import RxSwift
 #endif
 
 struct Item {
@@ -98,9 +96,6 @@ struct CalculatorView: View {
     @State var alertType:AlertType = .onlyMessage
     @State var alertMessage = ""
     @State var alertTitle = ""
-    #if FULL
-    let disposeBag = DisposeBag()
-    #endif
     
     var 단항연산가능:Bool {
         Calculator.shared.items.last is Calculator.Number
@@ -347,6 +342,10 @@ struct CalculatorView: View {
                             : ["÷","✕","-","+"].firstIndex(of: str) != nil ? 사칙연산자추가가능
                             : ["root","+/-","%"].firstIndex(of: str) != nil ? 단항연산가능
                             : true
+                            let nh = (height / CGFloat(list.count > 0 ? list.count : 1)) - 10
+                            let rowHeight = nh < 0 ? 0 : nh
+                            
+                            
                             Button {
                                 if isEnable {
                                     if str == "clear" {
@@ -391,7 +390,7 @@ struct CalculatorView: View {
                                             .padding(0.5)
                                     }
                                 }
-                                .frame(width: width, height: (height / CGFloat(list.count)) - 10 , alignment: .center)
+                                .frame(width: width, height:rowHeight , alignment: .center)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.btnTextColor, lineWidth: 1)
@@ -406,6 +405,25 @@ struct CalculatorView: View {
             }
         }.frame(height:height)
     }
+    
+    func loadHistoryData() {
+#if FULL
+        var results:[String] = []
+        var models:[HistoryModel.ThreadSafeModel] = []
+        
+        for item in Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false).prefix(20) {
+            results.append(item.value)
+            models.append(item.threadSafeModel)
+            print(item.threadSafeModel.memo)
+        }
+        history.removeAll()
+        historyModels.removeAll()
+        history = results
+        historyModels = models
+        print(results)
+#endif
+    }
+    
     var body: some View {
         GeometryReader { geomentry in
             if geomentry.size.width < geomentry.size.height {
@@ -437,56 +455,30 @@ struct CalculatorView: View {
                 schemaVersion: 2)
             // Use this configuration when opening realms
             Realm.Configuration.defaultConfiguration = config
-#endif 
-            
-            NotificationCenter.default.addObserver(forName: .calculator_lastNumber, object: nil, queue: nil) {  noti in
-                displayText = Calculator.shared.displayAttributedString
-                lastOp = nil
-            }
-            
-            NotificationCenter.default.addObserver(forName: .calculator_lastOperator, object: nil, queue: nil) { noti in
-                displayText = Calculator.shared.displayAttributedString
-                if let op = noti.object as? Calculator.Operation {
-                    lastOp = op.type.rawValue
-                }
-            }
-            #if FULL
-            Observable.collection(from: Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false))
-                .subscribe { event in
-                    switch event {
-                    case .next(let list):
-                            var results:[String] = []
-                            var models:[HistoryModel.ThreadSafeModel] = []
-                            for item in list {
-                                if results.count == 20 {
-                                    continue
-                                }
-                                results.append(item.value)
-                                models.append(item.threadSafeModel)
-                                print(item.threadSafeModel.memo)
-                            }
-                            history.removeAll()
-                            historyModels.removeAll()
-                            history = results
-                            historyModels = models
-                            print(results)
-                    default:
-                        break
-                    }
-                    
-                }.disposed(by: self.disposeBag)
-            #else
-            NotificationCenter.default.addObserver(forName: .calculator_calculated, object: nil, queue: nil) { noti in
-                if let markdownString = noti.object as? String {
-                    history.insert(markdownString, at: 0)                    
-                    if history.count > 20 {
-                        history.removeLast()
-                    }
-                }
-            }
-            #endif
-            
+            loadHistoryData()
+#endif
         }
+        .onReceive(NotificationCenter.default.publisher(for: .calculator_lastNumber), perform: { noti in
+            displayText = Calculator.shared.displayAttributedString
+            lastOp = nil
+        })
+        .onReceive(NotificationCenter.default.publisher(for: .calculator_lastOperator), perform: { noti in
+            displayText = Calculator.shared.displayAttributedString
+            if let op = noti.object as? Calculator.Operation {
+                lastOp = op.type.rawValue
+            }
+        })
+        .onReceive(NotificationCenter.default.publisher(for: .calculator_calculated), perform: { noti in
+            if let markdownString = noti.object as? String {
+                history.insert(markdownString, at: 0)
+                if history.count > 20 {
+                    history.removeLast()
+                }
+            }
+        })
+        .onReceive(NotificationCenter.default.publisher(for: .calculator_db_updated), perform: { noti in
+            loadHistoryData()
+        })
 #if FULL
         .sheet(isPresented: $isShowEditNote, content: {
             let model = historyModels[editNoteIdx!]
@@ -534,6 +526,7 @@ struct CalculatorView: View {
                                 if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
                                     try! realm.write {
                                         realm.delete(target)
+                                        NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
                                     }
                                 }
                                 adPoint -= 1

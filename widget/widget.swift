@@ -12,12 +12,11 @@ import RealmSwift
 
 struct Provider: IntentTimelineProvider {
     var history:[HistoryModel.ThreadSafeModel] {
-        var result:[HistoryModel.ThreadSafeModel] = Realm.shared.objects(HistoryModel.self).map { model in
+        let result:[HistoryModel.ThreadSafeModel] = Realm.shared.objects(HistoryModel.self)
+            .sorted(byKeyPath: "date", ascending: false)
+            .prefix(3)
+            .map { model in
             return model.threadSafeModel
-        }
-        result.reverse()
-        while result.count > 10 {
-            _ = result.popLast()
         }
         return result
     }
@@ -57,24 +56,26 @@ struct widgetEntryView : View {
     var entry: Provider.Entry
     
     var historyView: some View {
-        Group {
+        VStack(alignment: .leading) {
             ForEach(entry.history, id: \.self) { history in
-                Group {
-                    HStack {
-                        Text(try! AttributedString(markdown: history.value))
-                            .foregroundColor(Color.textColorNormal)
-                        Spacer()
-                    }
-                    HStack {
+                VStack(alignment: .leading) {
+                    Text(try! AttributedString(markdown: history.value))
+                        .foregroundColor(Color.textColorNormal)
+                    if !history.isMemoEmpty {
                         Text(history.memo)
                             .font(.system(size: 10))
                             .foregroundColor(Color.textColorWeak)
-                        Spacer()
                     }
-                }.padding(.bottom, 2)
+                }
+                .padding(5)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.secondary ,lineWidth: 2)
+                    
+                }
+                .padding(.bottom,1)
+
             }
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
         }
     }
     
@@ -91,12 +92,9 @@ struct widgetEntryView : View {
     }
     
     var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                main
-            }
-            .padding(.top, 10)
-        }
+        main
+        .widgetBackground(backgroundView: Color.bg2)
+        .padding(.top, 10)
     }
     
 }
@@ -117,7 +115,7 @@ struct widget_Previews: PreviewProvider {
     static var previews: some View {
         widgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(),history: [
             .init(id: .init(), value: "8,865 `%` 8 `=` **70,920**", memo: "memo", date: Date()),
-            .init(id: .init(), value: "8,865 `X` 8 `=` **70,920**", memo: "memo", date: Date()),
+            .init(id: .init(), value: "8,865 `X` 8 `=` **70,920**", memo: "", date: Date()),
             .init(id: .init(), value: "8,865 `X` 8 `=` **70,920**", memo: "memo", date: Date()),
 
         ]))

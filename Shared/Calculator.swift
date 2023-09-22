@@ -10,11 +10,6 @@ import SwiftUI
 #if FULL
 import RealmSwift
 #endif
-extension Notification.Name {
-    static let calculator_lastNumber = Notification.Name(rawValue: "calculator_lastNumber")
-    static let calculator_lastOperator = Notification.Name(rawValue: "calculator_lastOperator")
-    static let calculator_calculated = Notification.Name(rawValue: "calculator_calculated")
-}
 
 class Calculator {
     static let shared = Calculator()
@@ -124,8 +119,7 @@ class Calculator {
     }
     
     var items:[AnyHashable] = [] {
-        didSet {
-            
+        didSet {            
             if items.count == 0 || items.last is String {
                decimalLength = 0
             }
@@ -578,6 +572,8 @@ class Calculator {
         let realm = Realm.shared
         try! realm.write {
             realm.create(HistoryModel.self, value: ["value":displayMarkDownString], update: .all)
+            NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
+
         }
 #else
         NotificationCenter.default.post(name: .calculator_calculated, object: displayMarkDownString)        

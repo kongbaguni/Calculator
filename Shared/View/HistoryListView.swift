@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import RxSwift
-import RxRealm
 import RealmSwift
 fileprivate let DATE_FORMAT = "yyyy.MM.dd"
 fileprivate var editId:ObjectId? = nil
@@ -42,17 +40,11 @@ struct HistoryListView: View , KeyboardReadable {
     @State var query:String = ""
     @State var isLandscape = true
     @State var isKeyboardVisible = false
-//    init() {
-//        NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [self] note in
-//            isLandscape.toggle()
-//        }
-//    }
         
     var trimQuery : String {
         return query.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    let disposeBag = DisposeBag()
     var watchAdBtn : some View {
         Button {
             isAlert = true
@@ -217,6 +209,25 @@ struct HistoryListView: View , KeyboardReadable {
         }
     }
     
+    func loadData() {
+        let list = Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false)
+        var result:[String:[HistoryModel.ThreadSafeModel]] = [:]
+        for model in list {
+            let date = model.date.formatedString(format: DATE_FORMAT)!
+            if result[date] == nil {
+                result[date] = [model.threadSafeModel]
+            } else {
+                result[date]?.append(model.threadSafeModel)
+            }
+        }
+        data.removeAll()
+        for item in result.sorted(by: { a, b in
+            return a.key > b.key
+        }) {
+            data.append(Data(date: item.key, list: item.value))
+        }
+    }
+    
     var body: some View {
         GeometryReader { geomentry in
             VStack {
@@ -232,8 +243,6 @@ struct HistoryListView: View , KeyboardReadable {
         }
         .toast(title:toastTitle, message: toastMessage, isShowing: $isToast, duration: 4)
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always))
-//        #else
-//        .searchable(text: $query, placement: .toolbar)
         .alert(isPresented: $isAlert, content: {
             switch alertType {
                 case .lowPoint:
@@ -274,6 +283,7 @@ struct HistoryListView: View , KeyboardReadable {
                         let realm = Realm.shared
                         try! realm.write {
                             realm.deleteAll()
+                            NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
                         }
                         adPoint -= 1
                     }
@@ -306,6 +316,8 @@ struct HistoryListView: View , KeyboardReadable {
                                 if let target = realm.object(ofType: HistoryModel.self, forPrimaryKey: id) {
                                     try! realm.write {
                                         realm.delete(target)
+                                        NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
+
                                     }
                                 }
                                 adPoint -= 1
@@ -337,42 +349,12 @@ struct HistoryListView: View , KeyboardReadable {
             print("Is keyboard visible? ", newIsKeyboardVisible)
             isKeyboardVisible = newIsKeyboardVisible
         }
+        .onReceive(NotificationCenter.default.publisher(for: .calculator_db_updated), perform: { noti in
+            loadData()
+        })
         .onAppear {
             isLandscape = UIDevice.current.orientation.isLandscape
-            Observable.collection(from: Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: true))
-                .subscribe { event in
-                    switch event {
-                    case .next(let dbList):
-                        data.removeAll()
-                        var result:[String:[HistoryModel.ThreadSafeModel]] = [:]
-                        
-                        for item in dbList {
-                            let date = item.date.formatedString(format: DATE_FORMAT)!
-                            if result[date] == nil {
-                                result[date] = [item.threadSafeModel]
-                            } else {
-                                result[date]?.append(item.threadSafeModel)
-                            }
-                        }
-                        for item in result {
-                            data.append(Data(date: item.key, list: item.value))
-                        }
-                        data = data.sorted { a, b in
-                            if let datea = a.date.dateValue(format: DATE_FORMAT),
-                               let dateb = b.date.dateValue(format: DATE_FORMAT) {
-                                return datea.timeIntervalSince1970 < dateb.timeIntervalSince1970
-                            }
-                            return false
-                        }
-                        
-                    case .error(let error):
-                        print(error.localizedDescription)
-                        break
-                    case .completed:
-                        break
-                    }
-                }
-                .disposed(by: disposeBag)
+            loadData()
             
         }
     }

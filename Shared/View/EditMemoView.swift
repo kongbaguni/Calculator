@@ -47,6 +47,7 @@ struct EditMemoView: View {
                         try! realm.commitWrite()
                         presentationMode.wrappedValue.dismiss()
                         adPoint -= 1
+                        NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
                     }
                     if adPoint > 0 {
                         save()
