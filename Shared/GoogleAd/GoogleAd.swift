@@ -58,7 +58,6 @@ class GoogleAd : NSObject {
                 }
                 return
             }
-//            UserDefaults.standard.lastAdWatchTime = Date()
                         
             if let vc = UIApplication.shared.keyWindow?.rootViewController {
                 DispatchQueue.main.async {

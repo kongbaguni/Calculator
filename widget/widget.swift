@@ -106,8 +106,8 @@ struct widget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             widgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName(Text("Calculation history"))
+        .description(Text("3 most recent calculations"))
     }
 }
 
