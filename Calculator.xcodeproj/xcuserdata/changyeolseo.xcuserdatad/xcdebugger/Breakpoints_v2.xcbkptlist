@@ -20,5 +20,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BA700E3F-B475-4377-9DE5-2229C52633F5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/View/HistoryListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "historyListView"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "BA700E3F-B475-4377-9DE5-2229C52633F5 - 5dfcd1c118896db2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (kongbaguniCaculator.HistoryModel) -&gt; &lt;&lt;opaque return type of kongbaguniCaculator.HistoryListView.makeHistoryView(model: kongbaguniCaculator.HistoryModel.ThreadSafeModel) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;RealmSwift.Results&lt;kongbaguniCaculator.HistoryModel&gt;, kongbaguniCaculator.HistoryModel, &lt;&lt;opaque return type of kongbaguniCaculator.HistoryListView.makeHistoryView(model: kongbaguniCaculator.HistoryModel.ThreadSafeModel) -&gt; some&gt;&gt;.0&gt; in kongbaguniCaculator.HistoryListView.historyListView.getter : some"
+                  moduleName = "kongbaguniCaculator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changyeolseo/Documents/iOS/Calculator/Shared/View/HistoryListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  uuid = "BA700E3F-B475-4377-9DE5-2229C52633F5 - 5dfcd1c118896e55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (kongbaguniCaculator.HistoryModel) -&gt; &lt;&lt;opaque return type of kongbaguniCaculator.HistoryListView.makeHistoryView(model: kongbaguniCaculator.HistoryModel.ThreadSafeModel) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;RealmSwift.Results&lt;kongbaguniCaculator.HistoryModel&gt;, kongbaguniCaculator.HistoryModel, &lt;&lt;opaque return type of kongbaguniCaculator.HistoryListView.makeHistoryView(model: kongbaguniCaculator.HistoryModel.ThreadSafeModel) -&gt; some&gt;&gt;.0&gt; in kongbaguniCaculator.HistoryListView.historyListView.getter : some"
+                  moduleName = "kongbaguniCaculator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/changyeolseo/Documents/iOS/Calculator/Shared/View/HistoryListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "268">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

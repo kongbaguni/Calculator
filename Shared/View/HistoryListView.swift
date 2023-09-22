@@ -36,11 +36,13 @@ struct HistoryListView: View , KeyboardReadable {
     @State var alertType = AlertType.deleteHistory
     @State var isShowEditMemo = false
     
-    @State var data:[Data] = []
     @State var query:String = ""
     @State var isLandscape = true
     @State var isKeyboardVisible = false
         
+    @ObservedResults(HistoryModel.self) var historys
+    
+    
     var trimQuery : String {
         return query.trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -102,8 +104,66 @@ struct HistoryListView: View , KeyboardReadable {
         }
     }
     
+    func makeHistoryView(model:HistoryModel.ThreadSafeModel)-> some View  {
+        VStack(alignment:.leading) {
+            HStack {
+                Text("*")
+                    .foregroundColor(.idxTextColor)
+                Text(try! AttributedString(markdown: model.value))
+                    .foregroundColor(.textColorNormal)
+            }
+            HStack {
+                Text("memo :")
+                    .foregroundColor(.textColorWeak)
+                
+                model.isMemoEmpty
+                ? Text("none").foregroundColor(.textColorWeak)
+                : Text(model.memo).foregroundColor(.textColorNormal)
+                
+                Button {
+                    if adPoint < 1 {
+                        isAlert = true
+                        alertType = .lowPoint
+                    } else {
+                        editId = model.id
+                        isShowEditMemo = true
+                    }
+                } label : {
+                    Image(systemName: "square.and.pencil")
+                }
+                
+                Button {
+                    toastTitle = Text("copy to clipboard")
+                    toastMessage = model.copyToPastboard()
+                    isToast = true
+                } label : {
+                    Image(systemName: "doc.on.doc")
+                }
+
+                
+                Button {
+                    editId = model.id
+                    isAlert = true
+                    if adPoint < 1 {
+                        alertType = .lowPoint
+                    } else {
+                        alertType = .deleteItem
+                    }
+                } label : {
+                    Image(systemName: "trash")
+                }
+                
+            }
+        }.padding(.bottom, 5)
+
+    }
+    
     var historyListView : some View {
-        LazyVStack {
+        LazyVStack(alignment:.leading) {
+            ForEach(historys, id:\.self) { model in
+                makeHistoryView(model: model.threadSafeModel)
+            }
+            
             ForEach(data, id:\.self) { data in
                 Section(header: HStack {
                     Text(data.date)
@@ -114,65 +174,7 @@ struct HistoryListView: View , KeyboardReadable {
                     .padding(.top, 20)
                 ) {
                     ForEach(data.list, id:\.self) { model in
-                        VStack {
-                            HStack {
-                                Text("*")
-                                    .foregroundColor(.idxTextColor)
-                                Text(try! AttributedString(markdown: model.value))
-                                    .foregroundColor(.textColorNormal)
-                                Spacer()
-                            }
-                            HStack {
-                                Text("memo :")
-                                    .foregroundColor(.textColorWeak)
-                                
-                                model.isMemoEmpty
-                                ? Text("none").foregroundColor(.textColorWeak)
-                                : Text(model.memo).foregroundColor(.textColorNormal)
-                                
-                                Button {
-                                    if adPoint < 1 {
-                                        isAlert = true
-                                        alertType = .lowPoint
-                                    } else {
-                                        editId = model.id
-                                        isShowEditMemo = true
-                                    }
-                                } label : {
-                                    Image(systemName: "square.and.pencil")
-                                }
-                                
-                                Button {                                    
-                                    toastTitle = Text("copy to clipboard")
-                                    toastMessage = model.copyToPastboard()
-                                    isToast = true
-                                } label : {
-                                    Image(systemName: "doc.on.doc")
-                                }
-
-                                
-                                Button {
-                                    editId = model.id
-                                    isAlert = true
-                                    if adPoint < 1 {
-                                        alertType = .lowPoint
-                                    } else {
-                                        alertType = .deleteItem
-                                    }
-                                } label : {
-                                    Image(systemName: "trash")
-                                }
-                                
-                                Spacer()
-                            }
-                        }
-                        .padding(5)
-                        .background(
-                            model.memo.components(separatedBy: trimQuery).count > 1 ? Color.bg3 : Color.bg2)
-                        .padding(.leading,5)
-                        .padding(.trailing,5)
-                        .cornerRadius(5)
-                        
+                        makeHistoryView(model: model)
                     }
                 }
             }
@@ -209,8 +211,12 @@ struct HistoryListView: View , KeyboardReadable {
         }
     }
     
-    func loadData() {
-        let list = Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false)
+    var list:Results<HistoryModel> {
+        Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false)
+    }
+    
+    var data:[Data] {
+        var datas:[Data] = []
         var result:[String:[HistoryModel.ThreadSafeModel]] = [:]
         for model in list {
             let date = model.date.formatedString(format: DATE_FORMAT)!
@@ -220,13 +226,14 @@ struct HistoryListView: View , KeyboardReadable {
                 result[date]?.append(model.threadSafeModel)
             }
         }
-        data.removeAll()
         for item in result.sorted(by: { a, b in
             return a.key > b.key
         }) {
-            data.append(Data(date: item.key, list: item.value))
+            datas.append(Data(date: item.key, list: item.value))
         }
+        return datas
     }
+
     
     var body: some View {
         GeometryReader { geomentry in
@@ -349,13 +356,8 @@ struct HistoryListView: View , KeyboardReadable {
             print("Is keyboard visible? ", newIsKeyboardVisible)
             isKeyboardVisible = newIsKeyboardVisible
         }
-        .onReceive(NotificationCenter.default.publisher(for: .calculator_db_updated), perform: { noti in
-            loadData()
-        })
         .onAppear {
             isLandscape = UIDevice.current.orientation.isLandscape
-            loadData()
-            
         }
     }
 }
