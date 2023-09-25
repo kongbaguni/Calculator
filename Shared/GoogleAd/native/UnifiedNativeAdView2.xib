@@ -66,6 +66,10 @@
                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="VpA-FV-OcW" customClass="GADMediaView">
                             <rect key="frame" x="0.0" y="133.66666666666663" width="140" height="199.33333333333337"/>
                             <color key="backgroundColor" systemColor="systemTealColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="140" id="BCb-tA-BEH"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="ZBM-3M-KKP"/>
+                            </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DHw-Z9-5Gy">
                             <rect key="frame" x="0.0" y="338" width="140" height="17"/>
@@ -128,7 +132,7 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
