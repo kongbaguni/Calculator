@@ -73,18 +73,14 @@ struct CalculatorView: View {
     enum AlertType {
         case deleteItem
         case onlyMessage
-        case lowPointWhenDelete
-        case lowPointWhenInputEqual
     }
     let isAppClip:Bool
     
-    @AppStorage("adpoint") var adPoint = 0
     @State var count = 0
     @State var displayText:AttributedString = "0"
     @State var lastOp:String?
     @State var history:[String] = []
     #if FULL
-    let ad = GoogleAd()
     @State var historyModels:[HistoryModel.ThreadSafeModel] = []
     
     @State var isShowEditNote = false
@@ -352,19 +348,7 @@ struct CalculatorView: View {
                                         Calculator.shared.keyInput(key: clearText)
                                     } else {
                                         #if FULL
-                                        if str == "=" {
-                                            if adPoint > 0 {
-                                                Calculator.shared.keyInput(key: str)
-                                                adPoint -= 1
-                                            }
-                                            else {
-                                                isAlert = true
-                                                alertType = .lowPointWhenInputEqual
-                                            }
-                                            
-                                        } else {
-                                            Calculator.shared.keyInput(key: str)
-                                        }
+                                        Calculator.shared.keyInput(key: str)
                                         #else
                                         Calculator.shared.keyInput(key: str)
                                         #endif
@@ -487,31 +471,6 @@ struct CalculatorView: View {
 #endif
         .alert(isPresented: $isAlert, content: {
             switch alertType {
-                case .lowPointWhenDelete:
-                    return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
-                        #if FULL
-                        ad.showAd { error in
-                            if error == nil  {
-                                adPoint += 5
-                            }
-                            isAlert = true
-                            alertType = .deleteItem
-                        }
-                        #endif
-                    }), secondaryButton: .cancel())
-
-                case .lowPointWhenInputEqual:
-                    return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
-                        #if FULL
-                        ad.showAd { error in
-                            if error == nil {
-                                adPoint += 4
-                            }
-                            Calculator.shared.keyInput(key: "=")
-                        }
-                        #endif
-                    }), secondaryButton: .cancel())
-
             case .deleteItem:
                     return Alert(title: Text("history_delete_alert_title"),
                                  message: Text("history_delete_alert_message"),
@@ -529,15 +488,9 @@ struct CalculatorView: View {
                                         NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
                                     }
                                 }
-                                adPoint -= 1
                             }
                         }
-                        if adPoint > 0 {
-                            deleteItem()
-                        } else {
-                            isAlert = true
-                            alertType = .lowPointWhenDelete
-                        }
+                        deleteItem()
 #endif
                     }),
                                  secondaryButton: .cancel())

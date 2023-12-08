@@ -10,10 +10,7 @@ import RealmSwift
 
 struct EditMemoView: View {
     @Environment(\.presentationMode) var presentationMode
-//    let model:HistoryModel
-    @AppStorage("adpoint") var adPoint = 0
 
-    let googleAd = GoogleAd()
     let id:ObjectId
     var model:HistoryModel? {
         let realm = Realm.shared
@@ -46,19 +43,9 @@ struct EditMemoView: View {
                         model?.memo = text
                         try! realm.commitWrite()
                         presentationMode.wrappedValue.dismiss()
-                        adPoint -= 1
                         NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
                     }
-                    if adPoint > 0 {
-                        save()
-                    } else {
-                        googleAd.showAd { error in
-                            if error == nil {
-                                adPoint += 5
-                            }
-                            save()
-                        }
-                    }
+                    save()
                 } label: {
                     Text("confirm")
                 }

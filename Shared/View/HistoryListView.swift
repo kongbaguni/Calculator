@@ -26,8 +26,6 @@ struct HistoryListView: View , KeyboardReadable {
         case showAd
         case lowPoint
     }
-    let googleAd = GoogleAd()
-    @AppStorage("adpoint") var adPoint = 0
     @State var isToast = false
     @State var toastTitle:Text? = nil
     @State var toastMessage = ""
@@ -45,28 +43,6 @@ struct HistoryListView: View , KeyboardReadable {
     
     var trimQuery : String {
         return query.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
-    var watchAdBtn : some View {
-        Button {
-            isAlert = true
-            alertType = .showAd
-        } label : {
-            HStack {
-                Image(systemName: "video.circle")
-                    .imageScale(.large)
-                    .foregroundColor(Color.btnTextColor)
-                    .padding(.trailing,5)
-                
-                Text("watch AD")
-                    .font(.headline)
-                    .foregroundColor(Color.btnTextColor)
-                
-                Text("Ad Point : \(adPoint)")
-            }
-            .padding(5)
-            
-        }
     }
     
     var deleteHistoryBtn : some View {
@@ -121,13 +97,8 @@ struct HistoryListView: View , KeyboardReadable {
                 : Text(model.memo).foregroundColor(.textColorNormal)
                 
                 Button {
-                    if adPoint < 1 {
-                        isAlert = true
-                        alertType = .lowPoint
-                    } else {
-                        editId = model.id
-                        isShowEditMemo = true
-                    }
+                    editId = model.id
+                    isShowEditMemo = true
                 } label : {
                     Image(systemName: "square.and.pencil")
                 }
@@ -144,11 +115,7 @@ struct HistoryListView: View , KeyboardReadable {
                 Button {
                     editId = model.id
                     isAlert = true
-                    if adPoint < 1 {
-                        alertType = .lowPoint
-                    } else {
-                        alertType = .deleteItem
-                    }
+                    alertType = .deleteItem
                 } label : {
                     Image(systemName: "trash")
                 }
@@ -187,7 +154,6 @@ struct HistoryListView: View , KeyboardReadable {
                 .font(.system(size: 30, weight: .heavy))
                 .foregroundColor(Color.btnSelectedColor)
                 .padding(50)
-            watchAdBtn
         }
     }
     
@@ -197,7 +163,6 @@ struct HistoryListView: View , KeyboardReadable {
             ScrollView {
                 historyListView
                 deleteHistoryBtn
-                watchAdBtn
             }
         }
     }
@@ -207,7 +172,6 @@ struct HistoryListView: View , KeyboardReadable {
             historyListView
             bannerView
             deleteHistoryBtn
-            watchAdBtn
         }
     }
     
@@ -256,30 +220,13 @@ struct HistoryListView: View , KeyboardReadable {
                     return Alert(
                         title: Text("low point warning"),
                         primaryButton: .default(Text("confirm"), action: {
-                            googleAd.showAd { error in
-                                if error == nil  {
-                                    adPoint += 5
-                                }
-                                else {
-                                    alertType = .adWatchTime
-                                    isAlert = true
-                                }
-                            }
                         }), secondaryButton: .cancel())
 
                 case .showAd :
                     return Alert(
                         title: Text("show ad alert title"),
                         primaryButton: .default(Text("confirm"), action: {
-                            googleAd.showAd { error in
-                                if error == nil  {
-                                    adPoint += 5
-                                }
-                                else {
-                                    alertType = .adWatchTime
-                                    isAlert = true
-                                }
-                            }
+                          
                         }), secondaryButton: .cancel())
             case .deleteHistory:
                 return Alert(title: Text("history_delete_alert_title"),
@@ -292,19 +239,9 @@ struct HistoryListView: View , KeyboardReadable {
                             realm.deleteAll()
                             NotificationCenter.default.post(name: .calculator_db_updated, object: nil)
                         }
-                        adPoint -= 1
                     }
                     
-                    if adPoint > 0 {
-                        deleteAll()
-                    } else {
-                        googleAd.showAd { error in
-                            if error == nil {
-                                adPoint += 5
-                            }
-                            deleteAll()
-                        }
-                    }
+                    deleteAll()
                 }),
                              secondaryButton: .cancel())
             case .adWatchTime:
@@ -327,20 +264,10 @@ struct HistoryListView: View , KeyboardReadable {
 
                                     }
                                 }
-                                adPoint -= 1
                             }
                         }
                         
-                        if adPoint > 0 {
-                            deleteItem()
-                        } else {
-                            googleAd.showAd { error in
-                                if error == nil  {
-                                    adPoint += 5
-                                }
-                                deleteItem()
-                            }
-                        }
+                        deleteItem()
                         
                     }),
                                  secondaryButton: .cancel())
