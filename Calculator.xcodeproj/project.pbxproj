@@ -42,6 +42,14 @@
 		1B399598273E456F00EAADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B39959C273E456F00EAADD8 /* InfoPlist.strings */; };
 		1B39959A273E456F00EAADD8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B39959C273E456F00EAADD8 /* InfoPlist.strings */; };
 		1B692B042A68B6780007F5FB /* UserMessagingPlatformHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B692B032A68B6780007F5FB /* UserMessagingPlatformHelper.swift */; };
+		1B6DBF6D2B22F47B00A7D9BD /* GoogleAdId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF6C2B22F47B00A7D9BD /* GoogleAdId.swift */; };
+		1B6DBF762B22F56900A7D9BD /* GADNativeAd+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF6F2B22F56800A7D9BD /* GADNativeAd+Extensions.swift */; };
+		1B6DBF772B22F56900A7D9BD /* NativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF702B22F56800A7D9BD /* NativeAdView.swift */; };
+		1B6DBF782B22F56900A7D9BD /* UnifiedNativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF712B22F56800A7D9BD /* UnifiedNativeAdView.swift */; };
+		1B6DBF792B22F56900A7D9BD /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B6DBF722B22F56800A7D9BD /* UnifiedNativeAdView.xib */; };
+		1B6DBF7A2B22F56900A7D9BD /* AdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF732B22F56800A7D9BD /* AdLoader.swift */; };
+		1B6DBF7B2B22F56900A7D9BD /* GoogleAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF742B22F56900A7D9BD /* GoogleAd.swift */; };
+		1B6DBF7C2B22F56900A7D9BD /* GoogleAdPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6DBF752B22F56900A7D9BD /* GoogleAdPrompt.swift */; };
 		1B8FDB352A4E650C007BE5E5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8FDB342A4E650C007BE5E5 /* WidgetKit.framework */; };
 		1B8FDB372A4E650C007BE5E5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8FDB362A4E650C007BE5E5 /* SwiftUI.framework */; };
 		1B8FDB3A2A4E650C007BE5E5 /* widgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8FDB392A4E650C007BE5E5 /* widgetBundle.swift */; };
@@ -66,16 +74,6 @@
 		8D16E341282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */; };
 		8D16E343282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */; };
 		8D16E345282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */; };
-		8D3D9F8E2A85FA8500DC9897 /* GoogleAdPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D9F8D2A85FA8500DC9897 /* GoogleAdPrompt.swift */; };
-		8D3D9F972A85FBDD00DC9897 /* NativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D9F922A85FBD800DC9897 /* NativeAdView.swift */; };
-		8D3D9F982A85FBDD00DC9897 /* UnifiedNativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D9F932A85FBDA00DC9897 /* UnifiedNativeAdView.swift */; };
-		8D3D9F992A85FBDD00DC9897 /* GADNativeAd+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D9F942A85FBDA00DC9897 /* GADNativeAd+Extensions.swift */; };
-		8D3D9F9A2A85FBDD00DC9897 /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3D9F952A85FBDB00DC9897 /* UnifiedNativeAdView.xib */; };
-		8D3D9F9B2A85FBDD00DC9897 /* AdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D9F962A85FBDD00DC9897 /* AdLoader.swift */; };
-		8D3D9F9D2A85FD0D00DC9897 /* UnifiedNativeAdView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D3D9F9C2A85FD0D00DC9897 /* UnifiedNativeAdView2.xib */; };
-		8D3D9F9F2A85FEAD00DC9897 /* UnifiedNativeAdView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3D9F9E2A85FEAD00DC9897 /* UnifiedNativeAdView2.swift */; };
-		8D5C8386282B472200423C9F /* GoogleAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8385282B472200423C9F /* GoogleAd.swift */; };
-		8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5C8389282BA17800423C9F /* BannerAdView.swift */; };
 		8D76A5CD28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		8D76A5CF28E576B00088E67F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D76A5CC28E576B00088E67F /* Toast.swift */; };
 		8D84E4532941655300BF9C6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D84E4522941655200BF9C6E /* GoogleService-Info.plist */; };
@@ -151,6 +149,14 @@
 		1B39959B273E456F00EAADD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B39959D273E457100EAADD8 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B692B032A68B6780007F5FB /* UserMessagingPlatformHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessagingPlatformHelper.swift; sourceTree = "<group>"; };
+		1B6DBF6C2B22F47B00A7D9BD /* GoogleAdId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdId.swift; sourceTree = "<group>"; };
+		1B6DBF6F2B22F56800A7D9BD /* GADNativeAd+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GADNativeAd+Extensions.swift"; sourceTree = "<group>"; };
+		1B6DBF702B22F56800A7D9BD /* NativeAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdView.swift; sourceTree = "<group>"; };
+		1B6DBF712B22F56800A7D9BD /* UnifiedNativeAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnifiedNativeAdView.swift; sourceTree = "<group>"; };
+		1B6DBF722B22F56800A7D9BD /* UnifiedNativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnifiedNativeAdView.xib; sourceTree = "<group>"; };
+		1B6DBF732B22F56800A7D9BD /* AdLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdLoader.swift; sourceTree = "<group>"; };
+		1B6DBF742B22F56900A7D9BD /* GoogleAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAd.swift; sourceTree = "<group>"; };
+		1B6DBF752B22F56900A7D9BD /* GoogleAdPrompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAdPrompt.swift; sourceTree = "<group>"; };
 		1B8FDB332A4E650C007BE5E5 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B8FDB342A4E650C007BE5E5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1B8FDB362A4E650C007BE5E5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -175,17 +181,7 @@
 		83C8DD374C616DC5C66FAA2B /* Pods_calculator_clip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculator_clip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D16E33E282CC6FF005E3CC0 /* Userdefault+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault+Extensions.swift"; sourceTree = "<group>"; };
 		8D16E342282CC920005E3CC0 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
-		8D3D9F8D2A85FA8500DC9897 /* GoogleAdPrompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAdPrompt.swift; sourceTree = "<group>"; };
-		8D3D9F922A85FBD800DC9897 /* NativeAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdView.swift; sourceTree = "<group>"; };
-		8D3D9F932A85FBDA00DC9897 /* UnifiedNativeAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnifiedNativeAdView.swift; sourceTree = "<group>"; };
-		8D3D9F942A85FBDA00DC9897 /* GADNativeAd+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GADNativeAd+Extensions.swift"; sourceTree = "<group>"; };
-		8D3D9F952A85FBDB00DC9897 /* UnifiedNativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnifiedNativeAdView.xib; sourceTree = "<group>"; };
-		8D3D9F962A85FBDD00DC9897 /* AdLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdLoader.swift; sourceTree = "<group>"; };
-		8D3D9F9C2A85FD0D00DC9897 /* UnifiedNativeAdView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnifiedNativeAdView2.xib; sourceTree = "<group>"; };
-		8D3D9F9E2A85FEAD00DC9897 /* UnifiedNativeAdView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedNativeAdView2.swift; sourceTree = "<group>"; };
-		8D5C8385282B472200423C9F /* GoogleAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAd.swift; sourceTree = "<group>"; };
 		8D5C8388282B94B500423C9F /* calculator--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--iOS--Info.plist"; sourceTree = "<group>"; };
-		8D5C8389282BA17800423C9F /* BannerAdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		8D6202462A5FD31E00E737B0 /* calculator_clipRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = calculator_clipRelease.entitlements; sourceTree = "<group>"; };
 		8D76A5CC28E576B00088E67F /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8D76A5D028E595F60088E67F /* calculator--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "calculator--macOS--Info.plist"; sourceTree = "<group>"; };
@@ -324,6 +320,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1B6DBF6E2B22F56800A7D9BD /* nativeAd */ = {
+			isa = PBXGroup;
+			children = (
+				1B6DBF6F2B22F56800A7D9BD /* GADNativeAd+Extensions.swift */,
+				1B6DBF702B22F56800A7D9BD /* NativeAdView.swift */,
+				1B6DBF712B22F56800A7D9BD /* UnifiedNativeAdView.swift */,
+				1B6DBF722B22F56800A7D9BD /* UnifiedNativeAdView.xib */,
+				1B6DBF732B22F56800A7D9BD /* AdLoader.swift */,
+			);
+			path = nativeAd;
+			sourceTree = "<group>";
+		};
 		1B8FDB382A4E650C007BE5E5 /* widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,26 +381,12 @@
 		8D3D9F8C2A85FA4100DC9897 /* GoogleAd */ = {
 			isa = PBXGroup;
 			children = (
-				8D3D9F912A85FBC500DC9897 /* native */,
-				8D5C8389282BA17800423C9F /* BannerAdView.swift */,
-				8D3D9F8D2A85FA8500DC9897 /* GoogleAdPrompt.swift */,
-				8D5C8385282B472200423C9F /* GoogleAd.swift */,
+				1B6DBF742B22F56900A7D9BD /* GoogleAd.swift */,
+				1B6DBF752B22F56900A7D9BD /* GoogleAdPrompt.swift */,
+				1B6DBF6E2B22F56800A7D9BD /* nativeAd */,
+				1B6DBF6C2B22F47B00A7D9BD /* GoogleAdId.swift */,
 			);
 			path = GoogleAd;
-			sourceTree = "<group>";
-		};
-		8D3D9F912A85FBC500DC9897 /* native */ = {
-			isa = PBXGroup;
-			children = (
-				8D3D9F962A85FBDD00DC9897 /* AdLoader.swift */,
-				8D3D9F942A85FBDA00DC9897 /* GADNativeAd+Extensions.swift */,
-				8D3D9F922A85FBD800DC9897 /* NativeAdView.swift */,
-				8D3D9F932A85FBDA00DC9897 /* UnifiedNativeAdView.swift */,
-				8D3D9F952A85FBDB00DC9897 /* UnifiedNativeAdView.xib */,
-				8D3D9F9E2A85FEAD00DC9897 /* UnifiedNativeAdView2.swift */,
-				8D3D9F9C2A85FD0D00DC9897 /* UnifiedNativeAdView2.xib */,
-			);
-			path = native;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,11 +521,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B39958D273E3BFE00EAADD8 /* Launch Screen.storyboard in Resources */,
-				8D3D9F9D2A85FD0D00DC9897 /* UnifiedNativeAdView2.xib in Resources */,
+				1B6DBF792B22F56900A7D9BD /* UnifiedNativeAdView.xib in Resources */,
 				1B399598273E456F00EAADD8 /* InfoPlist.strings in Resources */,
 				8D84E4532941655300BF9C6E /* GoogleService-Info.plist in Resources */,
 				1B29F780273CC7CC007BC9B2 /* Localizable.strings in Resources */,
-				8D3D9F9A2A85FBDD00DC9897 /* UnifiedNativeAdView.xib in Resources */,
 				8DF082A32948642400615541 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,30 +583,29 @@
 			files = (
 				8D16E343282CC920005E3CC0 /* UIApplication+Extensions.swift in Sources */,
 				1B399591273E3DC800EAADD8 /* String+Extensions.swift in Sources */,
-				8D3D9F9F2A85FEAD00DC9897 /* UnifiedNativeAdView2.swift in Sources */,
-				8D3D9F992A85FBDD00DC9897 /* GADNativeAd+Extensions.swift in Sources */,
 				1BA96B0E27229E10002B2419 /* CalculatorView.swift in Sources */,
 				1B29F787273CF0CA007BC9B2 /* HistoryListView.swift in Sources */,
+				1B6DBF6D2B22F47B00A7D9BD /* GoogleAdId.swift in Sources */,
 				1B0B64EF2ABD2E0E00BDE8D5 /* Notification.Name+Extensions.swift in Sources */,
-				8D3D9F9B2A85FBDD00DC9897 /* AdLoader.swift in Sources */,
-				8D5C838A282BA17800423C9F /* BannerAdView.swift in Sources */,
 				1B29F78C273D08FF007BC9B2 /* Date+Extensions.swift in Sources */,
+				1B6DBF7B2B22F56900A7D9BD /* GoogleAd.swift in Sources */,
 				1B98CDF72710024400FC3E9E /* Calculator.swift in Sources */,
+				1B6DBF762B22F56900A7D9BD /* GADNativeAd+Extensions.swift in Sources */,
 				8D76A5CD28E576B00088E67F /* Toast.swift in Sources */,
-				8D3D9F8E2A85FA8500DC9897 /* GoogleAdPrompt.swift in Sources */,
 				1B06FA1E270D792A0079B080 /* ContentView.swift in Sources */,
 				1BD60CF327294AB2002684D6 /* Color.swift in Sources */,
 				1B05516D2A5B9D42002904B5 /* Realm+Extensions.swift in Sources */,
 				8DEA3D5C2939845B008C29FA /* KeyboardReadable.swift in Sources */,
+				1B6DBF772B22F56900A7D9BD /* NativeAdView.swift in Sources */,
 				8D16E33F282CC6FF005E3CC0 /* Userdefault+Extensions.swift in Sources */,
-				8D3D9F972A85FBDD00DC9897 /* NativeAdView.swift in Sources */,
 				1B8FDB442A4E650D007BE5E5 /* widget.intentdefinition in Sources */,
 				1B692B042A68B6780007F5FB /* UserMessagingPlatformHelper.swift in Sources */,
+				1B6DBF7C2B22F56900A7D9BD /* GoogleAdPrompt.swift in Sources */,
+				1B6DBF782B22F56900A7D9BD /* UnifiedNativeAdView.swift in Sources */,
 				1BAE669E273A4A5300C82269 /* Stack.swift in Sources */,
-				8D3D9F982A85FBDD00DC9897 /* UnifiedNativeAdView.swift in Sources */,
 				8DEA3D592936DD5B008C29FA /* EditMemoView.swift in Sources */,
+				1B6DBF7A2B22F56900A7D9BD /* AdLoader.swift in Sources */,
 				1B29F779273C921A007BC9B2 /* HistoryModel.swift in Sources */,
-				8D5C8386282B472200423C9F /* GoogleAd.swift in Sources */,
 				1B06FA1C270D792A0079B080 /* MainApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

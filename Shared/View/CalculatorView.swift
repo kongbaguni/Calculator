@@ -324,7 +324,7 @@ struct CalculatorView: View {
     func makeButtons(height:CGFloat)-> some View {
         HStack {
             #if FULL
-            NativeAdView(size: .init(width: 130, height: height))
+            NativeAdView()
             #endif
             VStack {
                 ForEach(0..<list.count, id:\.self) { i in
@@ -490,8 +490,8 @@ struct CalculatorView: View {
                 case .lowPointWhenDelete:
                     return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
                         #if FULL
-                        ad.showAd { isSucess, time in
-                            if(isSucess) {
+                        ad.showAd { error in
+                            if error == nil  {
                                 adPoint += 5
                             }
                             isAlert = true
@@ -503,8 +503,8 @@ struct CalculatorView: View {
                 case .lowPointWhenInputEqual:
                     return Alert(title: Text("low point warning"), primaryButton: .default(Text("confirm"), action: {
                         #if FULL
-                        ad.showAd { isSucess, interval in
-                            if isSucess {
+                        ad.showAd { error in
+                            if error == nil {
                                 adPoint += 4
                             }
                             Calculator.shared.keyInput(key: "=")

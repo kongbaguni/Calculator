@@ -10,72 +10,64 @@ import UIKit
 import SwiftUI
 import GoogleMobileAds
 import AppTrackingTransparency
-//fileprivate let gaid = "ca-app-pub-3940256099942544/6978759866" // test ga id
-fileprivate let gaid = "ca-app-pub-7714069006629518/6684078728" // real ga id
-
-//fileprivate let bannerGaId = "ca-app-pub-3940256099942544/2934735716" // test ga id
-fileprivate let bannerGaId = "ca-app-pub-7714069006629518/1697623159" // real ga id
 
 
 class GoogleAd : NSObject {
     
     var interstitial:GADRewardedAd? = nil
-    func requestTrackingAuthorization(complete:@escaping()->Void) {
+    
+    private func loadAd(complete:@escaping(_ error:Error?)->Void) {
+        let request = GADRequest()
+        
         ATTrackingManager.requestTrackingAuthorization { status in
             print("google ad tracking status : \(status)")
-            complete()
-        }
-    }
-    
-    private func loadAd(complete:@escaping(_ isSucess:Bool)->Void) {
-        let request = GADRequest()
-        requestTrackingAuthorization {
-            GADRewardedAd.load(withAdUnitID: gaid, request: request) { [weak self] ad, error in
+            GADRewardedAd.load(withAdUnitID: AdIDs.rewardAd, request: request) { [weak self] ad, error in
                 if let err = error {
                     print("google ad load error : \(err.localizedDescription)")
                 }
                 ad?.fullScreenContentDelegate = self
                 self?.interstitial = ad
-                complete(ad != nil)
+                complete(error)
             }
         }
     }
     
-    var callback:(_ isSucess:Bool, _ time:TimeInterval?)->Void = { _,_ in}
+    var callback:(_ error:Error?)->Void = { _ in}
     
-    var requestAd = false
-    func showAd(complete:@escaping(_ isSucess:Bool, _ time:TimeInterval?)->Void) {
-        callback = complete
-        if requestAd {
+    var requsetAd = false
+    
+    func showAd(complete:@escaping(_ error:Error?)->Void) {
+        if requsetAd {
             return
         }
-        requestAd = true
-        loadAd { [weak self] isSucess in
-            self?.requestAd = false
-            if isSucess == false {
+        requsetAd = true
+        callback = complete
+        loadAd { [weak self] error in
+            if let err = error {
                 DispatchQueue.main.async {
-                    complete(false,nil)
+                    complete(err)
                 }
                 return
             }
-                        
-            if let vc = UIApplication.shared.keyWindow?.rootViewController {
-                DispatchQueue.main.async {
-                    self?.interstitial?.present(fromRootViewController: vc, userDidEarnRewardHandler: {
-                        
-                    })
-                }
+            self?.requsetAd = false 
+            if let vc = UIApplication.shared.lastViewController {
+                self?.interstitial?.present(fromRootViewController: vc, userDidEarnRewardHandler: {
+                    
+                })
             }
         }
     }
+     
+    
 }
+
 extension GoogleAd : GADFullScreenContentDelegate {
     //광고 실패
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("google ad \(#function)")
         print(error.localizedDescription)
         DispatchQueue.main.async {
-            self.callback(false, nil)
+            self.callback(error)
         }
     }
     func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
@@ -88,21 +80,10 @@ extension GoogleAd : GADFullScreenContentDelegate {
     //광고 종료
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("google ad \(#function)")
-        DispatchQueue.main.async {
-            self.callback(true, nil)
-        }
-    }
-}
-
-struct GoogleAdBannerView: UIViewRepresentable {
-    let bannerView:GADBannerView
-    func makeUIView(context: Context) -> GADBannerView {
-        bannerView.adUnitID = bannerGaId
-        bannerView.rootViewController = UIApplication.shared.lastViewController
-        return bannerView
-    }
-  
-    func updateUIView(_ uiView: GADBannerView, context: Context) {
-        uiView.load(GADRequest())
+//        DispatchQueue.main.async {
+//            PointModel.add(value: 10, desc: "show ad") { error in
+//                self.callback(error)
+//            }
+//        }
     }
 }

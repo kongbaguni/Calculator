@@ -91,7 +91,7 @@ struct HistoryListView: View , KeyboardReadable {
     var bannerView : some View {
         HStack {
             Spacer()
-            NativeAdView(size: .init(width: UIScreen.main.bounds.width - 20, height: 400))
+            NativeAdView()
             Spacer()
         }
     }
@@ -99,7 +99,7 @@ struct HistoryListView: View , KeyboardReadable {
     var bannerViewLandscape : some View {
         HStack {
             Spacer()
-            NativeAdView(size: .init(width: UIScreen.main.bounds.width * 0.4 - 20, height: UIScreen.main.bounds.height - 100))
+            NativeAdView()
             Spacer()
         }
     }
@@ -256,13 +256,13 @@ struct HistoryListView: View , KeyboardReadable {
                     return Alert(
                         title: Text("low point warning"),
                         primaryButton: .default(Text("confirm"), action: {
-                            googleAd.showAd { isSucess, time in
-                                if isSucess {
+                            googleAd.showAd { error in
+                                if error == nil  {
                                     adPoint += 5
                                 }
                                 else {
                                     alertType = .adWatchTime
-                                    isAlert = !isSucess
+                                    isAlert = true
                                 }
                             }
                         }), secondaryButton: .cancel())
@@ -271,13 +271,13 @@ struct HistoryListView: View , KeyboardReadable {
                     return Alert(
                         title: Text("show ad alert title"),
                         primaryButton: .default(Text("confirm"), action: {
-                            googleAd.showAd { isSucess, time in
-                                if isSucess {
+                            googleAd.showAd { error in
+                                if error == nil  {
                                     adPoint += 5
                                 }
                                 else {
                                     alertType = .adWatchTime
-                                    isAlert = !isSucess
+                                    isAlert = true
                                 }
                             }
                         }), secondaryButton: .cancel())
@@ -298,8 +298,8 @@ struct HistoryListView: View , KeyboardReadable {
                     if adPoint > 0 {
                         deleteAll()
                     } else {
-                        googleAd.showAd { isSucess, time in
-                            if isSucess {
+                        googleAd.showAd { error in
+                            if error == nil {
                                 adPoint += 5
                             }
                             deleteAll()
@@ -334,8 +334,8 @@ struct HistoryListView: View , KeyboardReadable {
                         if adPoint > 0 {
                             deleteItem()
                         } else {
-                            googleAd.showAd { isSucess, _ in
-                                if isSucess {
+                            googleAd.showAd { error in
+                                if error == nil  {
                                     adPoint += 5
                                 }
                                 deleteItem()

@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
 import ActivityIndicatorView
+import GoogleMobileAds
+
 
 extension Notification.Name {
     static let googleAdNativeAdClick = Notification.Name("googleAdNativeAdClick_observer")
@@ -15,26 +16,26 @@ extension Notification.Name {
 }
 
 struct NativeAdView : View {
-    let size:CGSize
     @State var loading = true
     @State var nativeAd:GADNativeAd? = nil
     
     var body: some View {
-        ZStack {
-            VStack(alignment: .center) {
+        GeometryReader { proxy in
+            ZStack(alignment: .center) {
+                if let view = nativeAd?.view {
+                    view
+                }
                 ActivityIndicatorView(isVisible: $loading, type: .default()).frame(width: 50, height: 50)
-            }.frame(width:size.width, height:size.height)
-            if let view = nativeAd?.makeView(size: size) {
-                view.padding(2.5)
+                    .frame(width:proxy.size.width, height: 350)
             }
-        }.onAppear {
+        }.frame(height:350)
+        .onAppear {
             loading = true
             AdLoader.shared.getNativeAd(getAd: {[self] ad in
                 nativeAd = ad
                 loading = false
             })
         }
-
     }
 }
 

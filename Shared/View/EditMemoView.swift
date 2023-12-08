@@ -52,8 +52,8 @@ struct EditMemoView: View {
                     if adPoint > 0 {
                         save()
                     } else {
-                        googleAd.showAd { isSucess, time in
-                            if isSucess {
+                        googleAd.showAd { error in
+                            if error == nil {
                                 adPoint += 5
                             }
                             save()

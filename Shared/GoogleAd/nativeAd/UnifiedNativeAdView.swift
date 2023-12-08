@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import GoogleMobileAds
 
-class UnifiedNativeAdView2 : GADNativeAdView {
+class UnifiedNativeAdView : GADNativeAdView {
     init(ad:GADNativeAd, frame:CGRect) {
         super.init(frame: frame)
         loadXib()
@@ -22,7 +22,6 @@ class UnifiedNativeAdView2 : GADNativeAdView {
     }
     
     private func loadXib() {
-        
         let identifier = String(describing: type(of: self))
         let nibs = Bundle.main.loadNibNamed(identifier, owner: self, options: nil)
         
@@ -33,7 +32,7 @@ class UnifiedNativeAdView2 : GADNativeAdView {
     
     func initUI() {
         
-        (iconView as! UIImageView).image = nativeAd?.icon?.image ?? UIImage(named: "SF")
+        (iconView as! UIImageView).image = nativeAd?.icon?.image
         (headlineView as! UILabel).text = nativeAd?.headline
         (advertiserView as! UILabel).text = nativeAd?.advertiser
         (bodyView as! UILabel).text = nativeAd?.body
@@ -41,12 +40,14 @@ class UnifiedNativeAdView2 : GADNativeAdView {
         (priceView as! UILabel).text = nativeAd?.price
         mediaView?.mediaContent = nativeAd?.mediaContent
         nativeAd?.delegate = self
+        mediaView?.layer.borderWidth = 2
+        mediaView?.layer.borderColor = UIColor.systemTeal.cgColor
     }
     
     
 }
 
-extension UnifiedNativeAdView2 : GADNativeAdDelegate {
+extension UnifiedNativeAdView : GADNativeAdDelegate {
     public func nativeAdIsMuted(_ nativeAd: GADNativeAd) {
         print("NAdDelegate \(#function) \(#line)")
     }
@@ -70,7 +71,7 @@ extension UnifiedNativeAdView2 : GADNativeAdDelegate {
     }
 }
 
-extension UnifiedNativeAdView2 : GADNativeAdUnconfirmedClickDelegate {
+extension UnifiedNativeAdView : GADNativeAdUnconfirmedClickDelegate {
     public func nativeAd(_ nativeAd: GADNativeAd, didReceiveUnconfirmedClickOnAssetID assetID: GADNativeAssetIdentifier) {
         print("NAdDelegate \(#function) \(#line)")
 

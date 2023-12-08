@@ -12,11 +12,19 @@ import AppTrackingTransparency
 fileprivate func requestTrackingAuthorization(complete:@escaping()->Void) {
     ATTrackingManager.requestTrackingAuthorization { status in
         print("google ad tracking status : \(status)")
+        complete()
     }
 }
 
 fileprivate func userMessagePlatformPrompt(complete:@escaping()->Void) {
     func loadForm() {
+        guard let lvc = UIApplication.shared.lastViewController else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                loadForm()
+            }
+            return
+        }
+        
       // Loads a consent form. Must be called on the main thread.
         UMPConsentForm.load { form, loadError in
             if loadError != nil {
@@ -26,20 +34,21 @@ fileprivate func userMessagePlatformPrompt(complete:@escaping()->Void) {
                 // later.
                 if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.required {
                     form?.present(
-                        from: UIApplication.shared.lastViewController!,
+                        from: lvc,
                         completionHandler: { dismissError in
-                            if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
-                                // App can start requesting ads.
+                            switch UMPConsentInformation.sharedInstance.consentStatus {
+                                case UMPConsentStatus.obtained:
+                                    // App can start requesting ads.
+                                    break
+                                default:
+                                    // Handle dismissal by reloading form.
+                                    break
                             }
-                            // Handle dismissal by reloading form.
-                            loadForm();
                         })
                 } else {
                     // Keep the form available for changes to user consent.
                 }
-                
             }
-
         }
     }
     
