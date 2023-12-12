@@ -1,9 +1,0 @@
-/* 
-  InfoPlist.strings
-  Calculator
-
-  Created by Changyeol Seo on 2021/11/12.
-  
-*/
-"CFBundleDisplayName" = "kong calc";
-"CFBundleName" = "kong calculator";
