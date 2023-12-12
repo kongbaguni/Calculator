@@ -411,23 +411,30 @@ struct CalculatorView: View {
     var body: some View {
         GeometryReader { geomentry in
             if geomentry.size.width < geomentry.size.height {
+                // 세로
                 VStack {
                     numberDisplayView
+                        .padding(.horizontal,10)
                     historylistView
+                        .padding(.horizontal, 10)
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                     makeButtons(height: 360)
+                        .padding(10)
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                 }
             } else {
+                //가로
                 HStack {
                     VStack {
                         numberDisplayView
+                            .padding(.horizontal, 10)
                         historylistView
+                            .padding(.horizontal, 10)
                     }
                     VStack {
                         Spacer()
-                        makeButtons(height: geomentry.size.height)
-                            
+                        makeButtons(height: geomentry.size.height - 20)
+                            .padding(10)
                         Spacer()
                     }
                 }

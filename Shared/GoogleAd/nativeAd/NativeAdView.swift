@@ -24,11 +24,12 @@ struct NativeAdView : View {
             ZStack(alignment: .center) {
                 if let view = nativeAd?.view {
                     view
+                        .frame(width: proxy.size.width, height: proxy.size.height)
                 }
                 ActivityIndicatorView(isVisible: $loading, type: .default()).frame(width: 50, height: 50)
-                    .frame(width:proxy.size.width, height: 350)
+                    .frame(width:proxy.size.width, height: proxy.size.height)
             }
-        }.frame(height:350)
+        }
         .onAppear {
             loading = true
             AdLoader.shared.getNativeAd(getAd: {[self] ad in
