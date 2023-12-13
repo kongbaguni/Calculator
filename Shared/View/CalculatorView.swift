@@ -198,8 +198,8 @@ struct CalculatorView: View {
                                 .lineLimit(nil)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text(" `=` ")
-                                .foregroundColor(Color.btnTextColor)
+                            Text(try! AttributedString(markdown:" `=` "))
+                                .foregroundColor(Color.textColorWeak)
                                 .font(.system(size: 20,weight: .heavy))
                             
                             Button {
@@ -212,7 +212,7 @@ struct CalculatorView: View {
                                 }
                             } label: {
                                 Text(try! AttributedString(markdown:texts.last!))
-                                    .foregroundColor(Color.idxTextColor)
+                                    .foregroundColor(Color.textColorStrong)
                                     .font(.system(size: 20,weight: .heavy))
                             }
                             
