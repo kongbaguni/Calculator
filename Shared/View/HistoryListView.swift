@@ -40,7 +40,10 @@ struct HistoryListView: View , KeyboardReadable {
     @State var isLandscape = true
     @State var isKeyboardVisible = false
         
-    @ObservedResults(HistoryModel.self) var historys
+    @ObservedResults(HistoryModel.self,
+                     sortDescriptor: .init(keyPath: "date", ascending: true)
+                     
+    ) var historys
     
     
     var trimQuery : String {
@@ -80,6 +83,14 @@ struct HistoryListView: View , KeyboardReadable {
             NativeAdView()
             Spacer()
         }
+    }
+    
+    func isInSearch(model:HistoryModel.ThreadSafeModel)-> Bool {
+        model.memo.contains(trimQuery)
+    }
+    
+    func getOutlineColor(model:HistoryModel.ThreadSafeModel)->Color {
+        isInSearch(model: model) ? .primary : .secondary
     }
     
     func makeHistoryView(model:HistoryModel.ThreadSafeModel)-> some View  {
@@ -126,11 +137,18 @@ struct HistoryListView: View , KeyboardReadable {
             }
         }
         .padding(10)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(isInSearch(model: model) ? .teal : .clear)
+                .shadow(color: isInSearch(model: model) ? .primary : .clear ,radius: isInSearch(model: model) ? 10 : 0)
+        )
         .overlay {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.secondary, lineWidth: 2)
+                .stroke(getOutlineColor(model: model), lineWidth: 2)
+            
         }
         .padding(5)
+        
 
     }
     
