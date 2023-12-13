@@ -1,17 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    " `=` " : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "*" : {
       "localizations" : {
         "ko" : {
@@ -33,7 +22,14 @@
       }
     },
     "ad" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광고"
+          }
+        }
+      }
     },
     "ad watch time error confirm" : {
       "localizations" : {
@@ -169,17 +165,6 @@
         }
       }
     },
-    "history" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "계산 기록"
-          }
-        }
-      }
-    },
     "history_all_delete_alert_message" : {
       "localizations" : {
         "en" : {
@@ -300,34 +285,12 @@
         }
       }
     },
-    "memo :" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "메모 :"
-          }
-        }
-      }
-    },
     "Min" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "최소"
-          }
-        }
-      }
-    },
-    "none" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "없음"
           }
         }
       }
