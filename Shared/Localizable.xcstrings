@@ -165,6 +165,23 @@
         }
       }
     },
+    "history" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "calculation history"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계산 기록"
+          }
+        }
+      }
+    },
     "history_all_delete_alert_message" : {
       "localizations" : {
         "en" : {

@@ -9,7 +9,7 @@ import SwiftUI
 #if FULL
 import RealmSwift
 #endif
-
+fileprivate let historyLimit = 5
 struct Item {
     let color:Color
     let value:AnyHashable
@@ -401,7 +401,7 @@ struct CalculatorView: View {
         var results:[String] = []
         var models:[HistoryModel.ThreadSafeModel] = []
         
-        for item in Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false).prefix(20) {
+        for item in Realm.shared.objects(HistoryModel.self).sorted(byKeyPath: "date", ascending: false).prefix(historyLimit) {
             results.append(item.value)
             models.append(item.threadSafeModel)
             print(item.threadSafeModel.memo)
@@ -469,7 +469,7 @@ struct CalculatorView: View {
         .onReceive(NotificationCenter.default.publisher(for: .calculator_calculated), perform: { noti in
             if let markdownString = noti.object as? String {
                 history.insert(markdownString, at: 0)
-                if history.count > 20 {
+                while history.count > historyLimit {
                     history.removeLast()
                 }
             }
