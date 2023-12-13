@@ -7,10 +7,12 @@
 
 import SwiftUI
 import RealmSwift
+
 fileprivate let DATE_FORMAT = "yyyy.MM.dd"
 fileprivate var editId:ObjectId? = nil
 
 struct HistoryListView: View , KeyboardReadable {
+    
     struct Data:Hashable {
         static func == (lhs: HistoryListView.Data, rhs: HistoryListView.Data) -> Bool {
             lhs.date == rhs.date && lhs.list == rhs.list
@@ -87,15 +89,17 @@ struct HistoryListView: View , KeyboardReadable {
                     .foregroundColor(.idxTextColor)
                 Text(try! AttributedString(markdown: model.value))
                     .foregroundColor(.textColorNormal)
+                Spacer()
             }
             HStack {
-                Text("memo :")
-                    .foregroundColor(.textColorWeak)
+                if model.isMemoEmpty == false {
+                    Text("memo :")
+                        .foregroundColor(.textColorWeak)
+                    
+                    Text(model.memo).foregroundColor(.textColorNormal)
+                }
                 
-                model.isMemoEmpty
-                ? Text("none").foregroundColor(.textColorWeak)
-                : Text(model.memo).foregroundColor(.textColorNormal)
-                
+                Spacer()
                 Button {
                     editId = model.id
                     isShowEditMemo = true
@@ -119,9 +123,14 @@ struct HistoryListView: View , KeyboardReadable {
                 } label : {
                     Image(systemName: "trash")
                 }
-                
             }
-        }.padding(.bottom, 5)
+        }
+        .padding(10)
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.secondary, lineWidth: 2)
+        }
+        .padding(5)
 
     }
     
@@ -142,6 +151,7 @@ struct HistoryListView: View , KeyboardReadable {
                 ) {
                     ForEach(data.list, id:\.self) { model in
                         makeHistoryView(model: model)
+                            .padding(.horizontal, 10)
                     }
                 }
             }
@@ -170,7 +180,10 @@ struct HistoryListView: View , KeyboardReadable {
     var portraitLayout : some View {
         ScrollView {
             historyListView
-            bannerView
+            Section("ad") {
+                bannerView
+                    .frame(height:300)
+            }
             deleteHistoryBtn
         }
     }
@@ -249,10 +262,10 @@ struct HistoryListView: View , KeyboardReadable {
                              message: Text("ad watch time error message"),
                              dismissButton: .cancel(Text("ad watch time error confirm")))
             case .deleteItem:
-                    return Alert(title: Text("history_delete_alert_title"),
-                                 message: Text("history_delete_alert_message"),
-                                 primaryButton: .default(Text("history_delete_alert_confirm"),
-                                                         action: {
+                return Alert(title: Text("history_delete_alert_title"),
+                             message: Text("history_delete_alert_message"),
+                             primaryButton: .default(Text("history_delete_alert_confirm"),
+                                                     action: {
                         func deleteItem() {
                             if let id = editId {
                                 editId = nil

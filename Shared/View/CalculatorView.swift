@@ -28,43 +28,44 @@ fileprivate let c3 = Color.btn3
 fileprivate let c4 = Color.btn4
 
 
-
+fileprivate let w:CGFloat = 40
+fileprivate let w2:CGFloat = 90
 fileprivate let list:[[Item]] = [
     [
-        .init(color: c4, value: "(", imageName: nil, width:50),
-        .init(color: c4, value: ")", imageName: nil, width:50),
-        .init(color: c4, value: "clear", imageName: nil, width:50),
-        .init(color: c4, value: "⌫", imageName: "delete.left", width: 50)
+        .init(color: c4, value: "(", imageName: nil, width:w),
+        .init(color: c4, value: ")", imageName: nil, width:w),
+        .init(color: c4, value: "clear", imageName: nil, width:w),
+        .init(color: c4, value: "⌫", imageName: "delete.left", width: w)
     ],
     [
-        .init(color: c1, value: "root", imageName: "x.squareroot", width: 50),
-        .init(color: c1, value: "+/-", imageName: "plus.forwardslash.minus", width:50),
-        .init(color: c1, value: "%" , imageName: "percent", width:50),
-        .init(color: c3, value: "÷" , imageName: "divide", width:50)
+        .init(color: c1, value: "root", imageName: "x.squareroot", width: w),
+        .init(color: c1, value: "+/-", imageName: "plus.forwardslash.minus", width:w),
+        .init(color: c1, value: "%" , imageName: "percent", width:w),
+        .init(color: c3, value: "÷" , imageName: "divide", width:w)
     ],
     
     [
-        .init(color: c2, value: 7, imageName: nil, width:50),
-        .init(color: c2, value: 8, imageName: nil, width:50),
-        .init(color: c2, value: 9, imageName: nil, width:50),
-        .init(color: c3, value: "✕", imageName: "multiply", width:50)
+        .init(color: c2, value: 7, imageName: nil, width:w),
+        .init(color: c2, value: 8, imageName: nil, width:w),
+        .init(color: c2, value: 9, imageName: nil, width:w),
+        .init(color: c3, value: "✕", imageName: "multiply", width:w)
     ],
     [
-        .init(color: c2, value: 4, imageName: nil, width:50),
-        .init(color: c2, value: 5, imageName: nil, width:50),
-        .init(color: c2, value: 6, imageName: nil, width:50),
-        .init(color: c3, value: "-", imageName: "minus", width:50)
+        .init(color: c2, value: 4, imageName: nil, width:w),
+        .init(color: c2, value: 5, imageName: nil, width:w),
+        .init(color: c2, value: 6, imageName: nil, width:w),
+        .init(color: c3, value: "-", imageName: "minus", width:w)
     ],
     [
-        .init(color: c2, value: 1, imageName: nil, width:50),
-        .init(color: c2, value: 2, imageName: nil, width:50),
-        .init(color: c2, value: 3, imageName: nil, width:50),
-        .init(color: c3, value: "+", imageName: "plus", width:50)
+        .init(color: c2, value: 1, imageName: nil, width:w),
+        .init(color: c2, value: 2, imageName: nil, width:w),
+        .init(color: c2, value: 3, imageName: nil, width:w),
+        .init(color: c3, value: "+", imageName: "plus", width:w)
     ],
     [
-        .init(color: c2, value: 0, imageName: nil, width:110),
-        .init(color: c2, value: ".", imageName: nil, width:50),
-        .init(color: c3, value: "=", imageName: "equal",width:50)],
+        .init(color: c2, value: 0, imageName: nil, width:w2),
+        .init(color: c2, value: ".", imageName: nil, width:w),
+        .init(color: c3, value: "=", imageName: "equal",width:w)],
 ]
 
 fileprivate var editNoteIdx:Int?
@@ -414,12 +415,12 @@ struct CalculatorView: View {
                 // 세로
                 VStack {
                     numberDisplayView
-                        .padding(.horizontal,10)
+                        .padding(.horizontal, 5)
                     historylistView
-                        .padding(.horizontal, 10)
+                        .padding(.horizontal, 5)
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                     makeButtons(height: 360)
-                        .padding(10)
+                        .padding(5)
                     Spacer().frame(width: 300, height: 20, alignment: .center)
                 }
             } else {
@@ -427,14 +428,15 @@ struct CalculatorView: View {
                 HStack {
                     VStack {
                         numberDisplayView
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal, 5)
                         historylistView
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal, 5)
                     }
+                    .padding(.vertical,20)
                     VStack {
                         Spacer()
                         makeButtons(height: geomentry.size.height - 20)
-                            .padding(10)
+                            .padding(5)
                         Spacer()
                     }
                 }
