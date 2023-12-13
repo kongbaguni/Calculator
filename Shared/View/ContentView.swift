@@ -62,11 +62,10 @@ struct ContentView: View {
             if #available(iOS 16.0,*) {
                 NavigationStack {
                     subview
+                        .toolbar {
+                            naviLink
+                        }
                 }
-                .toolbar {
-                    naviLink
-                }
-
             } else {
                 subview
                     .toolbar {

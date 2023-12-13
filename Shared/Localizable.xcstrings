@@ -301,6 +301,7 @@
       }
     },
     "memo :" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {

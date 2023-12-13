@@ -220,10 +220,8 @@ struct CalculatorView: View {
 #if FULL
                         HStack {
                             if historyModels[idx].memo.isEmpty == false {
-                                Text("memo :")
-                                    .foregroundColor(.idxTextColor)
                                 Text(historyModels[idx].memo)
-                                    .foregroundColor(.textColorNormal)
+                                    .foregroundColor(Color.textColorWeak)
                             }
                             Spacer()
                             
@@ -262,7 +260,7 @@ struct CalculatorView: View {
                                 path.move(to: .init(x: 0, y: geo.size.height))
                                 path.addLine(to: .init(x:geo.size.width, y:geo.size.height))
                             }
-                            .stroke(Color.teal, style: .init(lineWidth:2,dash:[4,2]))
+                            .stroke(Color.teal, style: .init(lineWidth:1,dash:[4,4]))
                         }
                     }
                     .padding(10)

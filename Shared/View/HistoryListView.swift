@@ -104,10 +104,7 @@ struct HistoryListView: View , KeyboardReadable {
             }
             HStack {
                 if model.isMemoEmpty == false {
-                    Text("memo :")
-                        .foregroundColor(.textColorWeak)
-                    
-                    Text(model.memo).foregroundColor(.textColorNormal)
+                    Text(model.memo).foregroundColor(.textColorWeak)
                 }
                 
                 Spacer()
@@ -153,7 +150,7 @@ struct HistoryListView: View , KeyboardReadable {
                         path.move(to: .init(x: 0, y: geo.size.height))
                         path.addLine(to: .init(x:geo.size.width, y:geo.size.height))
                     }
-                    .stroke(Color.teal, style: .init(lineWidth:2,dash:[4,4]))
+                    .stroke(Color.teal, style: .init(lineWidth:1,dash:[4,4]))
                 }
             }
             
