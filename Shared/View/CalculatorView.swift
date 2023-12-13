@@ -28,8 +28,8 @@ fileprivate let c3 = Color.btn3
 fileprivate let c4 = Color.btn4
 
 
-fileprivate let w:CGFloat = 40
-fileprivate let w2:CGFloat = 90
+fileprivate let w:CGFloat = UIScreen.main.bounds.width * 0.1
+fileprivate let w2:CGFloat = w * 2 + 10
 fileprivate let list:[[Item]] = [
     [
         .init(color: c4, value: "(", imageName: nil, width:w),
