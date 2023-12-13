@@ -320,6 +320,7 @@
       }
     },
     "none" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {

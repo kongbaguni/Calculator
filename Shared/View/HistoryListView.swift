@@ -143,8 +143,19 @@ struct HistoryListView: View , KeyboardReadable {
                 .shadow(color: isInSearch(model: model) ? .primary : .clear ,radius: isInSearch(model: model) ? 10 : 0)
         )
         .overlay {
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(getOutlineColor(model: model), lineWidth: 2)
+            if isInSearch(model: model) {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.primary, lineWidth: 2)
+            }
+            else {
+                GeometryReader { geo in
+                    Path { path in
+                        path.move(to: .init(x: 0, y: geo.size.height))
+                        path.addLine(to: .init(x:geo.size.width, y:geo.size.height))
+                    }
+                    .stroke(Color.teal, style: .init(lineWidth:2,dash:[4,4]))
+                }
+            }
             
         }
         .padding(5)

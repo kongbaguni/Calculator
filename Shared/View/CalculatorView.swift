@@ -215,18 +215,18 @@ struct CalculatorView: View {
                                     .foregroundColor(Color.textColorStrong)
                                     .font(.system(size: 20,weight: .heavy))
                             }
-                            
                             Spacer()
                         }.fixedSize(horizontal: false, vertical: true)
 #if FULL
                         HStack {
-                            Text("memo :")
-                                .foregroundColor(.idxTextColor)
-                            historyModels[idx].memo.isEmpty
-                            ? Text("none")
-                                .foregroundColor(.textColorWeak)
-                            : Text(historyModels[idx].memo)
-                                .foregroundColor(.textColorNormal)
+                            if historyModels[idx].memo.isEmpty == false {
+                                Text("memo :")
+                                    .foregroundColor(.idxTextColor)
+                                Text(historyModels[idx].memo)
+                                    .foregroundColor(.textColorNormal)
+                            }
+                            Spacer()
+                            
                             Button {
                                 print(idx)
                                 editNoteIdx = idx
@@ -251,13 +251,20 @@ struct CalculatorView: View {
                             } label : {
                                 Image(systemName: "trash")
                             }
-                            
-                            Spacer()
                         }
 #endif
 
                     }
-
+                    .padding(.bottom, 5)
+                    .overlay {
+                        GeometryReader { geo in
+                            Path { path in
+                                path.move(to: .init(x: 0, y: geo.size.height))
+                                path.addLine(to: .init(x:geo.size.width, y:geo.size.height))
+                            }
+                            .stroke(Color.teal, style: .init(lineWidth:2,dash:[4,2]))
+                        }
+                    }
                     .padding(10)
                 }
 
