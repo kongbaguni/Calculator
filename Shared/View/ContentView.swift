@@ -51,8 +51,9 @@ struct ContentView: View {
     var naviLink : some View {
         NavigationLink {
             HistoryListView()
+                .navigationTitle(.init("history"))
         } label: {
-            Text("history")
+            Image(systemName: "list.bullet.clipboard")
         }
     }
     
